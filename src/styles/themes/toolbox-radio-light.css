@@ -1,0 +1,28 @@
+.field {
+  height: 20px;
+  margin-bottom: 0px;
+}
+
+.ripple {
+  background-color: transparent;
+}
+
+.radio, .radioChecked {
+  top: 2px;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #8ea8bf;
+}
+
+.radioChecked {
+  border: 1px solid #8ea8bf;
+}
+
+.radioChecked::before {
+  background-color: #0f8bdf;
+}
+
+.text {
+  color: #6E6E70;
+  font-size: 12px;
+}

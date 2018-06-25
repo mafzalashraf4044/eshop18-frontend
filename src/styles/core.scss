@@ -1,0 +1,80 @@
+@font-face {
+  font-family: 'Lato-Regular';
+  src: url(../assets/fonts/Lato-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'Lato-Light';
+  src: url(../assets/fonts/Lato-Light.ttf);
+}
+
+:global {
+  *{box-sizing:border-box;font-family:'Lato-Regular';font-size:14px;}
+  a, a:visited, a:active{text-decoration:none;;cursor:pointer;}
+  a:hover{text-decoration:none;}
+
+  body {
+    margin: 0;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .df {
+    display: flex;
+  }
+
+  .fd-r {
+    flex-direction: row;
+  }
+
+  .fd-c {
+    flex-direction: column;
+  }
+
+  .jc-c {
+    justify-content: center;
+  }
+
+  .jc-sb {
+    justify-content: space-between
+  }
+
+  .jc-sa {
+    justify-content: space-around;
+  }
+
+  .jc-fs {
+    justify-content: flex-start;
+  }
+
+  .jc-fe {
+    justify-content: flex-end;
+  }
+  
+  .ai-c {
+    align-items: center;
+  }
+
+  .ai-sb {
+    align-items: space-between
+  }
+
+  .ai-sa {
+    align-items: space-around;
+  }
+
+  .ai-fs {
+    align-items: flex-start;
+  }
+
+  .ai-fe {
+    align-items: flex-end;
+  }
+
+  .fw {
+    flex-wrap: wrap;
+  }
+
+}

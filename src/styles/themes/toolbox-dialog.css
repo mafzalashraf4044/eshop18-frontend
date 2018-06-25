@@ -1,0 +1,13 @@
+.dialog {
+  width: initial;
+  overflow: visible;
+  box-shadow: 0 0 80px 10px rgba(0,0,0,0.3); 
+}
+
+.body {
+  padding: 0px;
+}
+
+.overlay {
+  background-color: transparent;
+}

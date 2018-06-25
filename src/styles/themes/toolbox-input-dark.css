@@ -1,0 +1,31 @@
+.input {
+  width: 100%;
+  padding: 20px 0 10px 0;
+}
+
+.inputElement {
+  color: #8ea8bf;
+  font-size: 14px;
+  border-bottom: 1px solid #8ea8bf;
+}
+
+.label {
+  color: #8ea8bf;
+  font-size: 14px;
+  line-height: 14px;
+}
+
+.bar {
+  color: #8ea8bf;
+}
+
+.bar::before,
+.bar::after {
+  background-color: transparent;
+}
+
+.inputElement:focus:not([disabled]):not([readonly])~.label:not(.fixed) {
+  color: #8ea8bf;
+  font-size: 14px;
+  line-height: 14px;
+}

@@ -1,0 +1,31 @@
+.field {
+  height: 20px;
+  margin-bottom: 0;
+}
+
+.ripple {
+  background-color: transparent;
+}
+
+.check {
+  border-color: #8ea8bf;
+  border-radius: 0px;
+  border-width: 1px;
+  height:20px;
+  width:20px;
+}
+
+.check.checked {
+  background-color:#0f8bdf;
+  border-color: #8ea8bf;
+}
+
+.checked::after {
+  box-sizing: content-box;
+  margin: 1px;
+}
+
+.text {
+  color: #8EA8BF;
+  font-size: 12px;
+}

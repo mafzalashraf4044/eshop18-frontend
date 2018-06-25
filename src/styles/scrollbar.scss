@@ -1,0 +1,70 @@
+.scroll-container {
+  width: 100%;
+  
+  .track-vertical {
+    opacity: 0;
+    right: 0px;
+    top: 0px;
+    z-index: 220;
+    position: absolute;
+    height: 100%;
+    transition: opacity 0.5s ease;
+    -moz-transition: opacity 0.5s ease;
+    -webkit-transition: opacity 0.5s ease;
+    -o-transition: opacity 0.5s ease;
+  }
+
+  .track-theme-dark {
+    background-color: #435B73;
+  }
+
+  .track-theme-light-1 {
+    background-color: #ffffff;
+  }
+
+  .track-theme-light-2 {
+    background-color: #F9F9F9;
+    
+    &.border-left {
+      border-left: 1px solid #793232;
+    }
+  }
+
+  .thumb-theme-dark {
+    background-color: #BBC4CB;
+  }
+
+  .thumb-theme-light-1 {
+    background-color: #8EA8BF;    
+  }
+  
+  .thumb-theme-light-2 {
+    background-color: #B9C4CA;
+  }
+
+  &:active,
+  &:hover {
+    .track-vertical {
+      opacity: 1;
+    }
+  }
+}
+
+.selected-icons-scroll-container {
+  height: calc(100vh - 224px)!important;
+}
+
+.collections-scroll-container {
+  height: calc(100vh - 120px)!important;
+}
+
+.collections-scroll-container.with-actions {
+  height: calc(100vh - 182px)!important;
+}
+
+.backgrounds-scroll-container,
+.templates-scroll-container,
+.colors-scroll-container,
+.shadow-scroll-container {
+  height: calc(100vh - 280px)!important;
+}

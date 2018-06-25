@@ -1,0 +1,9 @@
+.bar::before,
+.bar::after {
+  background-color: transparent;
+}
+
+.hint {
+  color: #D1D1D1;
+  top: 10px;
+}
