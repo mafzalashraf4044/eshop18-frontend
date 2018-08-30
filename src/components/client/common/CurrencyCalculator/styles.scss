@@ -1,0 +1,128 @@
+.currency-calculator-container {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  position: relative;
+
+  .currency-calculator {
+    width: 80%;
+    height: 450px;
+    background-color: #07355E;
+
+    .tabs {
+
+      .tab {
+        cursor: pointer;
+        height: 64px;
+        width: 33.33%;
+        background-color: #003660;
+
+        span {
+          color: #FFF;
+          font-size: 14px;
+          font-weight: 700;
+        }
+
+        &.selected {
+          background-color: #004BA1;
+        }
+      }
+    }
+
+    .tab-content {
+      padding: 20px 25px;
+
+      .label {
+        color: #FFF;
+        display: block;
+        font-size: 16px;
+        height: 20px;
+        margin-bottom: 10px;
+        font-family: 'Lato-BoldItalic';
+      }
+
+      input {
+        width: 100%;
+        height: 36px;
+        border: none;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 3px;
+        background-color: #FFF;
+        font-family: "Lato-Regular";
+      }
+
+      .form-field {
+        margin-bottom: 10px;
+      }
+
+      .btn-container {
+        width: 100%;
+        
+        .btn {
+          width: 100%;
+          height: 36px;
+          border: none;
+          outline: none;
+          color: #FFF;
+          cursor: pointer;
+          font-weight: 700;
+          font-size: 16px;
+          margin-top: 5px;
+          border-radius: 3px;
+          text-transform: uppercase;
+          font-family: "Lato-Light";
+          background: repeat-y scroll 84% 0 #ed1c2e;
+
+          &:hover {
+            background: #fc404f;
+          }
+        }
+      }
+
+      .amount-to-from {
+        .left, .right {
+          width: 40%;
+        }
+
+        .arrow-icon-container {
+          width: 20%;
+          height: 60px;
+          padding-top: 20px;
+
+          .arrow-icon {
+            width: 36px;
+            height: 36px;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+
+  .currency-calculator-container .currency-calculator .tabs .tab span {
+    font-size: 12px;
+  }
+
+  .currency-calculator-container .currency-calculator .tab-content .label {
+    font-size: 12px;
+    height: 16px;
+  }
+
+}
+
+@media screen and (max-width: 991px) {
+
+  .currency-calculator-container {
+    width: 80%;
+    margin: 0 auto;
+
+    .currency-calculator {
+      width: 100%;
+    }
+  }
+
+}

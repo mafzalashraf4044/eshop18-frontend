@@ -1,0 +1,36 @@
+.page-sell {
+  width: 100%;
+  padding: 0 10%;
+  margin: 40px 0;
+  margin-bottom: 100px;
+  margin-top: 180px;
+
+  .heading {
+    h1 {
+      margin: 0;
+      font-family: "Lato-Light";
+      font-style: normal;
+      font-weight: 200;
+      color: #ed1c2e;
+      font-weight: 600;
+      background-color: #fff;
+      font-size: 24px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #ccc;
+    }
+  }
+
+  ul {
+    li {
+      color: #666;
+      font-size: 16px;
+      line-height: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .page-sell {
+    margin-top: 140px;
+  }
+}

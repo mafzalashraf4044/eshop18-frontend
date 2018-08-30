@@ -1,0 +1,324 @@
+.home {
+  position: relative;
+
+  .banner-wrapper {
+    width: 100%;
+    height: 100vh;
+    min-height: 672px;
+    padding-top: 100px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(../../../assets/images/home-banner-image.png);
+  
+    .banner {
+      width: 100%;
+      height: 100%;
+
+      .site-intro-container {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        position: relative;
+
+        .certificates-container {
+          width: 70%;
+          margin-top: 40px;
+          
+          img {
+            width: 30%;
+            height: 50px;
+          }
+        }
+
+        .site-intro {
+          width: 70%;
+          padding: 15px;
+          background-color: #fff;
+
+          h1.title {
+            margin: 0;
+            color: #004fa3;
+            line-height: normal;
+            font-family: "Lato-Light";
+            font-size: 28px;
+            padding-bottom: 10px;
+        
+          }
+
+          p.txt {
+            font-size: 16px;
+            background: #fff;
+            color: #004fa3;
+            margin: 0;
+            line-height: 20px;
+          }
+        }
+        
+        .news-container {
+          width: 70%;
+          margin-top: 15px;
+          background-color: #fff;
+
+          .news {
+            width: 100%;
+            height: 150px;
+            background-color: #FFF;
+            border-radius: 4px;
+  
+            .slick-list {
+              padding-top: 0;
+            }
+            
+            .slick-arrow {
+              display: none!important;
+            }
+
+            .slick-dots {
+              > li {
+                button {
+                  &:before {
+                    color: #FFF;
+                    opacity: 0.5;
+                  }
+                }
+        
+                &:hover,
+                &.slick-active {
+                  button {
+                    &:before {
+                      color: #FFF;
+                      opacity: 0.75;
+                    }
+                  }
+                }
+              }
+            }
+        
+
+            .slick-item {
+    
+              &:focus {
+                outline: none;
+              }
+    
+              .news-item {
+                width: 100%;
+      
+                .news-title {
+                  padding: 15px;
+                  height: 50px;
+                  border-radius: 4px 4px 0 0;
+                  background-color: #FFF;
+                  border-bottom: 1px solid rgba(15,70,100,.12);
+  
+                  h2 {
+                    margin: 0;
+                    color: #00326a;
+                    font-size: 18px;
+                    margin-bottom: 0;
+                    font-family: "Lato-Light";
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                  }
+                }
+      
+                .news-content {
+                  padding: 15px;
+                  height: 100px;
+                  border-radius: 0 0 4px 4px;
+                  background-color: rgba(162, 201, 221, 0.12);
+  
+                  p {
+                    margin: 0;      
+                    color: #666;
+                    font-size: 14px;
+                  }
+                }
+              }
+    
+            }
+          }
+  
+        }
+      }
+    }
+  }
+  
+  .about-us-container {
+    width: 100%;
+    padding: 0 10%;
+    margin: 40px 0;
+    background-color: #FFF;
+
+    .currency-info {
+      width: 40%;
+
+      .table {
+        margin-bottom: 0;
+      }
+    }
+
+    .about-us {
+      width: 60%;
+      padding: 0 25px;
+      
+      h2 {
+        margin: 0;
+        color: #ed1c2e;
+        font-weight: 600;
+        font-size: 24px;
+        margin-bottom: 10px;
+        font-family: "Lato-Light";
+      }
+
+      p {
+        margin: 0;
+        color: #666;
+        font-size: 18px;
+        text-align: justify;            
+      }
+    }
+  }
+
+  .our-services {
+    width: 100%;
+    padding: 40px 10%;
+    background-color: #004D9D;
+
+    .our-services-txt {
+      padding-top: 20px;
+      text-align: center;
+
+      h2 {
+        color: #FFF;
+        font-size: 24px;
+        font-family: "Lato-Light";
+      }
+
+      p {
+        color: #FFF;
+        font-size: 16px;
+      }
+    }
+
+    .services {
+      width: 100%;
+      padding-top: 20px;
+
+      .service {
+        width: 32%;
+        min-height: 300px;
+        margin-bottom: 20px;
+        padding: 30px 25px;
+        background-color: #fff;
+
+        .service-icon-container {
+          margin-bottom: 30px;
+
+          .service-icon {
+            width: 65px;
+            height: 65px;
+            color: #78787a;
+          }
+        }
+
+        .service-description {
+          text-align: center;
+
+          h2 {
+            color: #78787a;
+            font-size: 20px;
+          }
+
+          p {
+            color: #78787a;
+            font-size: 14px;
+            line-height: 22px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+
+  .home .banner-wrapper .banner .site-intro-container .site-intro h1.title {
+    font-size: 16px;
+  }
+
+  .home .banner-wrapper .banner .site-intro-container .site-intro p.txt {
+    font-size: 12px;
+  }
+
+  .home .about-us-container .about-us p {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+}
+
+@media screen and (max-width: 991px) {
+
+  .home {
+    position: relative;
+
+    .banner-wrapper {
+      height: auto;
+      
+      .banner {
+        display: block;
+        padding-bottom: 40px;
+
+        .site-intro-container {
+          width: 80%;
+          margin: 0 auto;
+
+          .site-intro, .news-container, .certificates-container {
+            width: 100%;
+          }
+
+          .certificates-container {
+            margin-top: 30px;
+            margin-bottom: 15px;
+          }
+        }
+      }
+    }
+
+    .about-us-container {
+      flex-direction: column;
+  
+      .currency-info {
+        width: 100%;
+      }
+  
+      .about-us {
+        order: -1;
+        width: 100%;
+        padding: 0;
+        padding-bottom: 20px;
+  
+        h2 {
+          text-align: center;
+        }
+  
+        p {
+          text-align: center;
+        }
+      }
+    }
+
+    .our-services {
+      .services {
+        flex-direction: column;
+
+        .service {
+          width: 100%;
+          min-height: 200px;
+        }
+      }
+    }
+  }
+}

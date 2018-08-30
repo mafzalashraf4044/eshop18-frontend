@@ -1,0 +1,21 @@
+.dashboard-content-default {
+  .table {
+    margin-top: 20px;
+
+    td {
+      font-size: 16px;
+      padding: 5px;
+      color: #666;
+
+      &.c1 {
+        text-align: right;
+        width: 40%;
+      }
+
+      &.c2 {
+        width: 60%;
+      }
+    }
+  }
+
+}

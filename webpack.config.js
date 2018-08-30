@@ -138,6 +138,9 @@ module.exports = {
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NamedModulesPlugin(),
       new webpack.optimize.AggressiveMergingPlugin(),
+      new webpack.DefinePlugin({
+        ARG_API_URL: JSON.stringify(process.env.API_URL || "http://localhost:1337"),
+      }),
       new webpack.optimize.ModuleConcatenationPlugin(),
       new webpack.optimize.UglifyJsPlugin({
         sourceMap: false,
