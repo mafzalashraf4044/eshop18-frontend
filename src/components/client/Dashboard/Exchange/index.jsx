@@ -4,10 +4,6 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-//  third party components
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLongArrowAltRight, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
-
 //  custom components
 import PlaceOrder from '../../common/PlaceOrder';
 
@@ -23,7 +19,7 @@ class Exchange extends React.PureComponent {
     return (
       <div className="dashboard-content-exchange">
         <div className="heading df jc-fs ai-c">
-          <FontAwesomeIcon icon={faSyncAlt} className="icon" />
+          <i className="fa fa-sync-alt icon" />
           <h2>Exchange</h2>
         </div>
 

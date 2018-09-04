@@ -6,8 +6,7 @@ import PropTypes from 'prop-types';
 
 //  third party components
 import Slider from "react-slick";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
+import { Link } from "react-router-dom";
 
 //  redux
 import { connect } from 'react-redux';
@@ -62,24 +61,20 @@ class Footer extends React.PureComponent {
             
             <ul className="links">
               <li className="df jc-fs ai-c">
-                <FontAwesomeIcon icon={faAngleRight} className="angle-icon" />
-                <span>Buy</span>  
+                <i className="fa fa-angle-right angle-icon" />
+                <Link className="df jc-c ai-c" to="/buy"><span>Buy</span></Link> 
               </li>
               <li className="df jc-fs ai-c">
-                <FontAwesomeIcon icon={faAngleRight} className="angle-icon" />
-                <span>Sell</span>  
+                <i className="fa fa-angle-right angle-icon" />
+                <Link className="df jc-c ai-c" to="/sell"><span>Sell</span></Link>
               </li>
               <li className="df jc-fs ai-c">
-                <FontAwesomeIcon icon={faAngleRight} className="angle-icon" />
-                <span>Exchange</span>  
+                <i className="fa fa-angle-right angle-icon" />
+                <Link className="df jc-c ai-c" to="/exchange"><span>Exchange</span></Link>
               </li>
               <li className="df jc-fs ai-c">
-                <FontAwesomeIcon icon={faAngleRight} className="angle-icon" />
-                <span>Fees</span>  
-              </li>
-              <li className="df jc-fs ai-c">
-                <FontAwesomeIcon icon={faAngleRight} className="angle-icon" />
-                <span>FAQ</span>  
+                <i className="fa fa-angle-right angle-icon" />
+                <Link className="df jc-c ai-c" to="/faq"><span>FAQ</span></Link>
               </li>
             </ul>
           </div>
@@ -90,7 +85,7 @@ class Footer extends React.PureComponent {
             </div>
 
             <div className="contact-us">
-              <p>Travelex Currency Services Inc.</p>
+              <p>eBUYexchange.</p>
               <p>122 East 42nd Street</p>
               <p>Suite 2800</p>
               <p>New York, NY 10168</p>

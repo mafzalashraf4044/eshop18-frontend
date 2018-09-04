@@ -5,10 +5,6 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import update from 'immutability-helper';
 
-//  third party components
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 //  styles
 import './styles.scss';
 
@@ -26,8 +22,18 @@ class LoginModal extends React.PureComponent {
     };
   }
 
-  componentWillReceiveProps(newProps) {
-    console.log('verifyEmailResponse', newProps.verifyEmailResponse);    
+  handleKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      this.login();
+    }
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyDown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyDown);
   }
 
   login = () => {
@@ -70,7 +76,7 @@ class LoginModal extends React.PureComponent {
         <div className="login-modal">
           <div className="heading df jc-sb ai-c">
             <h2>Login</h2>
-            <FontAwesomeIcon icon={faTimes} className="icon" onClick={this.props.toggleModal} />
+            <i className="fa fa-times icon" onClick={this.props.toggleModal} />
           </div>
 
           <div className="form">

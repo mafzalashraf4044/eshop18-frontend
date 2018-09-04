@@ -1,13 +1,9 @@
 import React from 'react';
 
 //  third party libraries
-import _ from 'lodash';
+import compact from 'lodash/compact';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-
-//  third party components
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLongArrowAltRight, faCreditCard, faMoneyBillAlt, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 
 //  styles
 import './styles.scss';
@@ -39,15 +35,15 @@ class OrdersHistory extends React.PureComponent {
   }
 
   render() {
-    const buyOrders = _.compact(this.state.orders.map(order => (order.type === 'buy' ? order : null)));
-    const sellOrders = _.compact(this.state.orders.map(order => (order.type === 'sell' ? order : null)));
-    const exchangeOrders = _.compact(this.state.orders.map(order => (order.type === 'exchange' ? order : null)));
+    const buyOrders = compact(this.state.orders.map(order => (order.type === 'buy' ? order : null)));
+    const sellOrders = compact(this.state.orders.map(order => (order.type === 'sell' ? order : null)));
+    const exchangeOrders = compact(this.state.orders.map(order => (order.type === 'exchange' ? order : null)));
 
     return (
       <div className="dashboard-content-orders-history">
         <div className="buy-stats">
           <div className="heading df jc-fs ai-c">
-            <FontAwesomeIcon icon={faCreditCard} className="icon" />
+            <i className="fa fa-credit-card icon" />
             <h2>Buy Orders Statistics</h2>
           </div>
 
@@ -91,7 +87,7 @@ class OrdersHistory extends React.PureComponent {
 
         <div className="sell-stats">
           <div className="heading df jc-fs ai-c">
-            <FontAwesomeIcon icon={faMoneyBillAlt} className="icon" />
+            <i className="fa fa-money-bill-alt icon" />
             <h2>Sell Orders Statistics</h2>
           </div>
 
@@ -134,7 +130,7 @@ class OrdersHistory extends React.PureComponent {
 
         <div className="exchange-stats">
           <div className="heading df jc-fs ai-c">
-            <FontAwesomeIcon icon={faSyncAlt} className="icon" />
+            <i className="fa fa-sync-alt icon" />
             <h2>Exchange Orders Statistics</h2>
           </div>
           

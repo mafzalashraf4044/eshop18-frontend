@@ -4,10 +4,6 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-//  third party components
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLongArrowAltRight, faMoneyBillAlt } from '@fortawesome/free-solid-svg-icons';
-
 //  custom components
 import PlaceOrder from '../../common/PlaceOrder';
 
@@ -24,7 +20,7 @@ class Sell extends React.PureComponent {
     return (
       <div className="dashboard-content-sell">
         <div className="heading df jc-fs ai-c">
-          <FontAwesomeIcon icon={faMoneyBillAlt} className="icon" />
+          <i className="fa fa-money-bill-alt icon" />
           <h2>Sell</h2>
         </div>
 

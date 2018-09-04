@@ -99,3 +99,9 @@
     }
   }
 }
+
+@media screen and (max-width: 991px) {
+  .login-modal {
+    width: 80%!important;
+  }
+}

@@ -6,8 +6,6 @@ import PropTypes from 'prop-types';
 
 //  third party components
 import Select from 'react-select';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLongArrowAltRight, faCreditCard } from '@fortawesome/free-solid-svg-icons';
 
 //  custom components
 import PlaceOrder from '../../common/PlaceOrder';
@@ -28,7 +26,7 @@ class Buy extends React.PureComponent {
     return (
       <div className="dashboard-content-buy">
         <div className="heading df jc-fs ai-c">
-          <FontAwesomeIcon icon={faCreditCard} className="icon" />
+          <i className="fa fa-credit-card icon" />
           <h2>Buy</h2>
         </div>
 

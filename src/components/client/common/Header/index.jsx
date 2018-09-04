@@ -6,8 +6,6 @@ import PropTypes from 'prop-types';
 
 //  third party components
 import { Link } from "react-router-dom";
-import { faPhoneSquare, faPhoneVolume, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 //  styles
 import './styles.scss';
@@ -90,11 +88,11 @@ class Header extends React.PureComponent {
               </li>
             }
             <li className="nav-item contact-us df jc-c ai-c">
-              <a href="#" className="df jc-c ai-c"><FontAwesomeIcon icon={faPhoneSquare} className="contact-icon" /></a>
+              <a href="#" className="df jc-c ai-c"><i className="fa fa-phone-square contact-icon" /></a>
               <div className="contact-details">
                 <div className="call-us df fd-c jc-fs ai-c">
                   <div className="heading-container df jc-fs ai-c">
-                    <FontAwesomeIcon icon={faPhoneVolume} className="call-icon" />
+                    <i className="fa fa-phone-volume call-icon" />
                     <p className="heading-txt">Call us</p>
                   </div>
                   <div className="body">
@@ -104,7 +102,7 @@ class Header extends React.PureComponent {
                 </div>
                 <div className="email-us df fd-c jc-fs ai-c">
                   <div className="heading-container df jc-fs ai-c">
-                    <FontAwesomeIcon icon={faEnvelope} className="email-icon" />
+                    <i className="fa fa-envelope email-icon" />
                     <p className="heading-txt">Email us</p>
                   </div>
                   <div className="body">
@@ -153,17 +151,17 @@ class Header extends React.PureComponent {
             {
               !this.props.isLoggedIn &&
               <li className="nav-item df jc-c ai-c" onClick={() => {this.toggleMenuOpen(); window.scrollTo(0,0); this.toggleRegisterModal();}}>
-                <Link to="/dashboard"><span>Register</span></Link>
+                <a><span>Register</span></a>
               </li>
             }
 
             {
               !this.props.isLoggedIn ?
               <li className="nav-item df jc-c ai-c" onClick={() => {this.toggleMenuOpen(); window.scrollTo(0,0); this.toggleLoginModal();}}>
-                <Link to="/dashboard"><span>Login</span></Link>
+                <a><span>Login</span></a>
               </li> :
               <li className="nav-item df jc-c ai-c" onClick={this.props.logout}>
-                <Link to="/dashboard"><span>Logout</span></Link>
+                <a><span>Logout</span></a>
               </li>
             }
           </ul>

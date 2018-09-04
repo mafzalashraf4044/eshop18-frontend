@@ -4,10 +4,6 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-//  third party components
-import { faUserShield } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 //  styles
 import './styles.scss';
 
@@ -16,7 +12,7 @@ class VerifyAccount extends React.PureComponent {
     return (
       <div className="dashboard-content-verify-account">
         <div className="heading df jc-fs ai-c">
-          <FontAwesomeIcon icon={faUserShield} className="icon" />
+          <i className="fa fa-user-shield icon" />
           <h2>Account Verification</h2>
         </div>
 

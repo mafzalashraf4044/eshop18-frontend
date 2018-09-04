@@ -14,7 +14,7 @@
 }
 
 :global {
-  @import '../assets/icons/fontawesome/css/all.css';
+  // @import '../assets/icons/fontawesome/css/all.css';
   // @import '../assets/bootstrap/css/bootstrap.css';
   // @import '../assets/bootstrap/css/bootstrap-theme.css';
 
@@ -86,26 +86,30 @@
   .fw {
     flex-wrap: wrap;
   }
+  
+  input {
+    color: #666;
+  }
 
   .err-msg {
-    color: red;
+    color: #a94442;
     padding: 5px;
     display: block;
     font-size: 16px;
     border-radius: 2px;
     margin-bottom: 6px;
-    border: 2px dotted red;
+    border: 2px dotted #a94442;
     font-family: Lato-BoldItalic;
   }
 
   .success-msg {
-    color: blue;
+    color: #3c763d;
     padding: 5px;
     display: block;
     font-size: 16px;
     border-radius: 2px;
     margin-bottom: 6px;
-    border: 2px dotted blue;
+    border: 2px dotted #3c763d;
     font-family: Lato-BoldItalic;
   }
 

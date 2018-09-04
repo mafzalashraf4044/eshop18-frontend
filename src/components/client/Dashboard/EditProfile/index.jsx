@@ -5,10 +5,6 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import update from 'immutability-helper';
 
-//  third party components
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 //  styles
 import './styles.scss';
 
@@ -23,6 +19,7 @@ class EditProfile extends React.PureComponent {
 
     this.state = {
       user: this.props.user,
+      responseMsg: {type: '', text: ''},
     };
   }
 
@@ -32,15 +29,23 @@ class EditProfile extends React.PureComponent {
       lastName: this.state.user.lastName,
       username: this.state.user.username,
       country: this.state.user.country,
-      email: this.state.user.email,
       contactNumber: this.state.user.contactNumber,
     }).then((res) => {
       if (res.status === 200) {
         this.props.saveUser(res.data.user);
+        this.setState({
+          responseMsg: {
+            type: 'success',
+            text: 'User profile updated successfully.',
+          } 
+        });
       }
     }).catch((err) => {
       this.setState({
-        responseMsg: err.response.data.details || err.response.data.raw 
+        responseMsg: {
+          type: 'err',
+          text: err.response.data.details || err.response.data.raw,
+        } 
       });
 
       throw new Error(err);
@@ -58,7 +63,7 @@ class EditProfile extends React.PureComponent {
     return (
       <div className="dashboard-content-edit-profile">
         <div className="heading df jc-fs ai-c">
-          <FontAwesomeIcon icon={faEdit} className="icon" />
+          <i className="fa fa-edit icon" />
           <h2>Edit Profile</h2>
         </div>
 
@@ -76,10 +81,6 @@ class EditProfile extends React.PureComponent {
             <input type="text" name="username" value={this.state.user.username} onChange={this.handleChange} />
           </div>
           <div className="form-field">
-            <label className="label">Email:</label>
-            <input type="text" name="email" value={this.state.user.email} onChange={this.handleChange} />
-          </div>
-          <div className="form-field">
             <label className="label">Country:</label>
             <input type="text" name="country" value={this.state.user.country} onChange={this.handleChange} />
           </div>
@@ -88,8 +89,8 @@ class EditProfile extends React.PureComponent {
             <input type="text" name="contactNumber" value={this.state.user.contactNumber} onChange={this.handleChange} />
           </div>
           {
-            this.state.responseMsg &&
-            <div className="err-msg">{this.state.responseMsg}</div>
+            this.state.responseMsg.text &&
+            <div className={classNames({'err-msg': this.state.responseMsg.type === 'err', 'success-msg': this.state.responseMsg.type === 'success'})}>{this.state.responseMsg.text}</div>
           }
           <div className="btn-container" onClick={this.editProfile}>
             <button className="btn">Save Changes</button>

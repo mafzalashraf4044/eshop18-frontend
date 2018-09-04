@@ -6,8 +6,6 @@ import PropTypes from 'prop-types';
 
 //  third party components
 import Slider from "react-slick";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 //  styles
 import './styles.scss';
@@ -40,7 +38,7 @@ class Reviews extends React.PureComponent {
                       {
                         [1,2,3,4,5].map((star, i) => (
                           <div className="star-icon-container" key={i}>
-                            <FontAwesomeIcon icon={faStar} className="star-icon" />
+                            <i className="fa fa-star star-icon" />
                           </div>
                         ))
                       }

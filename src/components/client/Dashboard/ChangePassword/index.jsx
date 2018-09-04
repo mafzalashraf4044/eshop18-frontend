@@ -4,10 +4,6 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-//  third party components
-import { faLock } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 //  styles
 import './styles.scss';
 
@@ -24,7 +20,7 @@ class ChangePassword extends React.PureComponent {
       oldPwd: '',
       newPwd: '',
       confirmPwd: '',
-      responseMsg: '',
+      responseMsg: {type: '', text: ''},
     };
   }
 
@@ -32,7 +28,10 @@ class ChangePassword extends React.PureComponent {
 
     if (this.state.newPwd !== this.state.confirmPwd) {
       this.setState({
-        responseMsg: 'Password does not match.',
+        responseMsg: {
+          type: 'err',
+          text: 'Password does not match.',
+        } 
       });
     } else {
       this.props.changePassword(this.props.user.id, this.state.oldPwd, this.state.newPwd).then((res) => {
@@ -41,14 +40,20 @@ class ChangePassword extends React.PureComponent {
             oldPwd: '',
             newPwd: '',
             confirmPwd: '',
-            responseMsg: '',
+            responseMsg: {
+              type: 'success',
+              text: 'Password changed successfully.'
+            },
           });
         }
       }).catch((err) => {
         this.setState({
-          responseMsg: err.response.data.details || err.response.data.raw 
+          responseMsg: {
+            type: 'err',
+            text: err.response.data.details || err.response.data.raw ,
+          } 
         });
-  
+
         throw new Error(err);
       });
     }
@@ -66,7 +71,7 @@ class ChangePassword extends React.PureComponent {
     return (
       <div className="dashboard-content-change-password">
         <div className="heading df jc-fs ai-c">
-          <FontAwesomeIcon icon={faLock} className="icon" />
+          <i className="fa fa-lock icon" />
           <h2>Change Password</h2>
         </div>
 
@@ -84,8 +89,8 @@ class ChangePassword extends React.PureComponent {
             <input type="password" name="confirmPwd" value={this.state.confirmPwd} onChange={this.handleChange}/>
           </div>
           {
-            this.state.responseMsg &&
-            <div className="err-msg">{this.state.responseMsg}</div>
+            this.state.responseMsg.text &&
+            <div className={classNames({'err-msg': this.state.responseMsg.type === 'err', 'success-msg': this.state.responseMsg.type === 'success'})}>{this.state.responseMsg.text}</div>
           }
           <div className="btn-container" onClick={this.changePassword}>
             <button className="btn">Save Changes</button>

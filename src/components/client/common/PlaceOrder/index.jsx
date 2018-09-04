@@ -1,15 +1,13 @@
 import React from 'react';
 
 //  third party libraries
-import _ from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 //  third party components
 import Select from 'react-select';
 import { withRouter } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons'
 
 //  styles
 import './styles.scss';
@@ -17,75 +15,75 @@ import './styles.scss';
 const buy = {
   firstAmount: {
     label: 'Amount you want to buy (USD)',
-    value: 0,
+    value: '',
   },
   from: {
     label: 'Payment',
-    value: 0,
+    value: '',
     optionsKey: 'paymentMethods',
   },
   to: {
     label: 'E-currency',
-    value: 0,
+    value: '',
     optionsKey: 'eCurrencies',
   },
   serviceCharges: {
     label: 'Service Charges',
-    value: 0,
+    value: '',
   },
   secondAmount: {
     label: 'You have to send (USD)',
-    value: 0,
+    value: '',
   },
 };
 
 const sell = {
   firstAmount: {
     label: 'Amount you want to sell (USD)',
-    value: 0,
+    value: '',
   },
   from: {
     label: 'E-currency',
-    value: 0,
+    value: '',
     optionsKey: 'eCurrencies',
   },
   to: {
     label: 'Payment',
-    value: 0,
+    value: '',
     optionsKey: 'paymentMethods',
   },
   serviceCharges: {
     label: 'Service Charges',
-    value: 0,
+    value: '',
   },
   secondAmount: {
     label: 'You will receive (USD)',
-    value: 0,
+    value: '',
   },
 };
 
 const exchange = {
   firstAmount: {
     label: 'Amount you want to exchange (USD)',
-    value: 0,
+    value: '',
   },
   from: {
     label: 'Exchange from',
-    value: 0,
+    value: '',
     optionsKey: 'eCurrencies',
   },
   to: {
     label: 'Exchange to',
-    value: 0,
+    value: '',
     optionsKey: 'eCurrencies',
   },
   serviceCharges: {
     label: 'Service Charges',
-    value: 0,
+    value: '',
   },
   secondAmount: {
     label: 'You will receive (USD)',
-    value: 0,
+    value: '',
   },
 };
 
@@ -95,12 +93,13 @@ class PlaceOrder extends React.PureComponent {
     super(props);
 
     this.state = {
-      buy: _.cloneDeep(buy),
-      sell: _.cloneDeep(sell), 
-      exchange: _.cloneDeep(exchange),
+      buy: cloneDeep(buy),
+      sell: cloneDeep(sell), 
+      exchange: cloneDeep(exchange),
       eCurrencies: [],
       paymentMethods: [],
       isOrderPlaced: false,
+      responseMsg: {type: '', text: ''},
     };
   }
 
@@ -115,6 +114,30 @@ class PlaceOrder extends React.PureComponent {
     });
   }
 
+  currencyCalculator = (currentTab) => {
+    if (currentTab.to.value && currentTab.from.value && (currentTab.firstAmount.value || currentTab.firstAmount.value === '0')) {
+      this.props.currencyCalculator({
+        to: currentTab.to.value,
+        from: currentTab.from.value,
+        type: this.props.orderType,
+        firstAmount: currentTab.firstAmount.value,
+      }).then((res) => {
+        if (res.status === 200) {
+          currentTab = {...this.state[this.props.orderType]};
+  
+          currentTab.secondAmount.value = res.data.secondAmount;
+          currentTab.serviceCharges.value = res.data.serviceCharges;
+  
+          this.setState({
+            [this.props.orderType]: currentTab,
+          });
+        }
+      }).catch((err) => {
+        throw new Error(err);
+      });
+    }
+  }
+
   handleChange = (key, value) => {
     let currentTab = {...this.state[this.props.orderType]};
     currentTab[key].value = value;
@@ -122,29 +145,32 @@ class PlaceOrder extends React.PureComponent {
     this.setState({
       [this.props.orderType]: currentTab,
     }, () => {
-
-      if (currentTab.to.value && currentTab.from.value && currentTab.firstAmount.value > 0) {
-        this.props.currencyCalculator({
-          to: currentTab.to.value,
-          from: currentTab.from.value,
-          type: this.props.orderType,
-          firstAmount: currentTab.firstAmount.value,
-        }).then((res) => {
-          if (res.status === 200) {
-            currentTab = {...this.state[this.props.orderType]};
-
-            currentTab.secondAmount.value = res.data.secondAmount;
-            currentTab.serviceCharges.value = res.data.serviceCharges;
-
-            this.setState({
-              [this.props.orderType]: currentTab,
-            });
-          }
-        }).catch((err) => {
-          throw new Error(err);
-        });
+      if (key === 'to' || key === 'from') {
+        this.currencyCalculator(currentTab);
       }
     });
+  }
+
+  verifyFirstAmountValue = (e) => {
+    let currentTab = {...this.state[this.props.orderType]};
+
+    if (isNaN(currentTab.firstAmount.value)) {
+      currentTab.firstAmount.value = '0';
+      this.setState({
+        [this.props.orderType]: currentTab,
+      }, () => {
+        this.currencyCalculator(currentTab);
+      });
+    } else if (parseFloat(currentTab.firstAmount.value) < 0) {
+      currentTab.firstAmount.value = currentTab.firstAmount.value * -1;
+      this.setState({
+        [this.props.orderType]: currentTab,
+      }, () => {
+        this.currencyCalculator(currentTab);
+      });
+    } else {
+      this.currencyCalculator(currentTab);
+    }
   }
 
   placeOrder = () => {
@@ -162,6 +188,13 @@ class PlaceOrder extends React.PureComponent {
         });
       }
     }).catch((err) => {
+      this.setState({
+        responseMsg: {
+          type: 'err',
+          text: err.response.data.details || err.response.data.raw,
+        } 
+      });
+
       throw new Error(err);
     });
 
@@ -175,33 +208,35 @@ class PlaceOrder extends React.PureComponent {
         <div className="form">
           <div className="form-field amount-buy">
             <label className="label">{currentTab.firstAmount.label}:</label>
-            <input type="number" value={currentTab.firstAmount.value} onChange={(e) => this.handleChange('firstAmount', e.target.value)} />
+            <input type="text" value={currentTab.firstAmount.value} onBlur={this.verifyFirstAmountValue} onChange={(e) => this.handleChange('firstAmount', e.target.value)} />
           </div>
   
           <div className="form-field amount-to-from df jc-fs ai-c">
             <div className="left">
               <label className="label">{currentTab.from.label}:</label>
               <Select
-                options={this.state[currentTab.from.optionsKey]}
+                isClearable
                 key={this.props.orderType}
                 isSearchable={false}
                 className="react-select"
                 classNamePrefix="react-select"
-                onChange={(opt) => this.handleChange('from', opt.value)}
+                onChange={(opt) => this.handleChange('from', opt ? opt.value : '')}
+                options={this.state[currentTab.from.optionsKey].filter(option => (option.value !== this.state[this.props.orderType].to.value))}
               />
             </div>
             <div className="arrow-icon-container df jc-c ai-c">
-              <FontAwesomeIcon icon={faLongArrowAltRight} className="arrow-icon" />
+              <i className="fa fa-long-arrow-alt-right arrow-icon" />
             </div>
             <div className="right">
               <label className="label">{currentTab.to.label}:</label>
               <Select
-                options={this.state[currentTab.to.optionsKey]}
+                isClearable
                 key={this.props.orderType}
                 isSearchable={false}
                 className="react-select"
                 classNamePrefix="react-select"
-                onChange={(opt) => this.handleChange('to', opt.value)}
+                onChange={(opt) => this.handleChange('to', opt ? opt.value : '')}
+                options={this.state[currentTab.to.optionsKey].filter(option => (option.value !== this.state[this.props.orderType].from.value))}
               />
             </div>
           </div>
@@ -216,6 +251,11 @@ class PlaceOrder extends React.PureComponent {
             <input type="text" value={currentTab.secondAmount.value} />
           </div>
   
+          {
+            this.state.responseMsg.text &&
+            <div className={classNames({'err-msg': this.state.responseMsg.type === 'err', 'success-msg': this.state.responseMsg.type === 'success'})}>{this.state.responseMsg.text}</div>
+          }
+
           <div className="btn-container" onClick={this.placeOrder}>
             <button className="btn">{this.props.orderType}</button>
           </div>

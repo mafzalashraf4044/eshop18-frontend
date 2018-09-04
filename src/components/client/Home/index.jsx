@@ -6,8 +6,6 @@ import PropTypes from 'prop-types';
 
 //  third party components
 import Slider from "react-slick";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLongArrowAltRight, faCreditCard, faMoneyBillAlt, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 
 //  custom components
 import CurrencyCalculator from 'components/client/common/CurrencyCalculator';
@@ -152,7 +150,7 @@ class Home extends React.PureComponent {
           <div className="services df jc-sb ai-c">
             <div className="service buy">
               <div className="service-icon-container df jc-c ai-c">
-                <FontAwesomeIcon icon={faCreditCard} className="service-icon" />
+                <i className="fa fa-credit-card service-icon" />
               </div>
               <div className="service-description">
                 <h2>BUY</h2>
@@ -161,7 +159,7 @@ class Home extends React.PureComponent {
             </div>
             <div className="service sell">
               <div className="service-icon-container df jc-c ai-c">
-                <FontAwesomeIcon icon={faMoneyBillAlt} className="service-icon" />
+                <i className="fa fa-money-bill-alt service-icon" />
               </div>
               <div className="service-description">
                 <h2>SELL</h2>
@@ -171,7 +169,7 @@ class Home extends React.PureComponent {
           
             <div className="service exchange">
               <div className="service-icon-container df jc-c ai-c">
-                <FontAwesomeIcon icon={faSyncAlt} className="service-icon" />
+                <i className="fa fa-sync service-icon" />
               </div>
               <div className="service-description">
                 <h2>EXCHANGE</h2>

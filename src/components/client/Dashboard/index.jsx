@@ -52,11 +52,14 @@ class Dashboard extends React.PureComponent {
             <NavLink exact activeClassName="active" to="/dashboard/edit-profile"><span>Edit Profile</span></NavLink>
           </li>
           <li className="nav-item">
-            <NavLink exact activeClassName="active" to="/dashboard/verify-account"><span>Verify Account</span></NavLink>
-          </li>
-          <li className="nav-item">
             <NavLink exact activeClassName="active" to="/dashboard/change-password"><span>Change Password</span></NavLink>
           </li>
+          {
+            !this.props.user.isVerified &&
+            <li className="nav-item">
+              <NavLink exact activeClassName="active" to="/dashboard/verify-account"><span>Verify Account</span></NavLink>
+            </li>
+          }
         </ul>
 
         <div className="dashboard-content">
@@ -68,8 +71,8 @@ class Dashboard extends React.PureComponent {
             <Route exact path="/dashboard/orders-history" component={OrdersHistory} />
             <Route exact path="/dashboard/my-accounts" component={MyAccount} />
             <Route exact path="/dashboard/edit-profile" component={EditProfile} />
-            <Route exact path="/dashboard/verify-account" component={VerifyAccount} />
             <Route exact path="/dashboard/change-password" component={ChangePassword} />
+            <Route exact path="/dashboard/verify-account" component={VerifyAccount} />
           </Switch>
         </div>
       </div>
@@ -77,4 +80,10 @@ class Dashboard extends React.PureComponent {
   }
 }
 
-export default Dashboard;
+const mapStateToProps = (state) => ({
+  user: state.MainReducer.user,
+});
+
+const mapDispatchToProps = (dispatch) => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

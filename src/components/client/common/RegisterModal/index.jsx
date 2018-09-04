@@ -5,10 +5,6 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import update from 'immutability-helper';
 
-//  third party components
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 //  styles
 import './styles.scss';
 
@@ -26,8 +22,22 @@ class RegisterModal extends React.PureComponent {
         password: '',
         contactNumber: '',
       },
-      responseMsg: '',
+      responseMsg: {type: '', text: ''},
     };
+  }
+
+  handleKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      this.register();
+    }
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyDown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyDown);
   }
 
   register = () => {
@@ -35,13 +45,21 @@ class RegisterModal extends React.PureComponent {
 
     this.props.register(this.state.user).then((res) => {
       if (res.status === 200) {
-        this.props.toggleModal();
+        this.setState({
+          responseMsg: {
+            type: 'success',
+            text: 'Registration successful, kindly check your email for verifcation.',
+          } 
+        });
       }
       this.props.saveIsLoading(false);
     }).catch((err) => {
       this.props.saveIsLoading(false);
       this.setState({
-        responseMsg: err.response.data.details || err.response.data.raw 
+        responseMsg: {
+          type: 'err',
+          text: err.response.data.details || err.response.data.raw,
+        } 
       });
 
       throw new Error(err);
@@ -62,7 +80,7 @@ class RegisterModal extends React.PureComponent {
         <div className="register-modal">
           <div className="heading df jc-sb ai-c">
             <h2>Register</h2>
-            <FontAwesomeIcon icon={faTimes} className="icon" onClick={this.props.toggleModal}/>
+            <i className="fa fa-times icon" onClick={this.props.toggleModal}/>
           </div>
           <div className="form">
             <div className="two-columns df jc-sb ai-c">
@@ -100,8 +118,8 @@ class RegisterModal extends React.PureComponent {
               <input type="password" name="password" value={this.state.user.password} onChange={this.handleChange} />
             </div>
             {
-              this.state.responseMsg &&
-              <div className="err-msg">{this.state.responseMsg}</div>
+              this.state.responseMsg.text &&
+              <div className={classNames({'err-msg': this.state.responseMsg.type === 'err', 'success-msg': this.state.responseMsg.type === 'success'})}>{this.state.responseMsg.text}</div>
             }
             <div className="btn-container" onClick={this.register}>
               <button className="btn">Register</button>

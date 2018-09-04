@@ -1,13 +1,7 @@
 import React from 'react';
 
 //  third party libraries
-import moment from 'moment';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
-
-//  third party components
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 //  styles
 import './styles.scss';
@@ -21,7 +15,7 @@ class Default extends React.PureComponent {
     return (
       <div className="dashboard-content-default">
         <div className="heading df jc-fs ai-c">
-          <FontAwesomeIcon icon={faUser} className="icon" />
+          <i className="fa fa-user icon" />
           <h2>Account Summary</h2>
         </div>
         
@@ -29,7 +23,7 @@ class Default extends React.PureComponent {
           <tbody>
             <tr>
               <td className="c1">Name: </td>
-              <td className="c2">{this.props.user.firstName} {this.props.user.lastName}</td>
+              <td className="c2">{this.props.user.firstName} {this.props.user.lastName} {this.props.user.isVerified ? <span className="user-verified"><i className="fa fa-user-shield icon" /></span> : ''}</td>
             </tr>
             <tr>
               <td className="c1">Email: </td>
@@ -53,7 +47,7 @@ class Default extends React.PureComponent {
             </tr>
             <tr>
               <td className="c1">Member Since: </td>
-              <td className="c2">{moment(this.props.user.createdAt).format('DD-MM-YYYY')}</td>
+              <td className="c2">{new Date(this.props.user.createdAt).toDateString()}</td>
             </tr>
           </tbody>
         </table>

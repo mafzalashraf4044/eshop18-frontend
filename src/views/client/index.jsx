@@ -8,8 +8,6 @@ import PropTypes from 'prop-types';
 import Slider from "react-slick";
 import Loader from 'react-loaders';
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
-import { faHome, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 //  custom components
 import LoginModal from 'components/client/common/LoginModal';
@@ -33,7 +31,7 @@ import * as actions from '../../redux/actions/MainActionCreators';
 import './styles.scss';
 import 'loaders.css/src/animations/ball-grid-pulse.scss';
 
-const AuthProtectedRoute = ({ isAllowed, ...props }) => isAllowed ? <props.component /> : <Redirect to="/" />;
+const AuthProtectedRoute = ({ isAllowed, ...props }) => isAllowed ? <Route {...props} /> : <Redirect to="/" />;
 
 class Client extends React.PureComponent {
 
@@ -204,7 +202,7 @@ class Client extends React.PureComponent {
                 <div className="breadcrumb-container">
                   <ul className="breadcrumb df jc-fs ai-c">
                     <li>
-                      <FontAwesomeIcon icon={faHome} className="home-icon" />
+                      <i className="fa fa-home home-icon" />
                     </li>
                     <li>&nbsp;&nbsp;/&nbsp;&nbsp; {this.props.location.pathname.slice(1).replace('/', '  /  ').replace('-', ' ')}</li>
                   </ul>
@@ -217,7 +215,7 @@ class Client extends React.PureComponent {
                 <Route exact path="/sell" component={Sell} />
                 <Route exact path="/exchange" component={Exchange} />
                 <Route exact path="/faq" component={FAQ} />
-                <Route path="/dashboard" component={Dashboard} />
+                <AuthProtectedRoute isAllowed={this.props.isLoggedIn} path='/dashboard' component={Dashboard} />
                 <Redirect to='/' />
               </Switch>
   
