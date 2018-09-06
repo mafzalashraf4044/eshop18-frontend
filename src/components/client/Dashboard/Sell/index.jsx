@@ -28,6 +28,7 @@ class Sell extends React.PureComponent {
           this.props.eCurrencies.length > 0 && this.props.paymentMethods.length > 0 &&
           <PlaceOrder
             orderType="sell"
+            config={this.props.config}
             placeOrder={this.props.placeOrder}
             eCurrencies={this.props.eCurrencies}
             paymentMethods={this.props.paymentMethods}
@@ -41,6 +42,7 @@ class Sell extends React.PureComponent {
 }
 
 const mapStateToProps = (state) => ({
+  config: state.MainReducer.config,
   eCurrencies: state.MainReducer.eCurrencies,
   paymentMethods: state.MainReducer.paymentMethods,
 });

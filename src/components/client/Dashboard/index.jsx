@@ -26,6 +26,17 @@ import * as actions from '../../../redux/actions/MainActionCreators';
 import './styles.scss';
 
 class Dashboard extends React.PureComponent {
+
+  componentDidMount() {
+    this.props.getConfig().then((res) => {
+      if (res.status === 200) {
+        this.props.saveConfig(res.data.config);
+      }
+    }).catch((err) => {
+      throw new Error(err);
+    });
+  }
+
   render() {
     return (
       <div className="page-dashboard df jc-fs ai-fs">
@@ -84,6 +95,9 @@ const mapStateToProps = (state) => ({
   user: state.MainReducer.user,
 });
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  getConfig: () => dispatch(actions.getConfig()),
+  saveConfig: config => dispatch(actions.saveConfig(config)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

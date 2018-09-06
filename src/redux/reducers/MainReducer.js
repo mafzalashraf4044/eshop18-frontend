@@ -8,12 +8,14 @@ const defaultState = {
   paymentMethods: [],
   user: null,
   isLoading: false,
+  config: {},
 };
 
 export default (state = defaultState, action) => {
   switch(action.type) {
     case 'SAVE_NEWS':
     case 'SAVE_USER':
+    case 'SAVE_CONFIG':
     case 'SAVE_IS_BLUR':
     case 'SAVE_IS_LOGGED_IN':
     case 'SAVE_IS_LOADING_IN':

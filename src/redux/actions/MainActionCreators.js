@@ -12,6 +12,15 @@ export function saveUser(user) {
   };
 }
 
+export function saveConfig(config) {
+  return {
+    type: 'SAVE_CONFIG',
+    payload: {
+      config,
+    },
+  };
+}
+
 export function saveIsLoading(isLoading) {
   return {
     type: 'SAVE_IS_LOADING_IN',
@@ -175,5 +184,11 @@ export const placeOrder = (order) => {
 export const getUserOrders = () => {
   return (dispatch) => {
       return axios.get(`${API_URL}/user-orders`, {headers: getHeaders()});
+  }
+}
+
+export const getConfig = () => {
+  return (dispatch) => {
+      return axios.get(`${API_URL}/config-user`, {headers: getHeaders()});
   }
 }
