@@ -44,6 +44,7 @@ class Header extends React.PureComponent {
   render() {
     return (
       <div className="header">
+        <div className="df jc-c ai-c">EbuyExchange Ltd: The Authorized Wholesaler of E-Currency.</div>
         <div className="navbar-md hidden-sm df jc-sb ai-c">
           <div className="logo-container df jc-c ai-c">
             <h1 className="logo">eBUYexchange</h1>

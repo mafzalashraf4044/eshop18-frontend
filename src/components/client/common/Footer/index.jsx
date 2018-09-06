@@ -96,7 +96,7 @@ class Footer extends React.PureComponent {
           </div>
         </div>
         <div className="sub-footer df jc-c ai-c">
-          <p>Copyright 2018 eBUYexchange Currency Services Inc. and its licensors. All rights reserved.</p>
+          <p>Copyright 2018 &copy; EbuyExchange Ltd. All rights reserved.</p>
         </div>
       </div>
     );

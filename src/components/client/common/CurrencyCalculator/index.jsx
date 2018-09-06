@@ -192,6 +192,16 @@ class CurrencyCalculator extends React.PureComponent {
     }
   }
 
+  getBtnTxt = () => {
+    if (this.state.calculatorActiveTab === 'buy') {
+      return 'BUY / DEPOSIT';
+    } else if (this.state.calculatorActiveTab === 'sell') {
+      return 'SELL / WITHDRAWAL';
+    }
+
+    return this.state.calculatorActiveTab;
+  }
+
   render() {
     const currentTab = this.state[this.state.calculatorActiveTab];
 
@@ -199,8 +209,8 @@ class CurrencyCalculator extends React.PureComponent {
       <div className="currency-calculator-container df jc-fs ai-c">
         <div className="currency-calculator">
           <div className="tabs df jc-fs ai-c">
-            <div className={classNames('tab df jc-c ai-c', {selected: this.state.calculatorActiveTab === 'buy'})} data-tab="buy" onClick={this.setCalculatorActiveTab}><span>BUY</span></div>
-            <div className={classNames('tab df jc-c ai-c', {selected: this.state.calculatorActiveTab === 'sell'})} data-tab="sell" onClick={this.setCalculatorActiveTab}><span>SELL</span></div>
+            <div className={classNames('tab df jc-c ai-c', {selected: this.state.calculatorActiveTab === 'buy'})} data-tab="buy" onClick={this.setCalculatorActiveTab}><span>BUY / DEPOSIT</span></div>
+            <div className={classNames('tab df jc-c ai-c', {selected: this.state.calculatorActiveTab === 'sell'})} data-tab="sell" onClick={this.setCalculatorActiveTab}><span>SELL / WITHDRAWAL</span></div>
             <div className={classNames('tab df jc-c ai-c', {selected: this.state.calculatorActiveTab === 'exchange'})} data-tab="exchange" onClick={this.setCalculatorActiveTab}><span>EXCHANGE</span></div>
           </div>
           <div className="tab-content">
@@ -255,7 +265,7 @@ class CurrencyCalculator extends React.PureComponent {
             </div>
 
             <div className="btn-container" onClick={this.handleBtnClick}>
-              <button className="btn">{this.state.calculatorActiveTab}</button>
+              <button className="btn">{this.getBtnTxt()}</button>
             </div>
           </div>
         </div>

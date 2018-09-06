@@ -67,27 +67,25 @@ class Client extends React.PureComponent {
       });
     }
 
-    if (!this.state.isLoggedInChecked) {
-      this.props.checkIsLoggedIn().then((res) => {
-        if (res.status === 200) {
-          this.props.saveIsLoggedIn(true);
-          this.props.saveUser(res.data.user);
-          this.setState({
-            isLoggedInChecked: true,
-          });
-        }
-      }).catch((err) => {
-        if (err.response.status === 403) {
-          this.props.saveIsLoggedIn(false);
-          this.props.saveUser(null);
-          this.setState({
-            isLoggedInChecked: true,
-          });
-        }
+    this.props.checkIsLoggedIn().then((res) => {
+      if (res.status === 200) {
+        this.props.saveIsLoggedIn(true);
+        this.props.saveUser(res.data.user);
+        this.setState({
+          isLoggedInChecked: true,
+        });
+      }
+    }).catch((err) => {
+      if (err.response.status === 403) {
+        this.props.saveIsLoggedIn(false);
+        this.props.saveUser(null);
+        this.setState({
+          isLoggedInChecked: true,
+        });
+      }
 
-        throw new Error(err);
-      });
-    }
+      throw new Error(err);
+    });
 
     this.props.getECurrencies().then((res) => {
       if (res.status === 200) {
@@ -188,6 +186,12 @@ class Client extends React.PureComponent {
     if (this.state.isLoggedInChecked) {
       return (
         <div className={classNames('client', {'header-collapse': this.state.headerCollapse})}>
+          <div className="icon-bar">
+            <a href="#" className="facebook"><i className="fab fa-facebook-f"></i></a> 
+            <a href="#" className="google"><i className="fab fa-google"></i></a> 
+            <a href="skype:maa4044?chat" className="skype"><i className="fab fa-skype"></i></a>
+          </div>
+
           {
             this.props.isLoading &&
             <div className="main-loader-container df jc-c ai-c">
