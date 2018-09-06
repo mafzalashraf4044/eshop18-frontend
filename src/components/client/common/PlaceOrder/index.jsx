@@ -9,6 +9,9 @@ import PropTypes from 'prop-types';
 import Select from 'react-select';
 import { withRouter } from 'react-router-dom';
 
+// custom component 
+import ConfirmationModal from '../../common/ConfirmationModal';
+
 //  styles
 import './styles.scss';
 
@@ -100,10 +103,11 @@ class PlaceOrder extends React.PureComponent {
       paymentMethods: [],
       isOrderPlaced: false,
       responseMsg: {type: '', text: ''},
+      orderConfirmationModal: false,
     };
   }
 
-  componentDidMount() {
+  componentDidMount() {    
     this.setState({
       eCurrencies: this.props.eCurrencies.map((eCurrency) => ({
         value: eCurrency.title, label: eCurrency.title,
@@ -185,6 +189,8 @@ class PlaceOrder extends React.PureComponent {
       if (res.status === 200) {
         this.setState({
           isOrderPlaced: true,
+        }, () => {
+          window.scrollTo(0,0);
         });
       }
     }).catch((err) => {
@@ -192,12 +198,18 @@ class PlaceOrder extends React.PureComponent {
         responseMsg: {
           type: 'err',
           text: err.response.data.details || err.response.data.raw,
-        } 
+        },
+        orderConfirmationModal: false,
       });
 
       throw new Error(err);
     });
+  }
 
+  toggleModal = () => {
+    this.setState(prevState => ({
+      orderConfirmationModal: !prevState.orderConfirmationModal,
+    }));
   }
 
   render() {
@@ -256,16 +268,27 @@ class PlaceOrder extends React.PureComponent {
             <div className={classNames({'err-msg': this.state.responseMsg.type === 'err', 'success-msg': this.state.responseMsg.type === 'success'})}>{this.state.responseMsg.text}</div>
           }
 
-          <div className="btn-container" onClick={this.placeOrder}>
+          <div className="btn-container" onClick={this.toggleModal}>
             <button className="btn">{this.props.orderType}</button>
           </div>
+
+          {
+            this.state.orderConfirmationModal &&
+            <ConfirmationModal
+              title="Confirm Order"
+              confirmBtnTxt="Confirm"
+              toggleModal={this.toggleModal}
+              confirmAction={this.placeOrder}
+              confirmationTxt="Are you sure you want to place this order?"
+            />
+          }
         </div>
       );
     }
 
     return (
       <div className="order-placed">
-        <p>Your order has been placed successfully, kindly check your email for further details.</p>
+        <pre>{this.props.config[`${this.props.orderType}OrderConfirmedText`]}</pre>
       </div>
     );
 
