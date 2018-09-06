@@ -58,10 +58,19 @@ class Home extends React.PureComponent {
                   </Slider>
                 </div>
               </div>
-              <div className="certificates-container df jc-sb ai-c">
-                <img src={require('assets/images/c-gold.png')} alt="c-gold" />
-                <img src={require('assets/images/u-kash.png')} alt="u-kash" />
-                <img src={require('assets/images/perfect-money.png')} alt="perfect-money" />
+              <div className="certificates-container df fw jc-sb ai-c">
+                <div className="certificates-container-1">
+                  <img src={require('assets/images/paypal.png')} alt="paypal" />
+                  <img src={require('assets/images/bitcoin.png')} alt="bitcoin" />
+                  <img src={require('assets/images/cgold.png')} alt="cgold" />
+                  <img src={require('assets/images/litecoin.png')} alt="litecoin" />
+                </div>
+                <div className="certificates-container-2">
+                  <img src={require('assets/images/wire.png')} alt="wire" />
+                  <img src={require('assets/images/webmoney.png')} alt="webmoney" />
+                  <img src={require('assets/images/ccoin.png')} alt="ccoin" />
+                  <img src={require('assets/images/perfectmoney.png')} alt="perfectmoney" />                
+                </div>
               </div>
             </div>
             
@@ -74,7 +83,7 @@ class Home extends React.PureComponent {
 
         <div className="about-us-container df jc-fs ai-fs">
           <div className="currency-info">
-            <table className="table table-striped table-bordered table-condensed table-hover">
+            <table className="table table-custom table-striped table-condensed">
               <thead>
                 <tr>
                   <th>#</th>
@@ -83,62 +92,24 @@ class Home extends React.PureComponent {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Perfect Money</td>
-                  <td>21495.63 USD</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>ADVcash</td>
-                  <td>5017.04 USD</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>WebMoney</td>
-                  <td>3156.35 USD</td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>Ripple</td>
-                  <td>30718.54 USD</td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>Bitcoin</td>
-                  <td>34713.83 USD</td>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td>c-Gold</td>
-                  <td>54647.42 USD</td>
-                </tr>
-                <tr>
-                  <td>7</td>
-                  <td>Epay</td>
-                  <td>34120.87 USD</td>
-                </tr>
-                <tr>
-                  <td>8</td>
-                  <td>Tether USDT</td>
-                  <td>35378.22 USD</td>
-                </tr>
-                <tr>
-                  <td>9</td>
-                  <td>Litecoin</td>
-                  <td>33417.44 USD</td>
-                </tr>
-                <tr>
-                  <td>10</td>
-                  <td>Ethereum</td>
-                  <td>25120.47 USD</td>
-                </tr>
+                {
+                  this.props.eCurrencies.map((eCurrency, index) => (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{eCurrency.title}</td>
+                      <td>{eCurrency.reserves} USD</td>
+                    </tr>
+                  ))
+                }
               </tbody>
             </table>
           </div>
           <div className="about-us">
-            <h2>About Us</h2>
-            <p>Our exchanger ebuyexchange.com is one of biggest and well known companies in this market, we are certified exchanger of most major electronic currencies. We were regularly awarded in various polls, made by different online magazines about finances, Our team counts tens of qualified workers from different countries, among those are certified accountants, lawyers, former bank employees, specialists in security and other spheres, related to finances. We have partnership with variety financial structures and serious law companies, our branches and representatives are located all around the world, so we are performing your orders in shortest terms at any time of day or night. We will be glad to provide you almost any legal financial service possible. Our staff is speaking many languages, and we will surely find common language with any customer!We are the Official & Authorize Exchanger /Merchant of C-Gold.com , EgoPay.com , PerfectMoney.com</p>
+            <img src={require('assets/images/about.png')} alt="about" />
+            <p>
+              <span className="bold">We are the official &amp; authorize exchanger/merchant of c-gold.com &amp; egopay.com.</span>
+              &nbsp;Our exchanger <span className="bold">ebuyexchange.com</span> is one of biggest and well known companies in this market, we are certified exchanger of most major electronic currencies. We were regularly awarded in various polls, made by different online magazines about finances, Our team counts tens of qualified workers from different countries, among those are certified accountants, lawyers, former bank employees, specialists in security and other spheres, related to finances. We have partnership with variety financial structures and serious law companies, our branches and representatives are located all around the world, so we are performing your orders in shortest terms at any time of day or night. We will be glad to provide you almost any legal financial service possible. Our staff is speaking many languages, and we will surely find common language with any customer!We are the official &amp; authorize exchanger/merchant of c-gold.com, egopay.com , perfectmoney.com
+            </p>
           </div>
         </div>
 

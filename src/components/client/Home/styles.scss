@@ -4,11 +4,11 @@
   .banner-wrapper {
     width: 100%;
     height: 100vh;
-    min-height: 672px;
+    min-height: 600px;
     padding-top: 100px;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url(../../../assets/images/home-banner-image.png);
+    background-image: url(../../../assets/images/background-img.png);
   
     .banner {
       width: 100%;
@@ -22,11 +22,15 @@
 
         .certificates-container {
           width: 70%;
-          margin-top: 40px;
+          margin-top: 20px;
           
+          .certificates-container-1 {
+            margin-bottom: 10px;
+          }
+
           img {
-            width: 30%;
-            height: 50px;
+            margin: 0 5px;
+            width: calc(25% - 10px);
           }
         }
 
@@ -176,7 +180,11 @@
         margin: 0;
         color: #666;
         font-size: 18px;
-        text-align: justify;            
+        text-align: justify;
+        
+        .bold {
+          font-size: 16px;
+        }         
       }
     }
   }
@@ -254,6 +262,10 @@
   .home .about-us-container .about-us p {
     font-size: 16px;
     line-height: 20px;
+
+    .bold {
+      font-size: 14px;
+    }
   }
 
 }
