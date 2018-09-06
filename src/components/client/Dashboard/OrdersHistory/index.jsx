@@ -64,9 +64,9 @@ class OrdersHistory extends React.PureComponent {
                   buyOrders.map((order, index) => (
                     <tr>
                       <td>{order.id}</td>
-                      <td>{order.sentFrom}</td>
+                      <td>{order.sentFrom.title}</td>
                       <td>${order.amountSent}</td>
-                      <td>{order.receivedIn}</td>
+                      <td>{order.receivedIn.title}</td>
                       <td>${order.amountReceived}</td>
                       <td>{order.status}</td>
                     </tr>
@@ -108,9 +108,9 @@ class OrdersHistory extends React.PureComponent {
                   sellOrders.map((order, index) => (
                     <tr>
                       <td>{order.id}</td>
-                      <td>{order.sentFrom}</td>
+                      <td>{order.sentFrom.title}</td>
                       <td>${order.amountSent}</td>
-                      <td>{order.receivedIn}</td>
+                      <td>{order.receivedIn.title}</td>
                       <td>${order.amountReceived}</td>
                       <td>{order.status}</td>
                     </tr>
@@ -151,9 +151,9 @@ class OrdersHistory extends React.PureComponent {
                   exchangeOrders.map((order, index) => (
                     <tr>
                       <td>{order.id}</td>
-                      <td>{order.sentFrom}</td>
+                      <td>{order.sentFrom.title}</td>
                       <td>${order.amountSent}</td>
-                      <td>{order.receivedIn}</td>
+                      <td>{order.receivedIn.title}</td>
                       <td>${order.amountReceived}</td>
                       <td>{order.status}</td>
                     </tr>
