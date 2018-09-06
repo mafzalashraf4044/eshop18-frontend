@@ -9,6 +9,9 @@ import update from 'immutability-helper';
 //  third party components
 import Select from 'react-select';
 
+// custom component 
+import ConfirmationModal from '../../common/ConfirmationModal';
+
 //  styles
 import './styles.scss';
 
@@ -38,6 +41,7 @@ class MyAccount extends React.PureComponent {
       accounts: [],
       responseMsg: {type: '', text: ''},
       accountForEdit: null,
+      accountForDlt: null,
     }
   }
 
@@ -69,6 +73,7 @@ class MyAccount extends React.PureComponent {
   }
 
   addAccount = () => {
+    this.props.saveIsLoading(true);
     const account = {
       accountName: this.state.accountName,
       accountNum: this.state.accountNum,
@@ -107,19 +112,25 @@ class MyAccount extends React.PureComponent {
           }
         }));
       }
+
+      this.props.saveIsLoading(false);
     }).catch((err) => {
+      this.props.saveIsLoading(false);
+
       this.setState({
         responseMsg: {
           type: 'err',
           text: err.response.data.details || err.response.data.raw,
         } 
       });
-
+      
       throw new Error(err);
     });
   }
 
   editAccount = () => {
+    this.props.saveIsLoading(true);
+
     const editAccountIndex = findIndex(this.state.accounts, account => account.id === this.state.accountForEdit.id);
     const account = {
       accountName: this.state.accountForEdit.accountName,
@@ -144,7 +155,10 @@ class MyAccount extends React.PureComponent {
         }));
       }
 
+      this.props.saveIsLoading(false);
     }).catch((err) => {
+      this.props.saveIsLoading(false);
+
       this.setState({
         accountForEdit: update(prevState.accountForEdit, {responseMsg: {
           $set: {
@@ -152,6 +166,32 @@ class MyAccount extends React.PureComponent {
             text: err.response.data.details || err.response.data.raw,
           }
         }}),
+      });
+
+      throw new Error(err);
+    });
+  }
+
+  dltAccount = () => {
+    this.props.saveIsLoading(true);
+
+    const dltAccountIndex = findIndex(this.state.accounts, account => account.id === this.state.accountForDlt.id);
+    this.props.dltAccount(this.state.accountForDlt.id).then((res) => {
+      if (res.status === 200) {
+        this.setState(prevState => ({
+          accountForDlt: null,
+          accounts: update(prevState.accounts, {$splice: [[dltAccountIndex, 1]]}),
+        }));
+      }
+
+      this.props.saveIsLoading(false);
+    }).catch((err) => {
+      this.props.saveIsLoading(false);
+      this.setState({
+        responseMsg: {
+          type: 'err',
+          text: err.response.data.details || err.response.data.raw,
+        } 
       });
 
       throw new Error(err);
@@ -190,17 +230,26 @@ class MyAccount extends React.PureComponent {
 
   }
 
-  toggleModal = (accountForEdit = null) => {
+  toggleEditModal = (accountForEdit = null) => {
     this.setState(prevState => ({
       accountForEdit,
     }));
+  }
+
+  toggleDltModal = (accountForDlt = null) => {
+    this.setState({
+      accountForDlt,
+    });
   }
 
   renderAddEditAccountForm = (type) => {
     const accountState = type === 'addAccount' ? this.state : this.state.accountForEdit;
 
     if (this.state.activeTab === 'paymentmethod') {
-      const paymentMethodIndex = findIndex(this.props.paymentMethods, (paymentMethod) => paymentMethod.id === accountState.paymentMethod);
+      const paymentMethodIndex = type === 'addAccount' ?
+      findIndex(this.props.paymentMethods, (paymentMethod) => paymentMethod.id === accountState.paymentMethod) : 
+      findIndex(this.props.paymentMethods, (paymentMethod) => paymentMethod.id === accountState.paymentMethod.id);
+
       const isBankingEnabled = paymentMethodIndex !== -1 ? this.props.paymentMethods[paymentMethodIndex].isBankingEnabled : false;
       
       return  (
@@ -267,7 +316,7 @@ class MyAccount extends React.PureComponent {
             accountState.responseMsg && accountState.responseMsg.text &&
             <div className={classNames({'err-msg': accountState.responseMsg.type === 'err', 'success-msg': accountState.responseMsg.type === 'success'})}>{accountState.responseMsg.text}</div>
           }
-          <div className="btn-container" onClick={type === 'addAccouont' ? this.addAccount : this.editAccount}>
+          <div className="btn-container" onClick={type === 'addAccount' ? this.addAccount : this.editAccount}>
             <button className="btn">{type === 'addAccount' ? 'Add Account' : 'Save Changes'}</button>
           </div>
         </div>
@@ -303,13 +352,12 @@ class MyAccount extends React.PureComponent {
             accountState.responseMsg && accountState.responseMsg.text &&
             <div className={classNames({'err-msg': accountState.responseMsg.type === 'err', 'success-msg': accountState.responseMsg.type === 'success'})}>{accountState.responseMsg.text}</div>
           }
-          <div className="btn-container" onClick={type === 'addAccouont' ? this.addAccount : this.editAccount}>
+          <div className="btn-container" onClick={type === 'addAccount' ? this.addAccount : this.editAccount}>
             <button className="btn">{type === 'addAccount' ? 'Add Account' : 'Save Changes'}</button>
           </div>
         </div>
       );
     }
-    
   }
 
   renderPaymentAccounts = () => {
@@ -347,10 +395,10 @@ class MyAccount extends React.PureComponent {
                     <td>{paymentAccount.bankAddress ? paymentAccount.bankAddress : '-'}</td>
                     <td>{paymentAccount.bankSwiftCode ? paymentAccount.bankSwiftCode : '-'}</td>
                     <td>
-                      <button className="btn btn-default" onClick={() => this.toggleModal(paymentAccount)}>
+                      <button className="btn btn-default" onClick={() => this.toggleEditModal(paymentAccount)}>
                         <i className="fa fa-pencil-alt" />
                       </button>
-                      <button className="btn btn-default no-border-left">
+                      <button className="btn btn-default no-border-left" onClick={() => this.toggleDltModal(paymentAccount)}>
                         <i className="fa fa-trash" />
                       </button>
                     </td>
@@ -361,7 +409,7 @@ class MyAccount extends React.PureComponent {
               {
                 paymentAccounts.length === 0 &&
                 <tr>
-                  <td colSpan={9} style={{textAlign: 'left'}}>Nothing to display.</td>
+                  <td colSpan={10} style={{textAlign: 'left'}}>Nothing to display.</td>
                 </tr>
               }
             </tbody>
@@ -397,10 +445,10 @@ class MyAccount extends React.PureComponent {
                     <td>{eAccount.accountName}</td>
                     <td>{eAccount.accountNum}</td>
                     <td>
-                      <button className="btn btn-default" onClick={() => this.toggleModal(eAccount)}>
+                      <button className="btn btn-default" onClick={() => this.toggleEditModal(eAccount)}>
                         <i className="fa fa-pencil-alt" />
                       </button>
-                      <button className="btn btn-default no-border-left">
+                      <button className="btn btn-default no-border-left" onClick={() => this.toggleDltModal(eAccount)}>
                         <i className="fa fa-trash" />
                       </button>
                     </td>
@@ -444,16 +492,27 @@ class MyAccount extends React.PureComponent {
         {
           this.state.accountForEdit &&
           <div className="modal-container df jc-c ai-c">
-            <div className="modal-overlay" onClick={() => this.toggleModal(null)} />
+            <div className="modal-overlay" onClick={() => this.toggleEditModal(null)} />
             <div className="login-modal">
               <div className="heading df jc-sb ai-c">
                 <h2>Edit Account</h2>
-                <i className="fa fa-times icon" onClick={() => this.toggleModal(null)} />
+                <i className="fa fa-times icon" onClick={() => this.toggleEditModal(null)} />
               </div>
 
               {this.renderAddEditAccountForm('editAccount')}
             </div>
           </div>
+        }
+
+        {
+          this.state.accountForDlt &&
+          <ConfirmationModal
+            title="Delete Account"
+            confirmBtnTxt="Delete"
+            toggleModal={this.toggleDltModal}
+            confirmAction={this.dltAccount}
+            confirmationTxt="Are you sure you want to delete this account?"
+          />
         }
 
       </div>
@@ -472,6 +531,7 @@ const mapDispatchToProps = (dispatch) => ({
   addAccount: account => dispatch(actions.addAccount(account)),
   editAccount: (id, account) => dispatch(actions.editAccount(id, account)),
   dltAccount: id => dispatch(actions.dltAccount(id)),
+  saveIsLoading: isLoading => dispatch(actions.saveIsLoading(isLoading)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyAccount);
