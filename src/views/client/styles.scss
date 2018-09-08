@@ -83,5 +83,9 @@
 @media screen and (max-width: 991px) {
   .breadcrumb-container {
     top: 60px;
+
+    .breadcrumb {
+      padding: 10px 20px!important;
+    }
   }
 }

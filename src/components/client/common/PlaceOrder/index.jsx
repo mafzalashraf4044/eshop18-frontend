@@ -104,10 +104,13 @@ class PlaceOrder extends React.PureComponent {
       isOrderPlaced: false,
       responseMsg: {type: '', text: ''},
       orderConfirmationModal: false,
+      width: window.innerWidth,
     };
   }
 
-  componentDidMount() {    
+  componentDidMount() {
+    window.addEventListener("resize", this.updateDimensions);
+
     this.setState({
       eCurrencies: this.props.eCurrencies.map((eCurrency) => ({
         value: eCurrency.title, label: eCurrency.title,
@@ -116,6 +119,14 @@ class PlaceOrder extends React.PureComponent {
         value: paymentMethod.title, label: paymentMethod.title,
       })),
     });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions);
+  }
+
+  updateDimensions = () => {
+    this.setState({width: window.innerWidth});
   }
 
   currencyCalculator = (currentTab) => {
@@ -232,9 +243,43 @@ class PlaceOrder extends React.PureComponent {
             <label className="label">{currentTab.firstAmount.label}:</label>
             <input type="text" value={currentTab.firstAmount.value} onBlur={this.verifyFirstAmountValue} onChange={(e) => this.handleChange('firstAmount', e.target.value)} />
           </div>
+
+          {
+            this.state.width > 480 &&
+            <div className="form-field amount-to-from df jc-fs ai-c">
+              <div className="left">
+                <label className="label">{currentTab.from.label}:</label>
+                <Select
+                  isClearable
+                  key={this.props.orderType}
+                  isSearchable={false}
+                  className="react-select"
+                  classNamePrefix="react-select"
+                  onChange={(opt) => this.handleChange('from', opt ? opt.value : '')}
+                  options={this.state[currentTab.from.optionsKey].filter(option => (option.value !== this.state[this.props.orderType].to.value))}
+                />
+              </div>
+              <div className="arrow-icon-container df jc-c ai-c">
+                <i className="fa fa-long-arrow-alt-right arrow-icon" />
+              </div>
+              <div className="right">
+                <label className="label">{currentTab.to.label}:</label>
+                <Select
+                  isClearable
+                  key={this.props.orderType}
+                  isSearchable={false}
+                  className="react-select"
+                  classNamePrefix="react-select"
+                  onChange={(opt) => this.handleChange('to', opt ? opt.value : '')}
+                  options={this.state[currentTab.to.optionsKey].filter(option => (option.value !== this.state[this.props.orderType].from.value))}
+                />
+              </div>
+            </div>
+          }
   
-          <div className="form-field amount-to-from df jc-fs ai-c">
-            <div className="left">
+          {
+            this.state.width < 480 &&
+            <div className="form-field service-charges">
               <label className="label">{currentTab.from.label}:</label>
               <Select
                 isClearable
@@ -246,10 +291,11 @@ class PlaceOrder extends React.PureComponent {
                 options={this.state[currentTab.from.optionsKey].filter(option => (option.value !== this.state[this.props.orderType].to.value))}
               />
             </div>
-            <div className="arrow-icon-container df jc-c ai-c">
-              <i className="fa fa-long-arrow-alt-right arrow-icon" />
-            </div>
-            <div className="right">
+          }
+
+          {
+            this.state.width < 480 &&
+            <div className="form-field service-charges">
               <label className="label">{currentTab.to.label}:</label>
               <Select
                 isClearable
@@ -261,8 +307,8 @@ class PlaceOrder extends React.PureComponent {
                 options={this.state[currentTab.to.optionsKey].filter(option => (option.value !== this.state[this.props.orderType].from.value))}
               />
             </div>
-          </div>
-  
+          }  
+
           <div className="form-field service-charges">
             <label className="label">{currentTab.serviceCharges.label}:</label>
             <input type="text" value={currentTab.serviceCharges.value} />

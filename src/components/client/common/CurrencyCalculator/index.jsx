@@ -99,10 +99,13 @@ class CurrencyCalculator extends React.PureComponent {
       eCurrencies: [],
       paymentMethods: [],
       calculatorActiveTab: 'buy',
+      width: window.innerWidth,
     }
   }
 
   componentDidMount() {
+    window.addEventListener("resize", this.updateDimensions);
+
     this.setState({
       eCurrencies: this.props.eCurrencies.map((eCurrency) => ({
         value: eCurrency.title, label: eCurrency.title,
@@ -111,6 +114,14 @@ class CurrencyCalculator extends React.PureComponent {
         value: paymentMethod.title, label: paymentMethod.title,
       })),
     });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions);
+  }
+
+  updateDimensions = () => {
+    this.setState({width: window.innerWidth});
   }
 
   setCalculatorActiveTab = (e) => {
@@ -209,8 +220,8 @@ class CurrencyCalculator extends React.PureComponent {
       <div className="currency-calculator-container df jc-fs ai-c">
         <div className="currency-calculator">
           <div className="tabs df jc-fs ai-c">
-            <div className={classNames('tab df jc-c ai-c', {selected: this.state.calculatorActiveTab === 'buy'})} data-tab="buy" onClick={this.setCalculatorActiveTab}><span>BUY / DEPOSIT</span></div>
-            <div className={classNames('tab df jc-c ai-c', {selected: this.state.calculatorActiveTab === 'sell'})} data-tab="sell" onClick={this.setCalculatorActiveTab}><span>SELL / WITHDRAWAL</span></div>
+            <div className={classNames('tab df jc-c ai-c', {selected: this.state.calculatorActiveTab === 'buy'})} data-tab="buy" onClick={this.setCalculatorActiveTab}><span>BUY{this.state.width > 1024 && ' / DEPOSIT'}</span></div>
+            <div className={classNames('tab df jc-c ai-c', {selected: this.state.calculatorActiveTab === 'sell'})} data-tab="sell" onClick={this.setCalculatorActiveTab}><span>SELL{this.state.width > 1024 && ' / WITHDRAWAL'}</span></div>
             <div className={classNames('tab df jc-c ai-c', {selected: this.state.calculatorActiveTab === 'exchange'})} data-tab="exchange" onClick={this.setCalculatorActiveTab}><span>EXCHANGE</span></div>
           </div>
           <div className="tab-content">
@@ -224,8 +235,42 @@ class CurrencyCalculator extends React.PureComponent {
               />
             </div>
 
-            <div className="form-field amount-to-from df jc-fs ai-c">
-              <div className="left">
+            {
+              this.state.width > 480 &&
+              <div className="form-field amount-to-from df jc-fs ai-c">
+                <div className="left">
+                  <label className="label">{currentTab.from.label}:</label>
+                  <Select
+                    isClearable
+                    key={this.state.calculatorActiveTab}
+                    isSearchable={false}
+                    className="react-select"
+                    classNamePrefix="react-select"
+                    onChange={(opt) => this.handleChange('from', opt ? opt.value : '')}
+                    options={this.state[currentTab.from.optionsKey].filter(option => (option.value !== this.state[this.state.calculatorActiveTab].to.value))}
+                  />
+                </div>
+                <div className="arrow-icon-container df jc-c ai-c">
+                  <i className="fa fa-long-arrow-alt-right arrow-icon" />
+                </div>
+                <div className="right">
+                  <label className="label">{currentTab.to.label}:</label>
+                  <Select
+                    isClearable
+                    key={this.state.calculatorActiveTab}
+                    isSearchable={false}
+                    className="react-select"
+                    classNamePrefix="react-select"
+                    onChange={(opt) => this.handleChange('to', opt ? opt.value : '')}
+                    options={this.state[currentTab.to.optionsKey].filter(option => (option.value !== this.state[this.state.calculatorActiveTab].from.value))}
+                  />
+                </div>
+              </div>
+            }
+            
+            {
+              this.state.width < 480 &&
+              <div className="form-field service-charges">
                 <label className="label">{currentTab.from.label}:</label>
                 <Select
                   isClearable
@@ -237,10 +282,11 @@ class CurrencyCalculator extends React.PureComponent {
                   options={this.state[currentTab.from.optionsKey].filter(option => (option.value !== this.state[this.state.calculatorActiveTab].to.value))}
                 />
               </div>
-              <div className="arrow-icon-container df jc-c ai-c">
-                <i className="fa fa-long-arrow-alt-right arrow-icon" />
-              </div>
-              <div className="right">
+            }
+
+            {
+              this.state.width < 480 &&
+              <div className="form-field service-charges">
                 <label className="label">{currentTab.to.label}:</label>
                 <Select
                   isClearable
@@ -252,7 +298,7 @@ class CurrencyCalculator extends React.PureComponent {
                   options={this.state[currentTab.to.optionsKey].filter(option => (option.value !== this.state[this.state.calculatorActiveTab].from.value))}
                 />
               </div>
-            </div>
+            }
 
             <div className="form-field service-charges">
               <label className="label">{currentTab.serviceCharges.label}:</label>

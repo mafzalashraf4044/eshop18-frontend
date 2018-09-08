@@ -39,7 +39,6 @@ class Client extends React.PureComponent {
     super(props);
 
     this.state = {
-      headerCollapse: false,
       verifyEmailResponse: {type: '', text: ''},
       isLoggedInChecked: localStorage.getItem("token") === null,
     }
@@ -120,29 +119,11 @@ class Client extends React.PureComponent {
     });
   }
 
-  componentDidMount() {
 
-    window.addEventListener('scroll', (e) => {
-      if (this.props.location.pathname === '/') {
-        if ((window.scrollY + 100) > window.innerHeight && !this.state.headerCollapse) {
-          this.setState({headerCollapse: true});
-        } else if ((window.scrollY + 100) < window.innerHeight && this.state.headerCollapse) {
-          this.setState({headerCollapse: false});
-        }
-      }
-    });
-  }
 
   componentWillReceiveProps(newProps) {
     if (this.props.location !== newProps.location) {
       window.scrollTo(0, 0);
-    }
-
-    if (newProps.location.pathname === '/') {
-      window.addEventListener('scroll', this.handleScroll);
-    } else {
-      this.setState({headerCollapse: false});
-      window.removeEventListener('scroll', this.handleScroll);
     }
   }
 
@@ -154,14 +135,6 @@ class Client extends React.PureComponent {
     if (!results) return null;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
-  }
-
-  handleScroll = (e) => {
-    if ((window.scrollY + 100) > window.innerHeight && !this.state.headerCollapse) {
-      this.setState({headerCollapse: true});
-    } else if ((window.scrollY + 100) < window.innerHeight && this.state.headerCollapse) {
-      this.setState({headerCollapse: false});
-    }
   }
 
   toggleModal = () => {
@@ -194,7 +167,7 @@ class Client extends React.PureComponent {
   render() {
     if (this.state.isLoggedInChecked) {
       return (
-        <div className={classNames('client', {'header-collapse': this.state.headerCollapse})}>
+        <div className="client">
           <div className="icon-bar">
             <a href="#" className="facebook"><i className="fab fa-facebook-f"></i></a> 
             <a href="#" className="google"><i className="fab fa-google"></i></a> 
@@ -208,7 +181,7 @@ class Client extends React.PureComponent {
             </div>
           }
           <div className={classNames('blur-container', {'blur-active': this.props.isBlur || this.props.isLoading})}>
-            <Header logout={this.logout} />
+            <Header logout={this.logout} location={this.props.location} />
             <div className="body">
               {
                 this.props.location.pathname !== '/' &&

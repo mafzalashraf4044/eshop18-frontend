@@ -20,7 +20,20 @@ class Header extends React.PureComponent {
 
     this.state = {
       isMenuOpen: false,
+      width: window.innerWidth,
     };
+  }
+
+  componentDidMount() {
+    window.addEventListener("resize", this.updateDimensions);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions);
+  }
+
+  updateDimensions = () => {
+    this.setState({width: window.innerWidth});
   }
 
   toggleLoginModal = () => {
@@ -44,7 +57,10 @@ class Header extends React.PureComponent {
   render() {
     return (
       <div className="header">
-        <div className="df jc-c ai-c">EbuyExchange Ltd: The Authorized Wholesaler of E-Currency.</div>
+        {
+          this.state.width > 991 &&
+          <div className="df jc-c ai-c">EbuyExchange Ltd: The Authorized Wholesaler of E-Currency.</div>
+        }
         <div className="navbar-md hidden-sm df jc-sb ai-c">
           <div className="logo-container df jc-c ai-c">
             <h1 className="logo">eBUYexchange</h1>
@@ -126,15 +142,15 @@ class Header extends React.PureComponent {
               <span></span>
             </div>
           </div>
-          <ul className={classNames('nav df fd-c jc-fe ai-c', {'menu-open': this.state.isMenuOpen})}>
+          <ul className={classNames('nav df fd-c jc-fe ai-c', {'menu-open': this.state.isMenuOpen, 'is-home-page': this.props.location.pathname === '/'})}>
             <li className="nav-item df jc-c ai-c" onClick={() => {this.toggleMenuOpen(); window.scrollTo(0,0)}}>
               <Link to="/"><span>Home</span></Link>
             </li>
             <li className="nav-item df jc-c ai-c" onClick={() => {this.toggleMenuOpen(); window.scrollTo(0,0)}}>
-              <Link to="/buy"><span>Buy</span></Link>
+              <Link to="/buy"><span>Buy / Deposit</span></Link>
             </li>
             <li className="nav-item df jc-c ai-c" onClick={() => {this.toggleMenuOpen(); window.scrollTo(0,0)}}>
-              <Link to="/sell"><span>Sell</span></Link>
+              <Link to="/sell"><span>Sell / Withdrawal</span></Link>
             </li>
             <li className="nav-item df jc-c ai-c" onClick={() => {this.toggleMenuOpen(); window.scrollTo(0,0)}}>
               <Link to="/exchange"><span>Exhange</span></Link>

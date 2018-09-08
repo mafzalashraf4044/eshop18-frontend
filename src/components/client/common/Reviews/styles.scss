@@ -111,3 +111,10 @@
     }
   }
 }
+
+@media screen and (max-width: 480px) {
+  .star-icon {
+    width: 12px!important;
+    height: 12px!important;
+  }
+}
