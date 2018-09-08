@@ -12,15 +12,15 @@ class Buy extends React.PureComponent {
     return (
       <div className="page-buy">
         <div className="heading">
-          <h1>How to place buy order?</h1>
+          <h1>How to place buy / deposit order?</h1>
         </div>
         <ul>
           <li>Please click on signup button</li>
           <li>Fill the registration form and finish the process</li>
           <li>Login your account by user email and password</li>
           <li>Add E-currency account in my E-account option</li>
-          <li>Click on place buy order option</li>
-          <li>Type buy amount then select E-currency and payment by</li>
+          <li>Click on place buy / deposit order option</li>
+          <li>Type buy / deposit amount then select E-currency and payment by</li>
           <li>Click on preview and finally confirm order</li>
           <li>Check your mail inbox or spam folder for order details</li>
         </ul>

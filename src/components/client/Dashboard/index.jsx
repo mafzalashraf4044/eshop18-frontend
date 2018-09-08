@@ -45,10 +45,10 @@ class Dashboard extends React.PureComponent {
             <NavLink exact activeClassName="active" to="/dashboard"><span>Dashboard</span></NavLink>
           </li>
           <li className="nav-item">
-            <NavLink exact activeClassName="active" to="/dashboard/buy"><span>Buy</span></NavLink>
+            <NavLink exact activeClassName="active" to="/dashboard/buy"><span>Buy / Deposit</span></NavLink>
           </li>
           <li className="nav-item">
-            <NavLink exact activeClassName="active" to="/dashboard/sell"><span>Sell</span></NavLink>
+            <NavLink exact activeClassName="active" to="/dashboard/sell"><span>Sell / Withdrawal</span></NavLink>
           </li>
           <li className="nav-item">
             <NavLink exact activeClassName="active" to="/dashboard/exchange"><span>Exchange</span></NavLink>

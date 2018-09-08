@@ -110,9 +110,18 @@ class Client extends React.PureComponent {
     }).catch((err) => {
       throw new Error(err);
     });
+
+    this.props.getReviews().then((res) => {
+      if (res.status === 200) {
+        this.props.saveReviews(res.data.reviews);
+      }
+    }).catch((err) => {
+      throw new Error(err);
+    });
   }
 
   componentDidMount() {
+
     window.addEventListener('scroll', (e) => {
       if (this.props.location.pathname === '/') {
         if ((window.scrollY + 100) > window.innerHeight && !this.state.headerCollapse) {
@@ -223,7 +232,10 @@ class Client extends React.PureComponent {
                 <Redirect to='/' />
               </Switch>
   
-              <Reviews />
+              {
+                this.props.reviews.length > 0 &&
+                <Reviews reviews={this.props.reviews} />
+              }
             </div>
             <Footer />
           </div>
@@ -256,6 +268,7 @@ class Client extends React.PureComponent {
 
 const mapStateToProps = (state) => ({
   isBlur: state.MainReducer.isBlur,
+  reviews: state.MainReducer.reviews,
   isLoading: state.MainReducer.isLoading,
   isLoggedIn: state.MainReducer.isLoggedIn,
   isLoginModalOpen: state.MainReducer.isLoginModalOpen,
@@ -265,6 +278,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getNews: () => dispatch(actions.getNews()),
   saveNews: news => dispatch(actions.saveNews(news)),
+  getReviews: () => dispatch(actions.getReviews()),
+  saveReviews: reviews => dispatch(actions.saveReviews(reviews)),
   logout: () => dispatch(actions.logout()),
   saveUser: user => dispatch(actions.saveUser(user)),
   login: credentials => dispatch(actions.login(credentials)),

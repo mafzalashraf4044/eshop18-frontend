@@ -27,7 +27,7 @@ class Buy extends React.PureComponent {
       <div className="dashboard-content-buy">
         <div className="heading df jc-fs ai-c">
           <i className="fa fa-credit-card icon" />
-          <h2>Buy</h2>
+          <h2>Buy / Deposit</h2>
         </div>
 
         {

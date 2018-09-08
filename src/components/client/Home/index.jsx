@@ -36,7 +36,7 @@ class Home extends React.PureComponent {
           <div className="site-intro-container df fd-c jc-c ai-c">
               <div className="site-intro">
                 <h1 className="title">eBUYexhange – THE E-CURRENCY EXCHANGE EXPERTS</h1>
-                <p className="txt">We provide best rates, buy, sell and exchange E-currency with trust</p>
+                <p className="txt">We provide best rates, buy / deposit, sell / withdrawal and exchange E-currency with trust</p>
               </div>
               <div className="news-container">
                 <div className="news">
@@ -116,7 +116,7 @@ class Home extends React.PureComponent {
         <div className="our-services">
           <div className="our-services-txt">
             <h2>OUR SERVICES</h2>
-            <p>Here you can buy, sell and exchange E-currency. Our site provides fast and secure exchanges with the lowest fees. Please Signup or Login to use our services</p>
+            <p>Here you can buy / deposit, sell / withdrawal and exchange E-currency. Our site provides fast and secure exchanges with the lowest fees. Please Signup or Login to use our services</p>
           </div>
           <div className="services df jc-sb ai-c">
             <div className="service buy">
@@ -124,8 +124,8 @@ class Home extends React.PureComponent {
                 <i className="fa fa-credit-card service-icon" />
               </div>
               <div className="service-description">
-                <h2>BUY</h2>
-                <p>You can buy from a variety of E-currencies, by paying us amount in USD using the selected transfer option</p>
+                <h2>BUY / DEPOSIT</h2>
+                <p>You can buy / deposit from a variety of E-currencies, by paying us amount in USD using the selected transfer option</p>
               </div>
             </div>
             <div className="service sell">
@@ -133,8 +133,8 @@ class Home extends React.PureComponent {
                 <i className="fa fa-money-bill-alt service-icon" />
               </div>
               <div className="service-description">
-                <h2>SELL</h2>
-                <p>You can sell out your E-currency to us, you will get the amount in USD using the selected transfer option</p>
+                <h2>SELL / WITHDRAWAL</h2>
+                <p>You can sell / withdrawal out your E-currency to us, you will get the amount in USD using the selected transfer option</p>
               </div>
             </div>
           

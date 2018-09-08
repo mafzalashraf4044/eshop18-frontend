@@ -21,7 +21,7 @@ class Sell extends React.PureComponent {
       <div className="dashboard-content-sell">
         <div className="heading df jc-fs ai-c">
           <i className="fa fa-money-bill-alt icon" />
-          <h2>Sell</h2>
+          <h2>Sell / Withdrawal</h2>
         </div>
 
         {

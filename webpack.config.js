@@ -126,7 +126,7 @@ module.exports = {
     ]
     : [
       new HtmlWebpackPlugin({
-        title: 'Visionize',
+        title: 'ebuyexhange',
         minify: {
           collapseWhitespace: isProduction,
         },

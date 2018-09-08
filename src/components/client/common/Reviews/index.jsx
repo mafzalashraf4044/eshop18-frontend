@@ -31,7 +31,7 @@ class Reviews extends React.PureComponent {
         <div className="reviews">
           <Slider {...reviewsSliderSettings}>
             {
-              [1,2,3,4,5,6,7,8,9,10,11,12].map((review, index) => (
+              this.props.reviews.map((review, index) => (
                 <div className="slick-item" key={index}>
                   <div className="review">
                     <div className="star-rating df jc-fs ai-c">
@@ -44,10 +44,10 @@ class Reviews extends React.PureComponent {
                       }
                     </div>
                     <div className="review-title">
-                      <h2>Clean and efficient web interface</h2>
+                      <h2>{review.title}</h2>
                     </div>
                     <div className="review-content">
-                      <p>Fast, efficient (well monitored), and friendly service with good web interface. Thanks.</p>
+                      <p>{review.content}</p>
                     </div>
                   </div>
                 </div>

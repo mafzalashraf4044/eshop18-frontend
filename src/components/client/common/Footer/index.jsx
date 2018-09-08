@@ -62,11 +62,11 @@ class Footer extends React.PureComponent {
             <ul className="links">
               <li className="df jc-fs ai-c">
                 <i className="fa fa-angle-right angle-icon" />
-                <Link className="df jc-c ai-c" to="/buy"><span>Buy</span></Link> 
+                <Link className="df jc-c ai-c" to="/buy"><span>Buy / deposit</span></Link> 
               </li>
               <li className="df jc-fs ai-c">
                 <i className="fa fa-angle-right angle-icon" />
-                <Link className="df jc-c ai-c" to="/sell"><span>Sell</span></Link>
+                <Link className="df jc-c ai-c" to="/sell"><span>Sell / Withdrawal</span></Link>
               </li>
               <li className="df jc-fs ai-c">
                 <i className="fa fa-angle-right angle-icon" />

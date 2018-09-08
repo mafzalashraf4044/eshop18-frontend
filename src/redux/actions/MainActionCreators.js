@@ -71,6 +71,13 @@ export const saveNews = (news) => {
   };
 }
 
+export const saveReviews = (reviews) => {
+  return {
+      type: 'SAVE_REVIEWS',
+      payload: {reviews},
+  };
+}
+
 export const saveECurrencies = (eCurrencies) => {
   return {
       type: 'SAVE_E_CURRENCIES',
@@ -118,6 +125,12 @@ export const register = (user) => {
 export const getNews = () => {
   return (dispatch) => {
       return axios.get(`${API_URL}/news?sortBy=ASC&sortType=createdAt&pageNum=1&pageSize&latest=false`, {headers: getHeaders()});
+  }
+}
+
+export const getReviews = () => {
+  return (dispatch) => {
+      return axios.get(`${API_URL}/review?sortBy=ASC&sortType=createdAt&pageNum=1&pageSize&latest=false`, {headers: getHeaders()});
   }
 }
 

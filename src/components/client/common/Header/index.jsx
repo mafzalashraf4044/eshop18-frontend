@@ -54,10 +54,10 @@ class Header extends React.PureComponent {
               <Link className="df jc-c ai-c" to="/"><span>Home</span></Link>
             </li>
             <li className="nav-item df jc-c ai-c">
-              <Link className="df jc-c ai-c" to="/buy"><span>Buy</span></Link>
+              <Link className="df jc-c ai-c" to="/buy"><span>Buy / Deposit</span></Link>
             </li>
             <li className="nav-item df jc-c ai-c">
-              <Link className="df jc-c ai-c" to="/sell"><span>Sell</span></Link>
+              <Link className="df jc-c ai-c" to="/sell"><span>Sell / Withdrawal</span></Link>
             </li>
             <li className="nav-item df jc-c ai-c">
               <Link className="df jc-c ai-c" to="/exchange"><span>Exhange</span></Link>

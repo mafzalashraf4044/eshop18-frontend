@@ -212,6 +212,16 @@ class PlaceOrder extends React.PureComponent {
     }));
   }
 
+  getBtnTxt = () => {
+    if (this.props.orderType === 'buy') {
+      return 'BUY / DEPOSIT';
+    } else if (this.props.orderType === 'sell') {
+      return 'SELL / WITHDRAWAL';
+    }
+
+    return this.props.orderType;
+  }
+
   render() {
     const currentTab = this.state[this.props.orderType];
 
@@ -269,7 +279,7 @@ class PlaceOrder extends React.PureComponent {
           }
 
           <div className="btn-container" onClick={this.toggleModal}>
-            <button className="btn">{this.props.orderType}</button>
+            <button className="btn">{this.getBtnTxt()}</button>
           </div>
 
           {

@@ -4,6 +4,7 @@ const defaultState = {
   isRegisterModalOpen: false,
   isLoggedIn: false,
   news: [],
+  reviews: [],
   eCurrencies: [],
   paymentMethods: [],
   user: null,
@@ -16,6 +17,7 @@ export default (state = defaultState, action) => {
     case 'SAVE_NEWS':
     case 'SAVE_USER':
     case 'SAVE_CONFIG':
+    case 'SAVE_REVIEWS':
     case 'SAVE_IS_BLUR':
     case 'SAVE_IS_LOGGED_IN':
     case 'SAVE_IS_LOADING_IN':

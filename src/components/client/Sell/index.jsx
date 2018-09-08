@@ -12,15 +12,15 @@ class Sell extends React.PureComponent {
     return (
       <div className="page-sell">
         <div className="heading">
-          <h1>How to place sell order?</h1>
+          <h1>How to place sell / withdrawal order?</h1>
         </div>
         <ul>
           <li>Please go to signup option</li>
           <li>Fill the registration form and finish the process</li>
           <li>Login your account by user email and password</li>
           <li>Add receiver/bank details in my banking account option</li>
-          <li>Click on place sell order option</li>
-          <li>Type sell amount then select e-currency and payment by</li>
+          <li>Click on place sell / withdrawal order option</li>
+          <li>Type sell / withdrawal amount then select e-currency and payment by</li>
           <li>Click on preview and finally confirm order</li>
           <li>Check your mail inbox or spam folder for order details</li>
         </ul>
