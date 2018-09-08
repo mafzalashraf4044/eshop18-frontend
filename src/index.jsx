@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import DocumentMeta from 'react-document-meta';
 
 //  redux
 import store from './redux';
