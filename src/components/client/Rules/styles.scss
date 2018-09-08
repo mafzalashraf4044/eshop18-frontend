@@ -1,0 +1,45 @@
+
+.page-rules {
+  width: 100%;
+  padding: 0 10%;
+  margin: 40px 0;
+  margin-bottom: 100px;
+  margin-top: 180px;
+
+  p {
+    color: #666;
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .rule-item {
+    margin-bottom: 50px;
+
+    h1 {
+      margin: 0;
+      font-family: "Lato-Light";
+      font-style: normal;
+      font-weight: 200;
+      color: #ed1c2e;
+      font-weight: 600;
+      background-color: #fff;
+      font-size: 24px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    ol {
+      li {
+        color: #666;
+        font-size: 16px;
+        line-height: 20px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .page-rules {
+    margin-top: 140px;
+  }
+}

@@ -74,6 +74,10 @@ class Footer extends React.PureComponent {
               </li>
               <li className="df jc-fs ai-c">
                 <i className="fa fa-angle-right angle-icon" />
+                <Link className="df jc-c ai-c" to="/faq"><span>Rules</span></Link>
+              </li>
+              <li className="df jc-fs ai-c">
+                <i className="fa fa-angle-right angle-icon" />
                 <Link className="df jc-c ai-c" to="/faq"><span>FAQ</span></Link>
               </li>
             </ul>
@@ -85,13 +89,11 @@ class Footer extends React.PureComponent {
             </div>
 
             <div className="contact-us">
-              <p>eBUYexchange.</p>
-              <p>122 East 42nd Street</p>
-              <p>Suite 2800</p>
-              <p>New York, NY 10168</p>
-              <p>516-300-1622</p>
-              <p>877-414-6359</p>
-              <p>mail@ebuyexhange.com</p>
+              <p>admin@ebuyexchange.com</p>
+              <p>ebuyexchange@gmail.com (Google talk)</p>
+              <p>ebuy.exchange (Skype)</p>
+              <p>ebuyexchange@hotmail.com</p>
+              <p>ebuyexchange@yahoo.com</p>
             </div>
           </div>
         </div>

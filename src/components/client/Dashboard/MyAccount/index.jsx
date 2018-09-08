@@ -49,6 +49,15 @@ class MyAccount extends React.PureComponent {
   componentDidMount() {
     window.addEventListener("resize", this.updateDimensions);
 
+    this.setState({
+      eCurrencies: this.props.eCurrencies.map((eCurrency) => ({
+        value: eCurrency.id, label: eCurrency.title,
+      })),
+      paymentMethods: this.props.paymentMethods.map((paymentMethod) => ({
+        value: paymentMethod.id, label: paymentMethod.title,
+      })),
+    });
+
     this.props.getAccounts().then((res) => {
       if (res.status === 200) {
         this.setState({
@@ -61,8 +70,6 @@ class MyAccount extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('nextProps', nextProps);
-    
     this.setState({
       eCurrencies: nextProps.eCurrencies.map((eCurrency) => ({
         value: eCurrency.id, label: eCurrency.title,
@@ -70,8 +77,6 @@ class MyAccount extends React.PureComponent {
       paymentMethods: nextProps.paymentMethods.map((paymentMethod) => ({
         value: paymentMethod.id, label: paymentMethod.title,
       })),
-    }, () => {
-      console.log('this.state', this.state);
     });
   }
 
@@ -395,7 +400,7 @@ class MyAccount extends React.PureComponent {
             <tbody>
               {
                 paymentAccounts.map((paymentAccount, index) => (
-                  <tr>
+                  <tr key={index}>
                     <td>{paymentAccount.paymentMethod.title}</td>
                     <td>{paymentAccount.firstName ? paymentAccount.firstName : '-'}</td>
                     <td>{paymentAccount.lastName ? paymentAccount.lastName : '-'}</td>
@@ -451,7 +456,7 @@ class MyAccount extends React.PureComponent {
             <tbody>
               {
                 eAccounts.map((eAccount, index) => (
-                  <tr>
+                  <tr key={index}>
                     <td>{eAccount.eCurrency.title}</td>
                     <td>{eAccount.accountName}</td>
                     <td>{eAccount.accountNum}</td>

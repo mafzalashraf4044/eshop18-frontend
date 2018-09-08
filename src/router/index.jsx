@@ -17,6 +17,7 @@ export default () => (
       <Route exact path="/sell" component={ClientHome} />
       <Route exact path="/exchange" component={ClientHome} />
       <Route exact path="/fees" component={ClientHome} />
+      <Route exact path="/rules" component={ClientHome} />
       <Route exact path="/faq" component={ClientHome} />
       <Route path="/dashboard" component={ClientHome} />
       <Redirect to="/" />

@@ -12,43 +12,33 @@ class FAQ extends React.PureComponent {
     return (
       <div className="page-faq">
         <div className="faq-item">
-          <h1>1. How to register in eBUYexhange.com?</h1>
-          <p>It`s very simple, Just click on Register then fill up form and follow instruction. To active your account click on activation link sent you by mail. you will find mail on Inbox or Spam or Junk folder.</p>
+          <h1>1. What is eBUYexhange.com?</h1>
+          <p>We are certified exchanger with different E-currency / internet money services & deals with large scale transactions of E-Currencies.</p>
         </div>
 
         <div className="faq-item">
-          <h1>2. Where to send money?</h1>
-          <p>After place order you will receive a mail with order information (check your Inbox or Spam or Junk Folder) then send money as per order form instruction.</p>
+          <h1>2. How to register in eBUYexhange.com?</h1>
+          <p>It`s very simple, Just click on Register then fill up form and follow instruction. To active your account click on activation link sent you by mail. you will find email on inbox or spam folder.</p>
         </div>
 
         <div className="faq-item">
-          <h1>3. How to buy / deposit e-Currency?</h1>
-          <p>Please read this instruction.</p>
+          <h1>3. Where to send money?</h1>
+          <p>After placing the order you will receive an email with order information (check your inbox or spam folder) then send money as per order form instructions provided in the email.</p>
         </div>
 
         <div className="faq-item">
-          <h1>4. How to sell / withdrawal E-Currency?</h1>
-          <p>Please read this instruction.</p>
+          <h1>4. How much is the membership fee?</h1>
+          <p>Membership to eBUYexchange.com is free.</p>
         </div>
 
         <div className="faq-item">
-          <h1>5. How to exchange e-Currency?</h1>
-          <p>Please read this instruction.</p>
+          <h1>7. Can I pay by using my credit card?</h1>
+          <p>No, currently we do not support this payment method.</p>
         </div>
 
         <div className="faq-item">
-          <h1>6. How to apply card?</h1>
-          <p>This option temporally unavailable.</p>
-        </div>
-
-        <div className="faq-item">
-          <h1>7. What kind of information need to confirm order?</h1>
-          <p>We just need your MTCN or Money Transfer Reference or Batch No. or Bank Wire Information.</p>
-        </div>
-
-        <div className="faq-item">
-          <h1>8. How long will take time to arrive money to EX4U receiver account ?</h1>
-          <p>If you sent by Western Union or Money Gram it will arrive almost Instantly, it may need 1-24 banking hours to collect/cash. If you send by Bank Wire it may take 2-4 working days to available in our account.</p>
+          <h1>8. Is it secure to work with eBUYexchange.com?</h1>
+          <p>Yes, our state of the art technology uses a number of security levels. The connection between the User and ebuyexchange.com is encrypted using SSL protocol - an industry standard for the E-Commerce sites protection. All activities on our site are logged and you can always see when your last login was and from what IP address. All User passwords are encrypted to ensure confidentiality and security of your internet currency.net account. Our hosting provider uses modern methods to prevent "hacker" attacks.</p>
         </div>
 
         <div className="faq-item">
@@ -58,7 +48,7 @@ class FAQ extends React.PureComponent {
 
         <div className="faq-item">
           <h1>10. Delivery & Payment Validity?</h1>
-          <p>After received money we generally complete order within 1-3 working days. Sometime client send money and provide wrong Account No. which not possible to complete order. Even sometime they don`t contact with us. In this case we will wait up to 6 month for client reply, if no response within 6 month that fund will be frozen and not claimable for future!! </p>
+          <p>After received money we generally complete order within 4-7 working days. Sometime client send money and provide wrong Account No. which not possible to complete order. Even sometime they don`t contact with us. In this case we will wait up to 6 month for client reply, if no response within 6 month that fund will be frozen and not claimable for future!! </p>
         </div>
       </div>
     );

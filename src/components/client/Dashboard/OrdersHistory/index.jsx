@@ -62,7 +62,7 @@ class OrdersHistory extends React.PureComponent {
               <tbody>
                 {
                   buyOrders.map((order, index) => (
-                    <tr>
+                    <tr key={index}>
                       <td>{order.id}</td>
                       <td>{order.sentFrom.title}</td>
                       <td>${order.amountSent}</td>
@@ -106,7 +106,7 @@ class OrdersHistory extends React.PureComponent {
               <tbody>
                 {
                   sellOrders.map((order, index) => (
-                    <tr>
+                    <tr key={index}>
                       <td>{order.id}</td>
                       <td>{order.sentFrom.title}</td>
                       <td>${order.amountSent}</td>
@@ -149,7 +149,7 @@ class OrdersHistory extends React.PureComponent {
               <tbody>
                 {
                   exchangeOrders.map((order, index) => (
-                    <tr>
+                    <tr key={index}>
                       <td>{order.id}</td>
                       <td>{order.sentFrom.title}</td>
                       <td>${order.amountSent}</td>

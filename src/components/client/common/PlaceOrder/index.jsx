@@ -125,6 +125,19 @@ class PlaceOrder extends React.PureComponent {
     window.removeEventListener("resize", this.updateDimensions);
   }
 
+  componentWillReceiveProps(newProps) {
+    if ((newProps.location !== this.props.location) && this.state.isOrderPlaced) {
+      this.setState({
+        buy: cloneDeep(buy),
+        sell: cloneDeep(sell), 
+        exchange: cloneDeep(exchange),
+        isOrderPlaced: false,
+        responseMsg: {type: '', text: ''},
+        orderConfirmationModal: false,
+      });
+    }
+  }
+
   updateDimensions = () => {
     this.setState({width: window.innerWidth});
   }
@@ -200,6 +213,7 @@ class PlaceOrder extends React.PureComponent {
       if (res.status === 200) {
         this.setState({
           isOrderPlaced: true,
+          orderConfirmationModal: false,
         }, () => {
           window.scrollTo(0,0);
         });
@@ -343,7 +357,7 @@ class PlaceOrder extends React.PureComponent {
     }
 
     return (
-      <div className="order-placed">
+      <div className="order-placed form">
         <pre>{this.props.config[`${this.props.orderType}OrderConfirmedText`]}</pre>
       </div>
     );

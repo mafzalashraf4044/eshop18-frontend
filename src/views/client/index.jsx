@@ -17,6 +17,7 @@ import Home from 'components/client/Home';
 import Buy from 'components/client/Buy';
 import Sell from 'components/client/Sell';
 import Exchange from 'components/client/Exchange';
+import Rules from 'components/client/Rules';
 import FAQ from 'components/client/FAQ';
 import Dashboard from 'components/client/Dashboard';
 import Header from 'components/client/common/Header';
@@ -201,6 +202,7 @@ class Client extends React.PureComponent {
                 <Route exact path="/buy" component={Buy} />
                 <Route exact path="/sell" component={Sell} />
                 <Route exact path="/exchange" component={Exchange} />
+                <Route exact path="/rules" component={Rules} />
                 <Route exact path="/faq" component={FAQ} />
                 <AuthProtectedRoute isAllowed={this.props.isLoggedIn} path='/dashboard' component={Dashboard} />
                 <Redirect to='/' />

@@ -79,6 +79,9 @@ class Header extends React.PureComponent {
               <Link className="df jc-c ai-c" to="/exchange"><span>Exhange</span></Link>
             </li>
             <li className="nav-item df jc-c ai-c">
+              <Link className="df jc-c ai-c" to="/rules"><span>Rules</span></Link>
+            </li>
+            <li className="nav-item df jc-c ai-c">
               <Link className="df jc-c ai-c" to="/faq"><span>FAQ</span></Link>
             </li>
             {
@@ -107,23 +110,17 @@ class Header extends React.PureComponent {
             <li className="nav-item contact-us df jc-c ai-c">
               <a href="#" className="df jc-c ai-c"><i className="fa fa-phone-square contact-icon" /></a>
               <div className="contact-details">
-                <div className="call-us df fd-c jc-fs ai-c">
-                  <div className="heading-container df jc-fs ai-c">
-                    <i className="fa fa-phone-volume call-icon" />
-                    <p className="heading-txt">Call us</p>
-                  </div>
-                  <div className="body">
-                    <p className="main-txt">Have a question? Call us at 877-414-6359</p>
-                    <p className="sub-txt">Lines are open 8am-8pm Monday to Friday, and 9am-5pm Saturday (EST).</p>
-                  </div>
-                </div>
                 <div className="email-us df fd-c jc-fs ai-c">
                   <div className="heading-container df jc-fs ai-c">
                     <i className="fa fa-envelope email-icon" />
                     <p className="heading-txt">Email us</p>
                   </div>
                   <div className="body">
-                    <p className="main-txt">mail@ebuyexhange.com</p>
+                    <p className="main-txt">admin@ebuyexchange.com</p>
+                    <p className="main-txt">ebuyexchange@gmail.com (Google talk)</p>
+                    <p className="main-txt">ebuy.exchange (Skype)</p>
+                    <p className="main-txt">ebuyexchange@hotmail.com</p>
+                    <p className="main-txt">ebuyexchange@yahoo.com</p>
                   </div>
                 </div>
               </div>
@@ -154,6 +151,9 @@ class Header extends React.PureComponent {
             </li>
             <li className="nav-item df jc-c ai-c" onClick={() => {this.toggleMenuOpen(); window.scrollTo(0,0)}}>
               <Link to="/exchange"><span>Exhange</span></Link>
+            </li>
+            <li className="nav-item df jc-c ai-c" onClick={() => {this.toggleMenuOpen(); window.scrollTo(0,0)}}>
+              <Link to="/rules"><span>Rules</span></Link>
             </li>
             <li className="nav-item df jc-c ai-c" onClick={() => {this.toggleMenuOpen(); window.scrollTo(0,0)}}>
               <Link to="/faq"><span>FAQ</span></Link>

@@ -204,10 +204,12 @@ class CurrencyCalculator extends React.PureComponent {
   }
 
   getBtnTxt = () => {
-    if (this.state.calculatorActiveTab === 'buy') {
-      return 'BUY / DEPOSIT';
-    } else if (this.state.calculatorActiveTab === 'sell') {
-      return 'SELL / WITHDRAWAL';
+    if (this.state.width > 1024) {
+      if (this.state.calculatorActiveTab === 'buy') {
+        return 'BUY / DEPOSIT';
+      } else if (this.state.calculatorActiveTab === 'sell') {
+        return 'SELL / WITHDRAWAL';
+      }
     }
 
     return this.state.calculatorActiveTab;
