@@ -174,4 +174,12 @@
       padding: 20px 25px;
     }
   }
+
+  .label {
+    font-size: 14px!important;
+    margin-bottom: 5px!important;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }

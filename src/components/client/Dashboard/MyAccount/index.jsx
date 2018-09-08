@@ -42,14 +42,13 @@ class MyAccount extends React.PureComponent {
       responseMsg: {type: '', text: ''},
       accountForEdit: null,
       accountForDlt: null,
+      width: window.innerWidth,
     }
   }
 
-  componentDidCatch(error, errorInfo) {
-    throw new Error(error);
-  }
-
   componentDidMount() {
+    window.addEventListener("resize", this.updateDimensions);
+
     this.props.getAccounts().then((res) => {
       if (res.status === 200) {
         this.setState({
@@ -70,6 +69,14 @@ class MyAccount extends React.PureComponent {
         value: paymentMethod.id, label: paymentMethod.title,
       })),
     });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions);
+  }
+
+  updateDimensions = () => {
+    this.setState({width: window.innerWidth});
   }
 
   addAccount = () => {
@@ -477,11 +484,11 @@ class MyAccount extends React.PureComponent {
       <div className="dashboard-content-my-account">
         <div className="tabs df jc-fs ai-c">
           <div className={classNames('tab df jc-c ai-c', {active: this.state.activeTab === 'paymentmethod'})} data-tab="paymentmethod" onClick={this.setActiveTab}>
-            <i className="fa fa-university icon" />
-            <h2>Payment Accounts</h2>
+            {this.state.width > 480 && <i className="fa fa-university icon" />}
+            <h2>Payment {this.state.width > 480 && 'Accounts'}</h2>
           </div>
           <div className={classNames('tab df jc-c ai-c', {active: this.state.activeTab === 'ecurrency'})} data-tab="ecurrency" onClick={this.setActiveTab}>
-            <i className="fa fa-money-check-alt icon" />
+            {this.state.width > 480 && <i className="fa fa-money-check-alt icon" />}
             <h2>E-Accounts</h2>
           </div>
         </div>

@@ -44,7 +44,7 @@ class OrdersHistory extends React.PureComponent {
         <div className="buy-stats">
           <div className="heading df jc-fs ai-c">
             <i className="fa fa-credit-card icon" />
-            <h2>Buy / Deposit Orders Statistics</h2>
+            <h2>Buy / Deposit Orders</h2>
           </div>
 
           <div className="table-responsive">
@@ -88,7 +88,7 @@ class OrdersHistory extends React.PureComponent {
         <div className="sell-stats">
           <div className="heading df jc-fs ai-c">
             <i className="fa fa-money-bill-alt icon" />
-            <h2>Sell / Withdrawal Orders Statistics</h2>
+            <h2>Sell / Withdrawal Orders</h2>
           </div>
 
           <div className="table-responsive">
@@ -131,7 +131,7 @@ class OrdersHistory extends React.PureComponent {
         <div className="exchange-stats">
           <div className="heading df jc-fs ai-c">
             <i className="fa fa-sync-alt icon" />
-            <h2>Exchange Orders Statistics</h2>
+            <h2>Exchange Orders</h2>
           </div>
           
           <div className="table-responsive">

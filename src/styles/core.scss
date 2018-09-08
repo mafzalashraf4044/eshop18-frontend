@@ -29,6 +29,12 @@
     margin: 0;
   }
 
+  input {
+    &:focus {
+      outline: 2px auto rgb(61, 155, 218);
+    }
+  }
+
   .bold {
     font-weight: 700;
   }

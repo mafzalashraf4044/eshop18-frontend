@@ -119,8 +119,6 @@ class Client extends React.PureComponent {
     });
   }
 
-
-
   componentWillReceiveProps(newProps) {
     if (this.props.location !== newProps.location) {
       window.scrollTo(0, 0);
@@ -168,11 +166,14 @@ class Client extends React.PureComponent {
     if (this.state.isLoggedInChecked) {
       return (
         <div className="client">
-          <div className="icon-bar">
-            <a href="#" className="facebook"><i className="fab fa-facebook-f"></i></a> 
-            <a href="#" className="google"><i className="fab fa-google"></i></a> 
-            <a href="skype:maa4044?chat" className="skype"><i className="fab fa-skype"></i></a>
-          </div>
+          {
+            this.props.location.pathname === '/' &&
+            <div className="icon-bar">
+              <a href="#" className="facebook"><i className="fab fa-facebook-f"></i></a> 
+              <a href="#" className="google"><i className="fab fa-google"></i></a> 
+              <a href="skype:maa4044?chat" className="skype"><i className="fab fa-skype"></i></a>
+            </div>
+          }
 
           {
             this.props.isLoading &&
