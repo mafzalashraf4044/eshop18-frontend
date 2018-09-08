@@ -25,6 +25,14 @@
   a, a:visited, a:active{text-decoration:none;;cursor:pointer;}
   a:hover{text-decoration:none;}
 
+  textarea,
+  input[type="text"],
+  input[type="button"],
+  input[type="submit"] {
+    -webkit-appearance: none;
+    box-shadow: none!important;
+  }
+
   body {
     margin: 0;
   }
