@@ -61,6 +61,8 @@ class MyAccount extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log('nextProps', nextProps);
+    
     this.setState({
       eCurrencies: nextProps.eCurrencies.map((eCurrency) => ({
         value: eCurrency.id, label: eCurrency.title,
@@ -68,6 +70,8 @@ class MyAccount extends React.PureComponent {
       paymentMethods: nextProps.paymentMethods.map((paymentMethod) => ({
         value: paymentMethod.id, label: paymentMethod.title,
       })),
+    }, () => {
+      console.log('this.state', this.state);
     });
   }
 
