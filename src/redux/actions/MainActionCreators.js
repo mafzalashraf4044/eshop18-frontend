@@ -124,13 +124,13 @@ export const register = (user) => {
 
 export const getNews = () => {
   return (dispatch) => {
-      return axios.get(`${API_URL}/news?sortBy=ASC&sortType=createdAt&pageNum=1&pageSize&latest=false`, {headers: getHeaders()});
+      return axios.get(`${API_URL}/news?sortBy=ASC&sortType=createdAt&pageNum=1&pageSize&latest=true`, {headers: getHeaders()});
   }
 }
 
 export const getReviews = () => {
   return (dispatch) => {
-      return axios.get(`${API_URL}/review?sortBy=ASC&sortType=createdAt&pageNum=1&pageSize&latest=false`, {headers: getHeaders()});
+      return axios.get(`${API_URL}/review?sortBy=ASC&sortType=createdAt&pageNum=1&pageSize&latest=true`, {headers: getHeaders()});
   }
 }
 
