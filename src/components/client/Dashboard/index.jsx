@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 //  third party components
-import { Route, Switch, NavLink } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 
 //  custom components
 import Default from './Default';
@@ -42,33 +42,33 @@ class Dashboard extends React.PureComponent {
       <div className="page-dashboard df jc-fs ai-fs">
         <ul className="dashboard-nav">
           <li className="nav-item">
-            <NavLink exact activeClassName="active" to="/dashboard"><span>Dashboard</span></NavLink>
+            <Link className={classNames({active: this.props.location.pathname === '/dashboard'})} to="/dashboard"><span>Dashboard</span></Link>
           </li>
           <li className="nav-item">
-            <NavLink exact activeClassName="active" to="/dashboard/buy"><span>Buy / Deposit</span></NavLink>
+            <Link className={classNames({active: this.props.location.pathname === '/dashboard/buy'})} to="/dashboard/buy"><span>Buy / Deposit</span></Link>
           </li>
           <li className="nav-item">
-            <NavLink exact activeClassName="active" to="/dashboard/sell"><span>Sell / Withdrawal</span></NavLink>
+            <Link className={classNames({active: this.props.location.pathname === '/dashboard/sell'})} to="/dashboard/sell"><span>Sell / Withdrawal</span></Link>
           </li>
           <li className="nav-item">
-            <NavLink exact activeClassName="active" to="/dashboard/exchange"><span>Exchange</span></NavLink>
+            <Link className={classNames({active: this.props.location.pathname === '/dashboard/exchange'})} to="/dashboard/exchange"><span>Exchange</span></Link>
           </li>
           <li className="nav-item">
-            <NavLink exact activeClassName="active" to="/dashboard/my-accounts"><span>My Accounts</span></NavLink>
+            <Link className={classNames({active: this.props.location.pathname === '/dashboard/my-accounts'})} to="/dashboard/my-accounts"><span>My Accounts</span></Link>
           </li>
           <li className="nav-item">
-            <NavLink exact activeClassName="active" to="/dashboard/orders-history"><span>Orders History</span></NavLink>
+            <Link className={classNames({active: this.props.location.pathname === '/dashboard/orders-history'})} to="/dashboard/orders-history"><span>Orders History</span></Link>
           </li>
           <li className="nav-item">
-            <NavLink exact activeClassName="active" to="/dashboard/edit-profile"><span>Edit Profile</span></NavLink>
+            <Link className={classNames({active: this.props.location.pathname === '/dashboard/edit-profile'})} to="/dashboard/edit-profile"><span>Edit Profile</span></Link>
           </li>
           <li className="nav-item">
-            <NavLink exact activeClassName="active" to="/dashboard/change-password"><span>Change Password</span></NavLink>
+            <Link className={classNames({active: this.props.location.pathname === '/dashboard/change-password'})} to="/dashboard/change-password"><span>Change Password</span></Link>
           </li>
           {
             !this.props.user.isVerified &&
             <li className="nav-item">
-              <NavLink exact activeClassName="active" to="/dashboard/verify-account"><span>Verify Account</span></NavLink>
+              <Link className={classNames({active: this.props.location.pathname === '/dashboard/verify-account'})} to="/dashboard/verify-account"><span>Verify Account</span></Link>
             </li>
           }
         </ul>

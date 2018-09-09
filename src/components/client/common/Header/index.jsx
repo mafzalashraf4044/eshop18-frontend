@@ -67,27 +67,27 @@ class Header extends React.PureComponent {
           </div>
           <ul className="nav df jc-fe ai-c">
             <li className="nav-item df jc-c ai-c">
-              <Link className="df jc-c ai-c" to="/"><span>Home</span></Link>
+              <Link className={classNames("df jc-c ai-c", {active: this.props.location.pathname === '/'})} to="/"><span>Home</span></Link>
             </li>
             <li className="nav-item df jc-c ai-c">
-              <Link className="df jc-c ai-c" to="/buy"><span>Buy / Deposit</span></Link>
+              <Link className={classNames("df jc-c ai-c", {active: this.props.location.pathname === '/buy'})} to="/buy"><span>Buy / Deposit</span></Link>
             </li>
             <li className="nav-item df jc-c ai-c">
-              <Link className="df jc-c ai-c" to="/sell"><span>Sell / Withdrawal</span></Link>
+              <Link className={classNames("df jc-c ai-c", {active: this.props.location.pathname === '/sell'})} to="/sell"><span>Sell / Withdrawal</span></Link>
             </li>
             <li className="nav-item df jc-c ai-c">
-              <Link className="df jc-c ai-c" to="/exchange"><span>Exhange</span></Link>
+              <Link className={classNames("df jc-c ai-c", {active: this.props.location.pathname === '/exchange'})} to="/exchange"><span>Exhange</span></Link>
             </li>
             <li className="nav-item df jc-c ai-c">
-              <Link className="df jc-c ai-c" to="/rules"><span>Rules</span></Link>
+              <Link className={classNames("df jc-c ai-c", {active: this.props.location.pathname === '/rules'})} to="/rules"><span>Rules</span></Link>
             </li>
             <li className="nav-item df jc-c ai-c">
-              <Link className="df jc-c ai-c" to="/faq"><span>FAQ</span></Link>
+              <Link className={classNames("df jc-c ai-c", {active: this.props.location.pathname === '/faq'})} to="/faq"><span>FAQ</span></Link>
             </li>
             {
               this.props.isLoggedIn &&
               <li className="nav-item df jc-c ai-c">
-                <Link className="df jc-c ai-c" to="/dashboard"><span>Dashboard</span></Link>
+                <Link className={classNames("df jc-c ai-c", {active: this.props.location.pathname.indexOf('dashboard') !== -1})} to="/dashboard"><span>Dashboard</span></Link>
               </li>
             }
 

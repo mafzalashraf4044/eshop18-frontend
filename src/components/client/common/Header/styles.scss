@@ -38,13 +38,19 @@
           height: 55px;
           padding: 0 12px;
           color: #78787a;
-
+          
           span {
             font-size: 16px;
             line-height: 20px;
             color: #78787a;
             letter-spacing: .4px;
             font-weight: 700;
+          }
+
+          &.active {
+            span {
+              color: #3983ce;
+            }
           }
 
           .contact-icon {
