@@ -25,10 +25,7 @@
   a, a:visited, a:active{text-decoration:none;;cursor:pointer;}
   a:hover{text-decoration:none;}
 
-  textarea,
-  input[type="text"],
-  input[type="button"],
-  input[type="submit"] {
+  textarea, input {
     -webkit-appearance: none;
     box-shadow: none!important;
   }
@@ -457,4 +454,10 @@
     display: none!important;
   }
 
+}
+
+@media screen and (max-width: 480px) {
+  th, td {
+    font-size: 14px!important;
+  }
 }

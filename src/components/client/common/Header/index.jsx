@@ -139,7 +139,7 @@ class Header extends React.PureComponent {
               <span></span>
             </div>
           </div>
-          <ul className={classNames('nav df fd-c jc-fe ai-c', {'menu-open': this.state.isMenuOpen, 'is-home-page': this.props.location.pathname === '/'})}>
+          <ul className={classNames('nav df fd-c jc-fe ai-c', {'menu-open': this.state.isMenuOpen})}>
             <li className="nav-item df jc-c ai-c" onClick={() => {this.toggleMenuOpen(); window.scrollTo(0,0)}}>
               <Link to="/"><span>Home</span></Link>
             </li>

@@ -25,7 +25,7 @@ class Reviews extends React.PureComponent {
     return (
       <div className="reviews-container">
         <div className="reviews-heading">
-          <h2>What do our Customers say about us?</h2>
+          <h2>CUSTOMER REVIEWS</h2>
         </div>
 
         <div className="reviews">

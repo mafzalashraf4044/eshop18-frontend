@@ -25,6 +25,23 @@
       color: #666;
       font-size: 16px;
       line-height: 20px;
+      text-align: justify;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .page-sell {
+    .heading {
+      h1 {
+        font-size: 18px;
+      }
+    }
+  
+    ul {
+      li {
+        font-size: 14px;
+      }
     }
   }
 }

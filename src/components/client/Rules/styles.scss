@@ -10,6 +10,7 @@
     color: #666;
     font-size: 16px;
     line-height: 20px;
+    text-align: justify;
   }
 
   .rule-item {
@@ -33,10 +34,35 @@
         color: #666;
         font-size: 16px;
         line-height: 20px;
+        text-align: justify;
       }
     }
   }
 }
+
+@media screen and (max-width: 480px) {
+
+  .page-rules {
+    p {
+      font-size: 14px;
+    }
+  
+    .rule-item {
+  
+      h1 {
+        font-size: 18px;
+      }
+  
+      ol {
+        li {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+  
+}
+
 
 @media screen and (max-width: 991px) {
   .page-rules {

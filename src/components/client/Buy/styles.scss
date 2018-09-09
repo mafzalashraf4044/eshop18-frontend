@@ -10,7 +10,6 @@
       margin: 0;
       font-family: "Lato-Light";
       font-style: normal;
-      font-weight: 200;
       color: #ed1c2e;
       font-weight: 600;
       background-color: #fff;
@@ -25,6 +24,23 @@
       color: #666;
       font-size: 16px;
       line-height: 20px;
+      text-align: justify;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .page-buy {
+    .heading {
+      h1 {
+        font-size: 18px;
+      }
+    }
+  
+    ul {
+      li {
+        font-size: 14px;
+      }
     }
   }
 }
