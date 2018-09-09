@@ -38,14 +38,22 @@ class EditProfile extends React.PureComponent {
             type: 'success',
             text: 'User profile updated successfully.',
           } 
+        }, () => {
+          setTimeout(() => {
+            this.setState({responseMsg: {type: '', text: ''}});
+          }, 5000);
         });
       }
     }).catch((err) => {
       this.setState({
         responseMsg: {
           type: 'err',
-          text: err.response.data.details || err.response.data.raw,
+          text: err && err.response && err.response.data ? (err.response.data.details || err.response.data.raw) : 'Something went wrong, please try again later.',
         } 
+      }, () => {
+        setTimeout(() => {
+          this.setState({responseMsg: {type: '', text: ''}});
+        }, 5000);
       });
 
       throw new Error(err);

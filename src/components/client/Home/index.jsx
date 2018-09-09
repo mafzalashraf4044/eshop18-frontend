@@ -49,7 +49,7 @@ class Home extends React.PureComponent {
                               <h2>{news.title}</h2>
                             </div>
                             <div className="news-content">
-                              <p>{news.content}</p>
+                              <p>{news.content.length < 200 ? news.content : news.content.slice(0, 200) + '...'}</p>
                             </div>
                           </div>
                         </div>

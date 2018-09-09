@@ -119,8 +119,6 @@ class MyAccount extends React.PureComponent {
           bankName: '',
           bankAddress: '',
           bankSwiftCode: '',
-          paymentMethod: '',
-          eCurrency: '',
           accounts: update(prevState.accounts, {$push: [res.data.account]}),
           responseMsg: {
             type: 'success',
@@ -136,7 +134,7 @@ class MyAccount extends React.PureComponent {
       this.setState({
         responseMsg: {
           type: 'err',
-          text: err.response.data.details || err.response.data.raw,
+          text: err && err.response && err.response.data ? (err.response.data.details || err.response.data.raw) : 'Something went wrong, please try again later.',
         } 
       });
       
@@ -179,7 +177,7 @@ class MyAccount extends React.PureComponent {
         accountForEdit: update(prevState.accountForEdit, {responseMsg: {
           $set: {
             type: 'err',
-            text: err.response.data.details || err.response.data.raw,
+            text: err && err.response && err.response.data ? (err.response.data.details || err.response.data.raw) : 'Something went wrong, please try again later.',
           }
         }}),
       });
@@ -206,7 +204,7 @@ class MyAccount extends React.PureComponent {
       this.setState({
         responseMsg: {
           type: 'err',
-          text: err.response.data.details || err.response.data.raw,
+          text: err && err.response && err.response.data ? (err.response.data.details || err.response.data.raw) : 'Something went wrong, please try again later.',
         } 
       });
 
@@ -275,12 +273,13 @@ class MyAccount extends React.PureComponent {
             <div className="form-field">
               <label className="label">Payment Method:</label>
               <Select
+                isClearable
                 key="paymentMethod"
                 isSearchable={false}
                 className="react-select"
                 classNamePrefix="react-select"
                 options={this.state.paymentMethods}
-                onChange={(opt) => this.handleChange('paymentMethod', opt.value, type === 'editAccount')}
+                onChange={(opt) => this.handleChange('paymentMethod', opt ? opt.value : '', type === 'editAccount')}
               />
             </div>
           }
@@ -347,12 +346,13 @@ class MyAccount extends React.PureComponent {
             <div className="form-field">
               <label className="label">E-Currency:</label>
               <Select
+                isClearable
                 key="eCurrency"
                 isSearchable={false}
                 className="react-select"
                 classNamePrefix="react-select"
                 options={this.state.eCurrencies}
-                onChange={(opt) => this.handleChange('eCurrency', opt.value, type === 'editAccount')}
+                onChange={(opt) => this.handleChange('eCurrency', opt ? opt.value : '', type === 'editAccount')}
               />
             </div>
           }
@@ -385,6 +385,7 @@ class MyAccount extends React.PureComponent {
           <table className="table table-bordered table-hover table-condensed">
             <thead>
               <tr>
+                <th>ID</th>
                 <th>Account</th>
                 <th>First Name</th>
                 <th>Last Name</th>
@@ -401,6 +402,7 @@ class MyAccount extends React.PureComponent {
               {
                 paymentAccounts.map((paymentAccount, index) => (
                   <tr key={index}>
+                    <td>{paymentAccount.id}</td>
                     <td>{paymentAccount.paymentMethod.title}</td>
                     <td>{paymentAccount.firstName ? paymentAccount.firstName : '-'}</td>
                     <td>{paymentAccount.lastName ? paymentAccount.lastName : '-'}</td>
@@ -425,7 +427,7 @@ class MyAccount extends React.PureComponent {
               {
                 paymentAccounts.length === 0 &&
                 <tr>
-                  <td colSpan={10} style={{textAlign: 'left'}}>Nothing to display.</td>
+                  <td colSpan={11} style={{textAlign: 'left'}}>Nothing to display.</td>
                 </tr>
               }
             </tbody>
@@ -447,6 +449,7 @@ class MyAccount extends React.PureComponent {
           <table className="table table-bordered table-hover table-condensed">
             <thead>
               <tr>
+                <th>ID</th>
                 <th>Account</th>
                 <th>Acc. Name</th>
                 <th>Account #</th>
@@ -457,6 +460,7 @@ class MyAccount extends React.PureComponent {
               {
                 eAccounts.map((eAccount, index) => (
                   <tr key={index}>
+                    <td>{eAccount.id}</td>
                     <td>{eAccount.eCurrency.title}</td>
                     <td>{eAccount.accountName}</td>
                     <td>{eAccount.accountNum}</td>
@@ -475,7 +479,7 @@ class MyAccount extends React.PureComponent {
               {
                 eAccounts.length === 0 &&
                 <tr>
-                  <td colSpan={3} style={{textAlign: 'left'}}>Nothing to display.</td>
+                  <td colSpan={5} style={{textAlign: 'left'}}>Nothing to display.</td>
                 </tr>
               }
             </tbody>

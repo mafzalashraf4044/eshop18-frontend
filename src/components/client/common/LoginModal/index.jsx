@@ -37,8 +37,7 @@ class LoginModal extends React.PureComponent {
   }
 
   login = () => {
-    this.props.saveIsLoading(true);
-
+    this.props.saveIsLoading(true);    
     this.props.login(this.state.credentials).then((res) => {
       if (res.status === 200) {
         this.props.toggleModal();
@@ -48,14 +47,18 @@ class LoginModal extends React.PureComponent {
         this.props.history.push('dashboard');
       }
 
-      setTimeout(() => {this.props.saveIsLoading(false);}, 1000);
+      this.props.saveIsLoading(false);
     }).catch((err) => {
       this.props.saveIsLoading(false);
       this.setState({
         responseMsg: {
           type: 'err',
-          text: err.response.data.details || err.response.data.raw,
+          text: err && err.response && err.response.data ? (err.response.data.details || err.response.data.raw) : 'Something went wrong, please try again later.',
         } 
+      }, () => {
+        setTimeout(() => {
+          this.setState({responseMsg: {type: '', text: ''}});
+        }, 5000);
       });
 
       throw new Error(err);

@@ -50,6 +50,10 @@ class RegisterModal extends React.PureComponent {
             type: 'success',
             text: 'Registration successful, kindly check your email for verifcation.',
           } 
+        }, () => {
+          setTimeout(() => {
+            this.setState({responseMsg: {type: '', text: ''}});
+          }, 5000);
         });
       }
       this.props.saveIsLoading(false);
@@ -58,8 +62,12 @@ class RegisterModal extends React.PureComponent {
       this.setState({
         responseMsg: {
           type: 'err',
-          text: err.response.data.details || err.response.data.raw,
+          text: err && err.response && err.response.data ? (err.response.data.details || err.response.data.raw) : 'Something went wrong, please try again later.',
         } 
+      }, () => {
+        setTimeout(() => {
+          this.setState({responseMsg: {type: '', text: ''}});
+        }, 5000);
       });
 
       throw new Error(err);

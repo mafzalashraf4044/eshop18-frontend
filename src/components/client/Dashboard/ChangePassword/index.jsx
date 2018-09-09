@@ -30,8 +30,12 @@ class ChangePassword extends React.PureComponent {
       this.setState({
         responseMsg: {
           type: 'err',
-          text: 'Password does not match.',
+          text: 'Provided passwords does not match.',
         } 
+      }, () => {
+        setTimeout(() => {
+          this.setState({responseMsg: {type: '', text: ''}});
+        }, 5000);
       });
     } else {
       this.props.changePassword(this.props.user.id, this.state.oldPwd, this.state.newPwd).then((res) => {
@@ -44,14 +48,22 @@ class ChangePassword extends React.PureComponent {
               type: 'success',
               text: 'Password changed successfully.'
             },
+          }, () => {
+            setTimeout(() => {
+              this.setState({responseMsg: {type: '', text: ''}});
+            }, 5000);
           });
         }
       }).catch((err) => {
         this.setState({
           responseMsg: {
             type: 'err',
-            text: err.response.data.details || err.response.data.raw ,
+            text: err && err.response && err.response.data ? (err.response.data.details || err.response.data.raw) : 'Something went wrong, please try again later.' ,
           } 
+        }, () => {
+          setTimeout(() => {
+            this.setState({responseMsg: {type: '', text: ''}});
+          }, 5000);
         });
 
         throw new Error(err);
