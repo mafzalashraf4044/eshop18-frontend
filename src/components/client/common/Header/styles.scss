@@ -18,6 +18,10 @@
       height: 55px;
       cursor: pointer;
 
+      img {
+        width: 150px;
+      }
+
       .logo {
         color: #000;
         font-size: 18px;
@@ -215,8 +219,8 @@
 
     .toggle-nav {
       .logo-container {
-        h1 {
-          font-size: 18px;
+        img {
+          width: 100px;
         }
       }
 

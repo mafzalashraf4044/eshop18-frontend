@@ -63,7 +63,7 @@ class Header extends React.PureComponent {
         }
         <div className="navbar-md hidden-sm df jc-sb ai-c">
           <div className="logo-container df jc-c ai-c">
-            <h1 className="logo">eBUYexchange</h1>
+            <img src={require('../../../../assets/images/site-logo.png')} alt="site-logo"/>
           </div>
           <ul className="nav df jc-fe ai-c">
             <li className="nav-item df jc-c ai-c">
@@ -131,7 +131,7 @@ class Header extends React.PureComponent {
         <div className="navbar-xs hidden-md">
           <div className="toggle-nav df jc-sb ai-c">
             <div className="logo-container df jc-c ai-c">
-              <h1 className="logo">eBUYexchange</h1>
+              <img src={require('../../../../assets/images/site-logo.png')} alt="site-logo"/>
             </div>
             <div className={classNames('menu-icon', {'menu-open': this.state.isMenuOpen})} onClick={this.toggleMenuOpen}>
               <span></span>
