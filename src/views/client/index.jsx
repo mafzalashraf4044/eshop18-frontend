@@ -66,14 +66,33 @@ class Client extends React.PureComponent {
           this.setState({
             verifyEmailResponse: {
               type: 'success',
-              text: 'Email verified successfully, enter your credentials to login.',
+              text: res.data.details,
             }
           }, () => {
             this.props.saveIsLoginModalOpen(true);
             window.history.replaceState(null, null, window.location.pathname);
+
+            setTimeout(() => {
+              this.setState({verifyEmailResponse: {type: '', text: ''}});
+            }, 5000);
           });
         }
       }).catch((err) => {
+        this.setState({
+          verifyEmailResponse: {
+            type: 'err',
+            text: err && err.response && err.response.data ? (err.response.data.details || err.response.data.raw) : 'Something went wrong, please try again later.',
+          },
+          orderConfirmationModal: false,
+        }, () => {
+          this.props.saveIsLoginModalOpen(true);
+          window.history.replaceState(null, null, window.location.pathname);
+          
+          setTimeout(() => {
+            this.setState({verifyEmailResponse: {type: '', text: ''}});
+          }, 5000);
+        });
+
         throw new Error(err);
       });
     }
@@ -181,9 +200,9 @@ class Client extends React.PureComponent {
           {
             this.props.location.pathname === '/' && !this.state.siteLoader &&
             <div className="icon-bar">
-              <a href="#" className="facebook"><i className="fab fa-facebook-f"></i></a> 
-              <a href="#" className="google"><i className="fab fa-google"></i></a> 
-              <a href="skype:maa4044?chat" className="skype"><i className="fab fa-skype"></i></a>
+              <a href="skype:ebuy.exchange?chat" className="skype"><i className="fab fa-skype"></i></a>
+              <a href="mailto:ebuyexchange@gmail.com" className="google"><i className="fab fa-google"></i></a> 
+              <a href="mailto:ebuyexchange@yahoo.com" className="yahoo"><i className="fab fa-yahoo"></i></a> 
             </div>
           }
 
