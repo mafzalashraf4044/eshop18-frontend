@@ -40,12 +40,23 @@ class Client extends React.PureComponent {
     super(props);
 
     this.state = {
+      siteLoader: true,
       verifyEmailResponse: {type: '', text: ''},
       isLoggedInChecked: localStorage.getItem("token") === null,
     }
   }
 
+  handleWindowLoaded = () => {
+    console.log('window loaded');
+    
+    this.setState({
+      siteLoader: false,
+    });
+  }
+
   componentWillMount() {
+    window.addEventListener('load', this.handleWindowLoaded);
+
     const userId = this.getParameterByName('id', window.location.href);
     const emailVerifyHash = this.getParameterByName('hash', window.location.href);
 
@@ -168,11 +179,18 @@ class Client extends React.PureComponent {
       return (
         <div className="client">
           {
-            this.props.location.pathname === '/' &&
+            this.props.location.pathname === '/' && !this.state.siteLoader &&
             <div className="icon-bar">
               <a href="#" className="facebook"><i className="fab fa-facebook-f"></i></a> 
               <a href="#" className="google"><i className="fab fa-google"></i></a> 
               <a href="skype:maa4044?chat" className="skype"><i className="fab fa-skype"></i></a>
+            </div>
+          }
+
+          {
+            this.state.siteLoader &&
+            <div className="site-loader-container df jc-c ai-c">
+              <img src={require('../../assets/images/site-logo.png')} alt="site-logo"/>
             </div>
           }
 
@@ -182,7 +200,7 @@ class Client extends React.PureComponent {
               <Loader type="ball-grid-pulse" active={this.props.isLoading} color="#0f8ce0" />
             </div>
           }
-          <div className={classNames('blur-container', {'blur-active': this.props.isBlur || this.props.isLoading})}>
+          <div className={classNames('blur-container', {'blur-active': this.props.isBlur || this.props.isLoading}, {'site-loader-blur-active': this.state.siteLoader})}>
             <Header logout={this.logout} location={this.props.location} />
             <div className="body">
               {

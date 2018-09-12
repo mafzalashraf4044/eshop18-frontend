@@ -13,6 +13,25 @@
   }
 }
 
+.site-loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  
+  img {
+    width: 150px;
+  }
+}
+
+.blur-container {
+  &.site-loader-blur-active {
+    filter: blur(10px);
+  }
+}
+
 .breadcrumb-container {
   position: fixed;
   top: 100px;
