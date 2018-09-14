@@ -5,7 +5,7 @@ const config = require('./webpack.config');
 const path = require('path');
 const express = require('express');
 
-const portNumber = 80;
+const portNumber = 3000;
 let app;
 
 const gzipFiles = ['.js'];
