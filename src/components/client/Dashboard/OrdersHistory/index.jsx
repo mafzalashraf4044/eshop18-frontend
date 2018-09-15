@@ -52,31 +52,37 @@ class OrdersHistory extends React.PureComponent {
               <thead>
                 <tr>
                   <th>ID</th>
+                  <th className="date-cell">Date</th>
                   <th>Sent From</th>
-                  <th>Recive In</th>
+                  <th>Recived In</th>
                   <th>Amount</th>
-                  <th>Amount after Service Charges</th>
+                  <th className="second-amount-cell">Amount after Service Charges</th>
                   <th>Status</th>
                 </tr>
               </thead>
               <tbody>
                 {
-                  buyOrders.map((order, index) => (
-                    <tr key={index}>
-                      <td>{order.id}</td>
-                      <td>{order.sentFrom.title}</td>
-                      <td>{order.receivedIn.title}</td>
-                      <td>${order.firstAmount}</td>
-                      <td>${order.secondAmount}</td>
-                      <td>{order.status}</td>
-                    </tr>
-                  ))
+                  buyOrders.map((order, index) => {
+                    const createdAt = new Date(order.createdAt);
+
+                    return (
+                      <tr key={index}>
+                        <td>{order.id}</td>
+                        <td className="date-cell">{`${createdAt.toLocaleDateString()} ${createdAt.toLocaleTimeString()}`}</td>
+                        <td>{order.sentFrom.title}</td>
+                        <td>{order.receivedIn.title}</td>
+                        <td>${order.firstAmount}</td>
+                        <td className="second-amount-cell">${order.secondAmount}</td>
+                        <td>{order.status}</td>
+                      </tr>
+                    );
+                  })
                 }
 
                 {
                   buyOrders.length === 0 &&
                   <tr>
-                    <td colSpan={6}>Nothing to display.</td>
+                    <td colSpan={7}>Nothing to display.</td>
                   </tr>
                 }
 
@@ -96,31 +102,37 @@ class OrdersHistory extends React.PureComponent {
               <thead>
                 <tr>
                   <th>ID</th>
+                  <th className="date-cell">Date</th>
                   <th>Sent From</th>
-                  <th>Recive In</th>
+                  <th>Recived In</th>
                   <th>Amount</th>
-                  <th>Amount after Service Charges</th>
+                  <th className="second-amount-cell">Amount after Service Charges</th>
                   <th>Status</th>
                 </tr>
               </thead>
               <tbody>
                 {
-                  sellOrders.map((order, index) => (
-                    <tr key={index}>
-                      <td>{order.id}</td>
-                      <td>{order.sentFrom.title}</td>
-                      <td>{order.receivedIn.title}</td>
-                      <td>${order.firstAmount}</td>
-                      <td>${order.secondAmount}</td>
-                      <td>{order.status}</td>
-                    </tr>
-                  ))
+                  sellOrders.map((order, index) => {
+                    const createdAt = new Date(order.createdAt);
+
+                    return (
+                      <tr key={index}>
+                        <td>{order.id}</td>
+                        <td className="date-cell">{`${createdAt.toLocaleDateString()} ${createdAt.toLocaleTimeString()}`}</td>
+                        <td>{order.sentFrom.title}</td>
+                        <td>{order.receivedIn.title}</td>
+                        <td>${order.firstAmount}</td>
+                        <td className="second-amount-cell">${order.secondAmount}</td>
+                        <td>{order.status}</td>
+                      </tr>
+                    );
+                  })
                 }
 
                 {
                   sellOrders.length === 0 &&
                   <tr>
-                    <td colSpan={6}>Nothing to display.</td>
+                    <td colSpan={7}>Nothing to display.</td>
                   </tr>
                 }
               </tbody>
@@ -139,31 +151,37 @@ class OrdersHistory extends React.PureComponent {
               <thead>
                 <tr>
                   <th>ID</th>
+                  <th className="date-cell">Date</th>
                   <th>Sent From</th>
-                  <th>Recive In</th>
+                  <th>Recived In</th>
                   <th>Amount</th>
-                  <th>Amount after Service Charges</th>
+                  <th className="second-amount-cell">Amount after Service Charges</th>
                   <th>Status</th>
                 </tr>
               </thead>
               <tbody>
                 {
-                  exchangeOrders.map((order, index) => (
-                    <tr key={index}>
-                      <td>{order.id}</td>
-                      <td>{order.sentFrom.title}</td>
-                      <td>{order.receivedIn.title}</td>
-                      <td>${order.firstAmount}</td>
-                      <td>${order.secondAmount}</td>
-                      <td>{order.status}</td>
-                    </tr>
-                  ))
+                  exchangeOrders.map((order, index) => {
+                    const createdAt = new Date(order.createdAt);
+
+                    return (
+                      <tr key={index}>
+                        <td>{order.id}</td>
+                        <td className="date-cell">{`${createdAt.toLocaleDateString()} ${createdAt.toLocaleTimeString()}`}</td>
+                        <td>{order.sentFrom.title}</td>
+                        <td>{order.receivedIn.title}</td>
+                        <td>${order.firstAmount}</td>
+                        <td className="second-amount-cell">${order.secondAmount}</td>
+                        <td>{order.status}</td>
+                      </tr>
+                    );
+                  })
                 }
 
                 {
                   exchangeOrders.length === 0 &&
                   <tr>
-                    <td colSpan={6}>Nothing to display.</td>
+                    <td colSpan={7}>Nothing to display.</td>
                   </tr>
                 }
               </tbody>

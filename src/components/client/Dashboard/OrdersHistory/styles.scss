@@ -7,8 +7,17 @@
   
       th, td {
         color: #666;
+        min-width: 150px;
         text-align: left;
         font-size: 14px;
+
+        &.date-cell {
+          min-width: 180px;
+        }
+
+        &.second-amount-cell {
+          min-width: 220px;
+        }
       }
     }
   }

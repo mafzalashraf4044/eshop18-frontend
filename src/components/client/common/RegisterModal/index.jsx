@@ -57,7 +57,7 @@ class RegisterModal extends React.PureComponent {
         });
       }
       this.props.saveIsLoading(false);
-    }).catch((err) => {
+    }).catch((err) => {      
       this.props.saveIsLoading(false);
       this.setState({
         responseMsg: {
