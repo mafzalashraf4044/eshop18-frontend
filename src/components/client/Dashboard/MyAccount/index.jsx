@@ -385,7 +385,6 @@ class MyAccount extends React.PureComponent {
           <table className="table table-bordered table-hover table-condensed">
             <thead>
               <tr>
-                <th>ID</th>
                 <th>Account</th>
                 <th>First Name</th>
                 <th>Last Name</th>
@@ -402,7 +401,6 @@ class MyAccount extends React.PureComponent {
               {
                 paymentAccounts.map((paymentAccount, index) => (
                   <tr key={index}>
-                    <td>{paymentAccount.id}</td>
                     <td>{paymentAccount.paymentMethod.title}</td>
                     <td>{paymentAccount.firstName ? paymentAccount.firstName : '-'}</td>
                     <td>{paymentAccount.lastName ? paymentAccount.lastName : '-'}</td>
@@ -427,7 +425,7 @@ class MyAccount extends React.PureComponent {
               {
                 paymentAccounts.length === 0 &&
                 <tr>
-                  <td colSpan={11} style={{textAlign: 'left'}}>Nothing to display.</td>
+                  <td colSpan={10} style={{textAlign: 'left'}}>Nothing to display.</td>
                 </tr>
               }
             </tbody>
@@ -449,7 +447,6 @@ class MyAccount extends React.PureComponent {
           <table className="table table-bordered table-hover table-condensed">
             <thead>
               <tr>
-                <th>ID</th>
                 <th>Account</th>
                 <th>Acc. Name</th>
                 <th>Account #</th>
@@ -460,7 +457,6 @@ class MyAccount extends React.PureComponent {
               {
                 eAccounts.map((eAccount, index) => (
                   <tr key={index}>
-                    <td>{eAccount.id}</td>
                     <td>{eAccount.eCurrency.title}</td>
                     <td>{eAccount.accountName}</td>
                     <td>{eAccount.accountNum}</td>
@@ -479,7 +475,7 @@ class MyAccount extends React.PureComponent {
               {
                 eAccounts.length === 0 &&
                 <tr>
-                  <td colSpan={5} style={{textAlign: 'left'}}>Nothing to display.</td>
+                  <td colSpan={4} style={{textAlign: 'left'}}>Nothing to display.</td>
                 </tr>
               }
             </tbody>
