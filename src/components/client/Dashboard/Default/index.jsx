@@ -23,7 +23,7 @@ class Default extends React.PureComponent {
             <tbody>
               <tr>
                 <td className="c1">Name: </td>
-                <td className="c2">{this.props.user.firstName} {this.props.user.lastName} {this.props.user.isVerified ? <span className="user-verified"><i className="fa fa-user-shield icon" /></span> : ''}</td>
+                <td className="c2">{this.props.user.firstName} {this.props.user.lastName} {this.props.user.isVerified ? <span className="user-verified"><i className="fa fa-user-shield icon" /> (Verified)</span> : ''}</td>
               </tr>
               <tr>
                 <td className="c1">Email: </td>

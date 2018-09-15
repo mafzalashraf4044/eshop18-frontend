@@ -47,8 +47,6 @@ class Client extends React.PureComponent {
   }
 
   handleWindowLoaded = () => {
-    console.log('window loaded');
-    
     this.setState({
       siteLoader: false,
     });

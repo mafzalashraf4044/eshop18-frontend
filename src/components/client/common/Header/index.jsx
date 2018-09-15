@@ -54,6 +54,10 @@ class Header extends React.PureComponent {
     }));
   }
 
+  onLogoClick = () => {
+    window.location = '/';
+  }
+
   render() {
     return (
       <div className="header">
@@ -62,7 +66,7 @@ class Header extends React.PureComponent {
           <div className="df jc-c ai-c">EbuyExchange Ltd: The Authorized Wholesaler of E-Currency.</div>
         }
         <div className="navbar-md hidden-sm df jc-sb ai-c">
-          <div className="logo-container df jc-c ai-c">
+          <div className="logo-container df jc-c ai-c" onClick={this.onLogoClick}>
             <img src={require('../../../../assets/images/site-logo.png')} alt="site-logo"/>
           </div>
           <ul className="nav df jc-fe ai-c">
