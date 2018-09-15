@@ -484,6 +484,37 @@ class MyAccount extends React.PureComponent {
 
         {this.renderAddEditAccountForm('addAccount')}
 
+        <div className="table-responsive">
+          <table className="table table-bordered table-condensed">
+            <thead>
+              <tr>
+                <th>E-Currency</th>
+                <th>Example Format</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>c-Gold</td>
+                <td>34567</td>
+              </tr>
+              <tr>
+                <td>ADVcash</td>
+                <td>U 124 456 XXX</td>
+              </tr>
+              <tr>
+                <td>Perfect Money</td>
+                <td>U4185XXX or E4185XXX</td>
+              </tr>
+              <tr>
+                <td>Epay</td>
+                <td>youremail@abcxyx.com</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div className="sample-format-text"><p>For Bitcoin, Litecoin, Ethereum, Ripple, Tether fill in the account number field and write N/A in place of account name.</p></div>
+
       </div>
     );
   }
