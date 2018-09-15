@@ -5,6 +5,12 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import update from 'immutability-helper';
 
+//  third party components
+import Select from 'react-select';
+
+//  constatns
+import countriesList from './countriesList'
+
 //  styles
 import './styles.scss';
 
@@ -114,7 +120,19 @@ class RegisterModal extends React.PureComponent {
             <div className="two-columns df jc-sb ai-c">
               <div className="form-field">
                 <label className="label">Country:</label>
-                <input type="text" name="country" value={this.state.user.country} onChange={this.handleChange} />
+                <Select
+                  isClearable
+                  isSearchable
+                  maxMenuHeight={200}
+                  className="react-select"
+                  classNamePrefix="react-select"
+                  onChange={(opt) => {
+                    this.setState(prevState => ({
+                      user: update(prevState.user, {$merge: {country: opt ? opt.value : ''}}),
+                    }))
+                  }}
+                  options={countriesList}
+                />
               </div>
               <div className="form-field">
                 <label className="label">Mobile/Phone Number:</label>
