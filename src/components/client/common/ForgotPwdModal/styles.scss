@@ -12,7 +12,7 @@
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5)
   }
-  .login-modal {
+  .forgot-pwd-modal {
     width: 50%;
     padding: 30px;
     z-index: 300;
@@ -77,29 +77,12 @@
           }
         }
       }
-
-      .forgot-pwd {
-        a {
-          color: #78787a;
-          display: block;
-          font-size: 16px;
-          height: 20px;
-          margin-bottom: 10px;
-          text-decoration: underline;
-        }
-      }
-
-      .two-columns {
-        .form-field {
-          width: 48%;
-        }
-      }
     }
   }
 }
 
 @media screen and (max-width: 991px) {
-  .login-modal {
+  .forgot-pwd-modal {
     width: 80% !important;
   }
 }

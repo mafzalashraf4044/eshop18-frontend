@@ -12,7 +12,7 @@
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5)
   }
-  .login-modal {
+  .reset-pwd-modal {
     width: 50%;
     padding: 30px;
     z-index: 300;
@@ -99,7 +99,7 @@
 }
 
 @media screen and (max-width: 991px) {
-  .login-modal {
+  .reset-pwd-modal {
     width: 80% !important;
   }
 }

@@ -56,10 +56,6 @@ class RegisterModal extends React.PureComponent {
             type: 'success',
             text: 'Registration successful, kindly check your email for verifcation.',
           } 
-        }, () => {
-          setTimeout(() => {
-            this.setState({responseMsg: {type: '', text: ''}});
-          }, 5000);
         });
       }
       this.props.saveIsLoading(false);

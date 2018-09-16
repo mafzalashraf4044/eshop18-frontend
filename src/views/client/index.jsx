@@ -12,6 +12,8 @@ import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 //  custom components
 import LoginModal from 'components/client/common/LoginModal';
 import RegisterModal from 'components/client/common/RegisterModal';
+import ForgotPwdModal from 'components/client/common/ForgotPwdModal';
+import ResetPwdModal from 'components/client/common/ResetPwdModal';
 
 import Home from 'components/client/Home';
 import Buy from 'components/client/Buy';
@@ -49,51 +51,56 @@ class Client extends React.PureComponent {
   handleWindowLoaded = () => {
     this.setState({
       siteLoader: false,
+    }, () => {
+      const userId = this.getParameterByName('id', window.location.href);
+      const forgotPwdHash = this.getParameterByName('forgotPwdHash', window.location.href);
+      const emailVerifyHash = this.getParameterByName('emailVerifyHash', window.location.href);
+  
+      if (userId && forgotPwdHash) {
+        this.props.saveIsBlur(true);
+        this.props.saveIsResetPwdModalOpen(true);
+      }
+  
+      if (userId && emailVerifyHash) {
+        this.props.verifyEmail(userId, emailVerifyHash).then((res) => {
+          if (res.status === 200) {
+            this.setState({
+              verifyEmailResponse: {
+                type: 'success',
+                text: res.data.details,
+              }
+            }, () => {
+              this.props.saveIsLoginModalOpen(true);
+              window.history.replaceState(null, null, window.location.pathname);
+  
+              setTimeout(() => {
+                this.setState({verifyEmailResponse: {type: '', text: ''}});
+              }, 5000);
+            });
+          }
+        }).catch((err) => {
+          this.setState({
+            verifyEmailResponse: {
+              type: 'err',
+              text: err && err.response && err.response.data ? (err.response.data.details || err.response.data.raw) : 'Something went wrong, please try again later.',
+            },
+          }, () => {
+            this.props.saveIsLoginModalOpen(true);
+            window.history.replaceState(null, null, window.location.pathname);
+            
+            setTimeout(() => {
+              this.setState({verifyEmailResponse: {type: '', text: ''}});
+            }, 5000);
+          });
+  
+          throw new Error(err);
+        });
+      }
     });
   }
 
   componentWillMount() {
     window.addEventListener('load', this.handleWindowLoaded);
-
-    const userId = this.getParameterByName('id', window.location.href);
-    const emailVerifyHash = this.getParameterByName('hash', window.location.href);
-
-    if (userId && emailVerifyHash) {
-      this.props.verifyEmail(userId, emailVerifyHash).then((res) => {
-        if (res.status === 200) {
-          this.setState({
-            verifyEmailResponse: {
-              type: 'success',
-              text: res.data.details,
-            }
-          }, () => {
-            this.props.saveIsLoginModalOpen(true);
-            window.history.replaceState(null, null, window.location.pathname);
-
-            setTimeout(() => {
-              this.setState({verifyEmailResponse: {type: '', text: ''}});
-            }, 5000);
-          });
-        }
-      }).catch((err) => {
-        this.setState({
-          verifyEmailResponse: {
-            type: 'err',
-            text: err && err.response && err.response.data ? (err.response.data.details || err.response.data.raw) : 'Something went wrong, please try again later.',
-          },
-          orderConfirmationModal: false,
-        }, () => {
-          this.props.saveIsLoginModalOpen(true);
-          window.history.replaceState(null, null, window.location.pathname);
-          
-          setTimeout(() => {
-            this.setState({verifyEmailResponse: {type: '', text: ''}});
-          }, 5000);
-        });
-
-        throw new Error(err);
-      });
-    }
 
     this.props.checkIsLoggedIn().then((res) => {
       if (res.status === 200) {
@@ -170,9 +177,19 @@ class Client extends React.PureComponent {
     if (this.props.isLoginModalOpen) {
       this.props.saveIsLoginModalOpen(false);
       this.setState({verifyEmailResponse: {type: '', text: ''}});
+    } else if (this.props.isForgotPwdModalOpen) {
+      this.props.saveIsForgotPwdModalOpen(false);
+    } else if (this.props.isResetPwdModalOpen) {
+      this.props.saveIsResetPwdModalOpen(false);
     } else {
       this.props.saveIsRegisterModalOpen(false);
     }
+  }
+
+  handleForgotPwdClick = () => {
+    this.toggleModal();
+    this.props.saveIsBlur(true);
+    this.props.saveIsForgotPwdModalOpen(true);
   }
 
   logout = () => {
@@ -260,10 +277,29 @@ class Client extends React.PureComponent {
               toggleModal={this.toggleModal}
               saveIsLoading={this.props.saveIsLoading}
               saveIsLoggedIn={this.props.saveIsLoggedIn}
+              handleForgotPwdClick={this.handleForgotPwdClick}
               verifyEmailResponse={this.state.verifyEmailResponse}
             />
           }
   
+          {
+            this.props.isForgotPwdModalOpen &&
+            <ForgotPwdModal
+              forgotPwd={this.props.forgotPwd}
+              toggleModal={this.toggleModal}
+              saveIsLoading={this.props.saveIsLoading}
+            />
+          }
+
+          {
+            this.props.isResetPwdModalOpen &&
+            <ResetPwdModal
+              resetPwd={this.props.resetPwd}
+              toggleModal={this.toggleModal}
+              saveIsLoading={this.props.saveIsLoading}
+            />
+          }
+
   
           {
             this.props.isRegisterModalOpen &&
@@ -283,6 +319,8 @@ const mapStateToProps = (state) => ({
   isLoading: state.MainReducer.isLoading,
   isLoggedIn: state.MainReducer.isLoggedIn,
   isLoginModalOpen: state.MainReducer.isLoginModalOpen,
+  isForgotPwdModalOpen: state.MainReducer.isForgotPwdModalOpen,
+  isResetPwdModalOpen: state.MainReducer.isResetPwdModalOpen,
   isRegisterModalOpen: state.MainReducer.isRegisterModalOpen,
 });
 
@@ -294,6 +332,8 @@ const mapDispatchToProps = (dispatch) => ({
   logout: () => dispatch(actions.logout()),
   saveUser: user => dispatch(actions.saveUser(user)),
   login: credentials => dispatch(actions.login(credentials)),
+  forgotPwd: email => dispatch(actions.forgotPwd(email)),
+  resetPwd: (id, forgotPwdHash, newPwd) => dispatch(actions.resetPwd(id, forgotPwdHash, newPwd)),
   register: user => dispatch(actions.register(user)),
   saveIsBlur: isBlur => dispatch(actions.saveIsBlur(isBlur)),
   checkIsLoggedIn: () => dispatch(actions.checkIsLoggedIn()),
@@ -305,6 +345,8 @@ const mapDispatchToProps = (dispatch) => ({
   saveECurrencies: (eCurrencies) => dispatch(actions.saveECurrencies(eCurrencies)),
   savePaymentMethods: (paymentMethods) => dispatch(actions.savePaymentMethods(paymentMethods)),
   saveIsLoginModalOpen: isLoginModalOpen => dispatch(actions.saveIsLoginModalOpen(isLoginModalOpen)),
+  saveIsForgotPwdModalOpen: isForgotPwdModalOpen => dispatch(actions.saveIsForgotPwdModalOpen(isForgotPwdModalOpen)),
+  saveIsResetPwdModalOpen: isResetPwdModalOpen => dispatch(actions.saveIsResetPwdModalOpen(isResetPwdModalOpen)),
   saveIsRegisterModalOpen: isRegisterModalOpen => dispatch(actions.saveIsRegisterModalOpen(isRegisterModalOpen)),
 });
 

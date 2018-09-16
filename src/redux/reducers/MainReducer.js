@@ -1,6 +1,8 @@
 const defaultState = {
   isBlur: false,
   isLoginModalOpen: false,
+  isForgotPwdModalOpen: false,
+  isResetPwdModalOpen: false,
   isRegisterModalOpen: false,
   isLoggedIn: false,
   news: [],
@@ -24,6 +26,8 @@ export default (state = defaultState, action) => {
     case 'SAVE_E_CURRENCIES':
     case 'SAVE_PAYMENNT_METHODS':
     case 'SAVE_IS_LOGIN_MODAL_OPEN':
+    case 'SAVE_IS_FORGOT_PWD_MODAL_OPEN':
+    case 'SAVE_IS_RESET_PWD_MODAL_OPEN':
     case 'SAVE_IS_REGISTER_MODAL_OPEN':
       return {
         ...state,

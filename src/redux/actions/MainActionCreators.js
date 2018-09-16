@@ -48,6 +48,24 @@ export function saveIsLoginModalOpen(isLoginModalOpen) {
   };
 }
 
+export function saveIsForgotPwdModalOpen(isForgotPwdModalOpen) {
+  return {
+    type: 'SAVE_IS_FORGOT_PWD_MODAL_OPEN',
+    payload: {
+      isForgotPwdModalOpen,
+    },
+  };
+}
+
+export function saveIsResetPwdModalOpen(isResetPwdModalOpen) {
+  return {
+    type: 'SAVE_IS_RESET_PWD_MODAL_OPEN',
+    payload: {
+      isResetPwdModalOpen,
+    },
+  };
+}
+
 export function saveIsRegisterModalOpen(isRegisterModalOpen) {
   return {
     type: 'SAVE_IS_REGISTER_MODAL_OPEN',
@@ -104,6 +122,18 @@ export const login = (credentials) => {
   }
 }
 
+export const forgotPwd = (email) => {
+  return (dispatch) => {
+      return axios.post(`${API_URL}/forgot-password`, {email}, {headers: getHeaders()});
+  }
+}
+
+export const resetPwd = (id, forgotPwdHash, newPwd) => {
+  return (dispatch) => {
+      return axios.post(`${API_URL}/reset-password/${id}`, {forgotPwdHash, newPwd}, {headers: getHeaders()});
+  }
+}
+
 export const verifyEmail = (id, emailVerifyHash) => {
   return (dispatch) => {
       return axios.post(`${API_URL}/verify-email/${id}`, {emailVerifyHash}, {headers: getHeaders()});
@@ -142,7 +172,7 @@ export const editProfile = (id, user) => {
 
 export const changePassword = (id, oldPwd, newPwd) => {
   return (dispatch) => {
-      return axios.patch(`${API_URL}/change-password/${id}`, {oldPwd, newPwd}, {headers: getHeaders()});
+      return axios.post(`${API_URL}/change-password/${id}`, {oldPwd, newPwd}, {headers: getHeaders()});
   }
 }
 
