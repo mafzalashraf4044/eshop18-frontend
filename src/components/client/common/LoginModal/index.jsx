@@ -30,6 +30,10 @@ class LoginModal extends React.PureComponent {
 
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeyDown);
+
+    setTimeout(() => {
+      this.setState({responseMsg: {type: '', text: ''}});
+    }, 5000);
   }
 
   componentWillUnmount() {

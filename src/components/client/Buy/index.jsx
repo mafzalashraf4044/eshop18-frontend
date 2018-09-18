@@ -15,30 +15,30 @@ class Buy extends React.PureComponent {
           <h1>How to place buy / deposit order?</h1>
         </div>
         <ul>
-          <li>Please click on signup button</li>
-          <li>Fill the registration form and finish the process</li>
-          <li>Login your account by user email and password</li>
-          <li>Add E-currency account in my E-account option</li>
-          <li>Click on place buy / deposit order option</li>
-          <li>Type buy / deposit amount then select E-currency and payment by</li>
-          <li>Click on preview and finally confirm order</li>
-          <li>Check your mail inbox or spam folder for order details</li>
+          <li>Please click on register button.</li>
+          <li>Fill the registration form and finish the process.</li>
+          <li>Login to your account by user email and password.</li>
+          <li>Add an account of the E-Currency which you want to buy / deposit by clicking My Accounts option in your dashboard section.</li>
+          <li>Also add a payment method you want to use for buying / depositing the selected E-Currency from My Accounts section.</li>
+          <li>Click buy / deposit option in the dashboard.</li>
+          <li>Type buy / deposit amount then select E-currency and Payment Method.</li>
+          <li>Click on Buy / Deposit button.</li>
+          <li>Check your mail inbox or spam folder for order details.</li>
         </ul>
 
         <div className="heading">
           <h1>How to confirm order?</h1>
         </div>
         <ul>
-          <li>First make payment as per order form instruction</li>
-          <li>Go to current order list and click on order No. option</li>
-          <li>Fill the form with payment information and click on confirm payment button</li>
+          <li>First make payment as per order form instruction.</li>
+          <li>Then check your email you will receive all other instructions via email.</li>
         </ul>
 
         <div className="heading">
           <h1>When will deliver?</h1>
         </div>
         <ul>
-          <li>After received Payment we will deliver within 1-24 hours</li>
+          <li>After receiving the payment we will deliver the selected E-Currency within 1-24 hours</li>
         </ul>
       </div>
     );

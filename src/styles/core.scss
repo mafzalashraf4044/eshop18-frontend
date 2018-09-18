@@ -165,6 +165,10 @@
     .react-select__option--is-selected {
       background-color: #07355e;
     }
+
+    .react-select__value-container {
+      height: 36px!important;
+    }
   }
 
   table {

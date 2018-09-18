@@ -10,6 +10,11 @@
 .blur-container {
   &.blur-active {
     filter: blur(5px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
 }
 
@@ -29,6 +34,11 @@
 .blur-container {
   &.site-loader-blur-active {
     filter: blur(10px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
 }
 

@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 
 //  third party components
 import Select from 'react-select';
+import { Link } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
 
 // custom component 
@@ -225,10 +226,6 @@ class PlaceOrder extends React.PureComponent {
           text: err && err.response && err.response.data ? (err.response.data.details || err.response.data.raw) : 'Something went wrong, please try again later.',
         },
         orderConfirmationModal: false,
-      }, () => {
-        setTimeout(() => {
-          this.setState({responseMsg: {type: '', text: ''}});
-        }, 5000);
       });
 
       throw new Error(err);
@@ -341,6 +338,11 @@ class PlaceOrder extends React.PureComponent {
             this.state.responseMsg.text &&
             <div className={classNames({'err-msg': this.state.responseMsg.type === 'err', 'success-msg': this.state.responseMsg.type === 'success'})}>{this.state.responseMsg.text}</div>
           }
+
+          <div className="info-msg">
+            Before placing an order please make sure that accounts of selected E-Currency / Payment Method already exist.&nbsp;
+            <Link to="/dashboard/my-accounts"><span>Add Account</span></Link>
+          </div>
 
           <div className="btn-container" onClick={this.toggleModal}>
             <button className="btn">{this.getBtnTxt()}</button>

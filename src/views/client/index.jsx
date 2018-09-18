@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 //  third party components
 import Slider from "react-slick";
 import Loader from 'react-loaders';
+import { Link } from "react-router-dom";
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 
 //  custom components
@@ -242,7 +243,7 @@ class Client extends React.PureComponent {
                 <div className="breadcrumb-container">
                   <ul className="breadcrumb df jc-fs ai-c">
                     <li>
-                      <i className="fa fa-home home-icon" />
+                      <Link to="/"><i className="fa fa-home home-icon" /></Link>
                     </li>
                     <li>&nbsp;&nbsp;/&nbsp;&nbsp; {this.props.location.pathname.slice(1).replace('/', '  /  ').replace('-', ' ')}</li>
                   </ul>

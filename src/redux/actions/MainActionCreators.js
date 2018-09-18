@@ -190,7 +190,7 @@ export const getPaymentMethods = () => {
 
 export const getAccounts = () => {
   return (dispatch) => {
-      return axios.get(`${API_URL}/user-account`, {headers: getHeaders()});
+      return axios.get(`${API_URL}/user-account?sortType=DESC&sortBy=createdAt`, {headers: getHeaders()});
   }
 }
 
@@ -226,7 +226,7 @@ export const placeOrder = (order) => {
 
 export const getUserOrders = () => {
   return (dispatch) => {
-      return axios.get(`${API_URL}/user-orders`, {headers: getHeaders()});
+      return axios.get(`${API_URL}/user-orders?sortType=DESC&sortBy=createdAt`, {headers: getHeaders()});
   }
 }
 
