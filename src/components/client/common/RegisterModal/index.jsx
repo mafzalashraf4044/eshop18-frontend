@@ -29,7 +29,12 @@ class RegisterModal extends React.PureComponent {
         contactNumber: '',
       },
       responseMsg: {type: '', text: ''},
+      width: window.innerWidth,
     };
+  }
+
+  updateDimensions = () => {
+    this.setState({width: window.innerWidth});
   }
 
   handleKeyDown = (e) => {
@@ -39,10 +44,12 @@ class RegisterModal extends React.PureComponent {
   }
 
   componentDidMount() {
+    window.addEventListener("resize", this.updateDimensions);
     document.addEventListener('keydown', this.handleKeyDown);
   }
 
   componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions);
     document.removeEventListener('keydown', this.handleKeyDown);
   }
 
@@ -89,48 +96,91 @@ class RegisterModal extends React.PureComponent {
             <i className="fa fa-times icon" onClick={this.props.toggleModal}/>
           </div>
           <div className="form">
-            <div className="two-columns df jc-sb ai-c">
-              <div className="form-field">
-                <label className="label">First Name:</label>
-                <input type="text" name="firstName" value={this.state.user.firstName} onChange={this.handleChange} />
+            {
+              this.state.width > 480 ?
+              <div>
+                <div className="two-columns df jc-sb ai-c">
+                  <div className="form-field">
+                    <label className="label">First Name:</label>
+                    <input type="text" name="firstName" value={this.state.user.firstName} onChange={this.handleChange} />
+                  </div>
+                  <div className="form-field">
+                    <label className="label">Last Name:</label>
+                    <input type="text" name="lastName" value={this.state.user.lastName} onChange={this.handleChange} />
+                  </div>
+                </div>
+                <div className="two-columns df jc-sb ai-c">
+                  <div className="form-field">
+                    <label className="label">Email:</label>
+                    <input type="email" name="email" value={this.state.user.email} onChange={this.handleChange} />
+                  </div>
+                  <div className="form-field">
+                    <label className="label">Username:</label>
+                    <input type="text" name="username" value={this.state.user.username} onChange={this.handleChange} />
+                  </div>
+                </div>
+                <div className="two-columns df jc-sb ai-c">
+                  <div className="form-field">
+                    <label className="label">Country:</label>
+                    <Select
+                      isClearable
+                      isSearchable
+                      maxMenuHeight={200}
+                      className="react-select"
+                      classNamePrefix="react-select"
+                      onChange={(opt) => {
+                        this.setState(prevState => ({
+                          user: update(prevState.user, {$merge: {country: opt ? opt.value : ''}}),
+                        }))
+                      }}
+                      options={countriesList}
+                    />
+                  </div>
+                  <div className="form-field">
+                    <label className="label">Mobile/Phone Number:</label>
+                    <input type="text" name="contactNumber" value={this.state.user.contactNumber} onChange={this.handleChange} />
+                  </div>
+                </div>
+              </div> :
+              <div>
+                <div className="form-field">
+                  <label className="label">First Name:</label>
+                  <input type="text" name="firstName" value={this.state.user.firstName} onChange={this.handleChange} />
+                </div>
+                <div className="form-field">
+                  <label className="label">Last Name:</label>
+                  <input type="text" name="lastName" value={this.state.user.lastName} onChange={this.handleChange} />
+                </div>
+                <div className="form-field">
+                  <label className="label">Email:</label>
+                  <input type="email" name="email" value={this.state.user.email} onChange={this.handleChange} />
+                </div>
+                <div className="form-field">
+                  <label className="label">Username:</label>
+                  <input type="text" name="username" value={this.state.user.username} onChange={this.handleChange} />
+                </div>
+                <div className="form-field">
+                  <label className="label">Country:</label>
+                  <Select
+                    isClearable
+                    isSearchable
+                    maxMenuHeight={200}
+                    className="react-select"
+                    classNamePrefix="react-select"
+                    onChange={(opt) => {
+                      this.setState(prevState => ({
+                        user: update(prevState.user, {$merge: {country: opt ? opt.value : ''}}),
+                      }))
+                    }}
+                    options={countriesList}
+                  />
+                </div>
+                <div className="form-field">
+                  <label className="label">Mobile/Phone Number:</label>
+                  <input type="text" name="contactNumber" value={this.state.user.contactNumber} onChange={this.handleChange} />
+                </div>
               </div>
-              <div className="form-field">
-                <label className="label">Last Name:</label>
-                <input type="text" name="lastName" value={this.state.user.lastName} onChange={this.handleChange} />
-              </div>
-            </div>
-            <div className="two-columns df jc-sb ai-c">
-              <div className="form-field">
-                <label className="label">Email:</label>
-                <input type="email" name="email" value={this.state.user.email} onChange={this.handleChange} />
-              </div>
-              <div className="form-field">
-                <label className="label">Username:</label>
-                <input type="text" name="username" value={this.state.user.username} onChange={this.handleChange} />
-              </div>
-            </div>
-            <div className="two-columns df jc-sb ai-c">
-              <div className="form-field">
-                <label className="label">Country:</label>
-                <Select
-                  isClearable
-                  isSearchable
-                  maxMenuHeight={200}
-                  className="react-select"
-                  classNamePrefix="react-select"
-                  onChange={(opt) => {
-                    this.setState(prevState => ({
-                      user: update(prevState.user, {$merge: {country: opt ? opt.value : ''}}),
-                    }))
-                  }}
-                  options={countriesList}
-                />
-              </div>
-              <div className="form-field">
-                <label className="label">Mobile/Phone Number:</label>
-                <input type="text" name="contactNumber" value={this.state.user.contactNumber} onChange={this.handleChange} />
-              </div>
-            </div>
+            }
             <div className="form-field">
               <label className="label">Password:</label>
               <input type="password" name="password" value={this.state.user.password} onChange={this.handleChange} />
