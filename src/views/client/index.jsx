@@ -73,10 +73,6 @@ class Client extends React.PureComponent {
             }, () => {
               this.props.saveIsLoginModalOpen(true);
               window.history.replaceState(null, null, window.location.pathname);
-  
-              setTimeout(() => {
-                this.setState({verifyEmailResponse: {type: '', text: ''}});
-              }, 5000);
             });
           }
         }).catch((err) => {
@@ -88,10 +84,6 @@ class Client extends React.PureComponent {
           }, () => {
             this.props.saveIsLoginModalOpen(true);
             window.history.replaceState(null, null, window.location.pathname);
-            
-            setTimeout(() => {
-              this.setState({verifyEmailResponse: {type: '', text: ''}});
-            }, 5000);
           });
   
           throw new Error(err);

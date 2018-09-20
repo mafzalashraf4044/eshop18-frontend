@@ -8,8 +8,8 @@ import update from 'immutability-helper';
 //  third party components
 import Select from 'react-select';
 
-//  constatns
-import countriesList from './countriesList'
+//  constants
+import {countriesList} from 'general/constants'
 
 //  styles
 import './styles.scss';
@@ -66,10 +66,6 @@ class RegisterModal extends React.PureComponent {
           type: 'err',
           text: err && err.response && err.response.data ? (err.response.data.details || err.response.data.raw) : 'Something went wrong, please try again later.',
         } 
-      }, () => {
-        setTimeout(() => {
-          this.setState({responseMsg: {type: '', text: ''}});
-        }, 5000);
       });
 
       throw new Error(err);
@@ -141,8 +137,12 @@ class RegisterModal extends React.PureComponent {
             </div>
             {
               this.state.responseMsg.text &&
-              <div className={classNames({'err-msg': this.state.responseMsg.type === 'err', 'success-msg': this.state.responseMsg.type === 'success'})}>{this.state.responseMsg.text}</div>
+              <div className={classNames('df jc-sb ai-c', {'err-msg': this.state.responseMsg.type === 'err', 'success-msg': this.state.responseMsg.type === 'success'})}>
+                {this.state.responseMsg.text}
+                <span className="fa fa-times" onClick={() => this.setState({responseMsg: {type: '', text: ''}})}></span>
+              </div>
             }
+
             <div className="btn-container" onClick={this.register}>
               <button className="btn">Register</button>
             </div>

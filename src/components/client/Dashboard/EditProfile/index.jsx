@@ -5,6 +5,12 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import update from 'immutability-helper';
 
+//  third party components
+import Select from 'react-select';
+
+//  constants
+import {countriesList} from 'general/constants'
+
 //  styles
 import './styles.scss';
 
@@ -38,10 +44,6 @@ class EditProfile extends React.PureComponent {
             type: 'success',
             text: 'User profile updated successfully.',
           } 
-        }, () => {
-          setTimeout(() => {
-            this.setState({responseMsg: {type: '', text: ''}});
-          }, 5000);
         });
       }
     }).catch((err) => {
@@ -50,10 +52,6 @@ class EditProfile extends React.PureComponent {
           type: 'err',
           text: err && err.response && err.response.data ? (err.response.data.details || err.response.data.raw) : 'Something went wrong, please try again later.',
         } 
-      }, () => {
-        setTimeout(() => {
-          this.setState({responseMsg: {type: '', text: ''}});
-        }, 5000);
       });
 
       throw new Error(err);
@@ -90,7 +88,20 @@ class EditProfile extends React.PureComponent {
           </div>
           <div className="form-field">
             <label className="label">Country:</label>
-            <input type="text" name="country" value={this.state.user.country} onChange={this.handleChange} />
+            <Select
+              isClearable
+              isSearchable
+              value={{value: this.state.user.country, label: this.state.user.country}}
+              maxMenuHeight={200}
+              className="react-select"
+              classNamePrefix="react-select"
+              onChange={(opt) => {
+                this.setState(prevState => ({
+                  user: update(prevState.user, {$merge: {country: opt ? opt.value : ''}}),
+                }))
+              }}
+              options={countriesList}
+            />
           </div>
           <div className="form-field">
             <label className="label">Mobile/Phone Number:</label>
@@ -98,8 +109,12 @@ class EditProfile extends React.PureComponent {
           </div>
           {
             this.state.responseMsg.text &&
-            <div className={classNames({'err-msg': this.state.responseMsg.type === 'err', 'success-msg': this.state.responseMsg.type === 'success'})}>{this.state.responseMsg.text}</div>
+            <div className={classNames('df jc-sb ai-c', {'err-msg': this.state.responseMsg.type === 'err', 'success-msg': this.state.responseMsg.type === 'success'})}>
+              {this.state.responseMsg.text}
+              <span className="fa fa-times" onClick={() => this.setState({responseMsg: {type: '', text: ''}})}></span>
+            </div>
           }
+
           <div className="btn-container" onClick={this.editProfile}>
             <button className="btn">Save Changes</button>
           </div>

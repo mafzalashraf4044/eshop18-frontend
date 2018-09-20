@@ -119,7 +119,7 @@ class MyAccount extends React.PureComponent {
           bankName: '',
           bankAddress: '',
           bankSwiftCode: '',
-          accounts: update(prevState.accounts, {$push: [res.data.account]}),
+          accounts: update(prevState.accounts, {$unshift: [res.data.account]}),
           responseMsg: {
             type: 'success',
             text: 'New account created successfully.',
@@ -166,21 +166,23 @@ class MyAccount extends React.PureComponent {
         this.setState(prevState => ({
           accountForEdit: null,
           accounts: update(prevState.accounts, {$splice: [[editAccountIndex, 1, res.data.account]]}),
-        }));
+        }), () => {
+          document.removeEventListener('keydown', this.handleKeyDown);
+        });
       }
 
       this.props.saveIsLoading(false);
     }).catch((err) => {
       this.props.saveIsLoading(false);
 
-      this.setState({
+      this.setState(prevState => ({
         accountForEdit: update(prevState.accountForEdit, {responseMsg: {
           $set: {
             type: 'err',
             text: err && err.response && err.response.data ? (err.response.data.details || err.response.data.raw) : 'Something went wrong, please try again later.',
           }
         }}),
-      });
+      }));
 
       throw new Error(err);
     });
@@ -244,10 +246,22 @@ class MyAccount extends React.PureComponent {
 
   }
 
-  toggleEditModal = (accountForEdit = null) => {
+  toggleEditModal = (accountForEdit = null) => {    
     this.setState(prevState => ({
       accountForEdit,
-    }));
+    }), () => {
+      if (accountForEdit) {
+        document.addEventListener('keydown', this.handleKeyDown);
+      } else {
+        document.removeEventListener('keydown', this.handleKeyDown);
+      }
+    });
+  }
+
+  handleKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      this.editAccount();
+    }
   }
 
   toggleDltModal = (accountForDlt = null) => {
@@ -328,11 +342,37 @@ class MyAccount extends React.PureComponent {
           }
 
           {
-            accountState.responseMsg && accountState.responseMsg.text &&
-            <div className={classNames({'err-msg': accountState.responseMsg.type === 'err', 'success-msg': accountState.responseMsg.type === 'success'})}>{accountState.responseMsg.text}</div>
+            (accountState.responseMsg && accountState.responseMsg.text) &&
+            <div className={classNames('df jc-sb ai-c', {'err-msg': accountState.responseMsg.type === 'err', 'success-msg': accountState.responseMsg.type === 'success'})}>
+              {accountState.responseMsg.text}
+              <span
+                className="fa fa-times"
+                onClick={
+                  () => {
+                    if (type === 'addAccount') {
+                      this.setState({
+                        responseMsg: {
+                          type: '',
+                          text: ''
+                        },
+                      });
+                    } else {
+                      this.setState(prevState => ({
+                        accountForEdit: update(prevState.accountForEdit, {responseMsg: {
+                          $set: {
+                            type: '',
+                            text: ''
+                          },
+                        }}),
+                      }))
+                    }
+                  }
+                }
+              ></span>
+            </div>
           }
           <div className="btn-container" onClick={type === 'addAccount' ? this.addAccount : this.editAccount}>
-            <button className="btn">{type === 'addAccount' ? 'Add Account' : 'Save Changes'}</button>
+            <button type="button" className="btn">{type === 'addAccount' ? 'Add Account' : 'Save Changes'}</button>
           </div>
         </div>
       );
@@ -365,8 +405,34 @@ class MyAccount extends React.PureComponent {
             <input type="text" name="accountNum" value={accountState.accountNum} onChange={(e) => this.handleChange(e.target.name, e.target.value, type === 'editAccount')} />
           </div>
           {
-            accountState.responseMsg && accountState.responseMsg.text &&
-            <div className={classNames({'err-msg': accountState.responseMsg.type === 'err', 'success-msg': accountState.responseMsg.type === 'success'})}>{accountState.responseMsg.text}</div>
+            (accountState.responseMsg && accountState.responseMsg.text) &&
+            <div className={classNames('df jc-sb ai-c', {'err-msg': accountState.responseMsg.type === 'err', 'success-msg': accountState.responseMsg.type === 'success'})}>
+              {accountState.responseMsg.text}
+              <span
+                className="fa fa-times"
+                onClick={
+                  () => {
+                    if (type === 'addAccount') {
+                      this.setState({
+                        responseMsg: {
+                          type: '',
+                          text: ''
+                        },
+                      });
+                    } else {
+                      this.setState(prevState => ({
+                        accountForEdit: update(prevState.accountForEdit, {responseMsg: {
+                          $set: {
+                            type: '',
+                            text: ''
+                          },
+                        }}),
+                      }))
+                    }
+                  }
+                }
+              ></span>
+            </div>
           }
           <div className="btn-container" onClick={type === 'addAccount' ? this.addAccount : this.editAccount}>
             <button className="btn">{type === 'addAccount' ? 'Add Account' : 'Save Changes'}</button>

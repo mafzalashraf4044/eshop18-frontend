@@ -336,9 +336,12 @@ class PlaceOrder extends React.PureComponent {
   
           {
             this.state.responseMsg.text &&
-            <div className={classNames({'err-msg': this.state.responseMsg.type === 'err', 'success-msg': this.state.responseMsg.type === 'success'})}>{this.state.responseMsg.text}</div>
+            <div className={classNames('df jc-sb ai-c', {'err-msg': this.state.responseMsg.type === 'err', 'success-msg': this.state.responseMsg.type === 'success'})}>
+              {this.state.responseMsg.text}
+              <span className="fa fa-times" onClick={() => this.setState({responseMsg: {type: '', text: ''}})}></span>
+            </div>
           }
-
+          
           <div className="info-msg">
             Before placing an order please make sure that accounts of selected E-Currency / Payment Method already exist.&nbsp;
             <Link to="/dashboard/my-accounts"><span>Add Account</span></Link>

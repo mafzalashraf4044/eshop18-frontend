@@ -15,6 +15,8 @@ import 'slick-carousel/slick/slick.scss';
 import 'slick-carousel/slick/slick-theme.scss';
 import 'loaders.css/src/animations/ball-grid-pulse.scss';
 
+const favIcon = require('assets/images/fav.ico');
+
 ReactDOM.render(
   <Provider store={store}>
     <Router />

@@ -32,10 +32,6 @@ class ChangePassword extends React.PureComponent {
           type: 'err',
           text: 'Provided passwords does not match.',
         } 
-      }, () => {
-        setTimeout(() => {
-          this.setState({responseMsg: {type: '', text: ''}});
-        }, 5000);
       });
     } else {
       this.props.changePassword(this.props.user.id, this.state.oldPwd, this.state.newPwd).then((res) => {
@@ -48,10 +44,6 @@ class ChangePassword extends React.PureComponent {
               type: 'success',
               text: 'Password changed successfully.'
             },
-          }, () => {
-            setTimeout(() => {
-              this.setState({responseMsg: {type: '', text: ''}});
-            }, 5000);
           });
         }
       }).catch((err) => {
@@ -60,10 +52,6 @@ class ChangePassword extends React.PureComponent {
             type: 'err',
             text: err && err.response && err.response.data ? (err.response.data.details || err.response.data.raw) : 'Something went wrong, please try again later.' ,
           } 
-        }, () => {
-          setTimeout(() => {
-            this.setState({responseMsg: {type: '', text: ''}});
-          }, 5000);
         });
 
         throw new Error(err);
@@ -102,8 +90,12 @@ class ChangePassword extends React.PureComponent {
           </div>
           {
             this.state.responseMsg.text &&
-            <div className={classNames({'err-msg': this.state.responseMsg.type === 'err', 'success-msg': this.state.responseMsg.type === 'success'})}>{this.state.responseMsg.text}</div>
+            <div className={classNames('df jc-sb ai-c', {'err-msg': this.state.responseMsg.type === 'err', 'success-msg': this.state.responseMsg.type === 'success'})}>
+              {this.state.responseMsg.text}
+              <span className="fa fa-times" onClick={() => this.setState({responseMsg: {type: '', text: ''}})}></span>
+            </div>
           }
+
           <div className="btn-container" onClick={this.changePassword}>
             <button className="btn">Save Changes</button>
           </div>
