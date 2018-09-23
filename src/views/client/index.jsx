@@ -224,8 +224,8 @@ class Client extends React.PureComponent {
             this.props.location.pathname === '/' && !this.state.siteLoader &&
             <div className="icon-bar">
               <a href="skype:ebuy.exchange?chat" className="skype"><i className="fab fa-skype"></i></a>
-              <a href="mailto:ebuyexchange@gmail.com" className="google"><i className="fab fa-google"></i></a> 
-              <a href="mailto:ebuyexchange@yahoo.com" className="yahoo"><i className="fab fa-yahoo"></i></a> 
+              <a href="mailto:eshop18@gmail.com" className="google"><i className="fab fa-google"></i></a> 
+              <a href="mailto:eshop18@yahoo.com" className="yahoo"><i className="fab fa-yahoo"></i></a> 
             </div>
           }
 

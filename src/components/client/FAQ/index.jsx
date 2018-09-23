@@ -28,7 +28,7 @@ class FAQ extends React.PureComponent {
 
         <div className="faq-item">
           <h1>4. How much is the membership fee?</h1>
-          <p>Membership to eBUYexchange.com is free.</p>
+          <p>Membership to eshop18.com is free.</p>
         </div>
 
         <div className="faq-item">
@@ -37,8 +37,8 @@ class FAQ extends React.PureComponent {
         </div>
 
         <div className="faq-item">
-          <h1>8. Is it secure to work with eBUYexchange.com?</h1>
-          <p>Yes, our state of the art technology uses a number of security levels. The connection between the User and ebuyexchange.com is encrypted using SSL protocol - an industry standard for the E-Commerce sites protection. All activities on our site are logged and you can always see when your last login was and from what IP address. All User passwords are encrypted to ensure confidentiality and security of your internet currency.net account. Our hosting provider uses modern methods to prevent "hacker" attacks.</p>
+          <h1>8. Is it secure to work with eshop18.com?</h1>
+          <p>Yes, our state of the art technology uses a number of security levels. The connection between the User and eshop18.com is encrypted using SSL protocol - an industry standard for the E-Commerce sites protection. All activities on our site are logged and you can always see when your last login was and from what IP address. All User passwords are encrypted to ensure confidentiality and security of your internet currency.net account. Our hosting provider uses modern methods to prevent "hacker" attacks.</p>
         </div>
 
         <div className="faq-item">

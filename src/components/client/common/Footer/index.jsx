@@ -89,16 +89,16 @@ class Footer extends React.PureComponent {
             </div>
 
             <div className="contact-us">
-              <p>admin@ebuyexchange.com</p>
-              <p>ebuyexchange@gmail.com (Google talk)</p>
+              <p>admin@eshop18.com</p>
+              <p>eshop18@gmail.com (Google talk)</p>
               <p>ebuy.exchange (Skype)</p>
-              <p>ebuyexchange@hotmail.com</p>
-              <p>ebuyexchange@yahoo.com</p>
+              <p>eshop18@hotmail.com</p>
+              <p>eshop18@yahoo.com</p>
             </div>
           </div>
         </div>
         <div className="sub-footer df jc-c ai-c">
-          <p>Copyright 2018 &copy; EbuyExchange Ltd. All rights reserved.</p>
+          <p>Copyright 2018 &copy; eshop18 Ltd. All rights reserved.</p>
         </div>
       </div>
     );

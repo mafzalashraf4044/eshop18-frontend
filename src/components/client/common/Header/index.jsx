@@ -63,7 +63,7 @@ class Header extends React.PureComponent {
       <div className="header">
         {
           this.state.width > 991 &&
-          <div className="df jc-c ai-c">EbuyExchange Ltd: The Authorized Wholesaler of E-Currency.</div>
+          <div className="df jc-c ai-c">eshop18 Ltd: The Authorized Wholesaler of E-Currency.</div>
         }
         <div className="navbar-md hidden-sm df jc-sb ai-c">
           <div className="logo-container df jc-c ai-c" onClick={this.onLogoClick}>
@@ -120,11 +120,11 @@ class Header extends React.PureComponent {
                     <p className="heading-txt">Email us</p>
                   </div>
                   <div className="body">
-                    <p className="main-txt">admin@ebuyexchange.com</p>
-                    <p className="main-txt">ebuyexchange@gmail.com (Google talk)</p>
+                    <p className="main-txt">admin@eshop18.com</p>
+                    <p className="main-txt">eshop18@gmail.com (Google talk)</p>
                     <p className="main-txt">ebuy.exchange (Skype)</p>
-                    <p className="main-txt">ebuyexchange@hotmail.com</p>
-                    <p className="main-txt">ebuyexchange@yahoo.com</p>
+                    <p className="main-txt">eshop18@hotmail.com</p>
+                    <p className="main-txt">eshop18@yahoo.com</p>
                   </div>
                 </div>
               </div>
