@@ -53,42 +53,45 @@ class Client extends React.PureComponent {
     this.setState({
       siteLoader: false,
     }, () => {
-      const userId = this.getParameterByName('id', window.location.href);
-      const forgotPwdHash = this.getParameterByName('forgotPwdHash', window.location.href);
-      const emailVerifyHash = this.getParameterByName('emailVerifyHash', window.location.href);
-  
-      if (userId && forgotPwdHash) {
-        this.props.saveIsBlur(true);
-        this.props.saveIsResetPwdModalOpen(true);
-      }
-  
-      if (userId && emailVerifyHash) {
-        this.props.verifyEmail(userId, emailVerifyHash).then((res) => {
-          if (res.status === 200) {
+
+      this.props.checkIsLoggedIn().then((res) => {}).catch((err) => {  
+        const userId = this.getParameterByName('id', window.location.href);
+        const forgotPwdHash = this.getParameterByName('forgotPwdHash', window.location.href);
+        const emailVerifyHash = this.getParameterByName('emailVerifyHash', window.location.href);
+    
+        if (userId && forgotPwdHash) {
+          this.props.saveIsBlur(true);
+          this.props.saveIsResetPwdModalOpen(true);
+        }
+    
+        if (userId && emailVerifyHash) {
+          this.props.verifyEmail(userId, emailVerifyHash).then((res) => {
+            if (res.status === 200) {
+              this.setState({
+                verifyEmailResponse: {
+                  type: 'success',
+                  text: res.data.details,
+                }
+              }, () => {
+                this.props.saveIsLoginModalOpen(true);
+                window.history.replaceState(null, null, window.location.pathname);
+              });
+            }
+          }).catch((err) => {
             this.setState({
               verifyEmailResponse: {
-                type: 'success',
-                text: res.data.details,
-              }
+                type: 'err',
+                text: err && err.response && err.response.data ? (err.response.data.details || err.response.data.raw) : 'Something went wrong, please try again later.',
+              },
             }, () => {
               this.props.saveIsLoginModalOpen(true);
               window.history.replaceState(null, null, window.location.pathname);
             });
-          }
-        }).catch((err) => {
-          this.setState({
-            verifyEmailResponse: {
-              type: 'err',
-              text: err && err.response && err.response.data ? (err.response.data.details || err.response.data.raw) : 'Something went wrong, please try again later.',
-            },
-          }, () => {
-            this.props.saveIsLoginModalOpen(true);
-            window.history.replaceState(null, null, window.location.pathname);
+    
+            throw new Error(err);
           });
-  
-          throw new Error(err);
-        });
-      }
+        }
+      });
 
       var Tawk_API = Tawk_API || {},
       Tawk_LoadStart = new Date();
